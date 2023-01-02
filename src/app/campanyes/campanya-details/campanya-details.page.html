@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="campanya">{{campanya.company_id}}/{{campanya.id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="campanyaDetailForm">
+  <form [formGroup]="campanyaDetailForm" (ngSubmit)="onSubmit()">
+   <ion-item> 
+     <ion-label position="floating">Nom</ion-label>
+     <ion-input clearInput="true" formControlName="CampanyaNom"></ion-input>
+    </ion-item>
+
+    <ion-label position="floating">Tarjeta Color</ion-label>
+    <!-- <input [className]="'in-color'" [cpOKButton]="true" [cpCancelButton]="true" [cpColorMode]='"color"' [(colorPicker)]="this.campanya.CampanyaTarjetaColor" [style.background]="this.campanya.CampanyaTarjetaColor"/>
+  {{this.campanya.CampanyaTarjetaColor}} -->
+  <!-- <ion-label [className]="'in-color'" [cpOKButton]="true" [cpCancelButton]="true" [cpColorMode]='"color"' [(colorPicker)]="this.campanya.CampanyaTarjetaColor" [style.background]="this.campanya.CampanyaTarjetaColor"></ion-label>
+  {{this.campanya.CampanyaTarjetaColor}} -->
+  <ion-icon slot="icon-only" name="color-palette" [className]="'in-color'" [cpOKButton]="true" [cpCancelButton]="true" [cpColorMode]='"color"' [(colorPicker)]="this.campanya.card_color" [style.color]="this.campanya.card_color"></ion-icon>
+  {{this.campanya.card_color}}
+
+  <!-- <ion-item> 
+    <ion-label position="floating">Tarjeta Color</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaColor"></ion-input>
+    <ion-note slot="helper">Color</ion-note>
+  </ion-item>   -->
+  <ion-item> 
+    <ion-label position="floating">Imatge Principal</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaImatgePrincipal"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Tarjeta Titul</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaTitulo"></ion-input>
+    <ion-note slot="error">Tarjeta Titul Obligatori</ion-note>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">TarjetaSubTitulo</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaSubTitulo"></ion-input>
+  </ion-item>    
+  <ion-item> 
+    <ion-label position="floating">CampanyaTarjetaNotaPie</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaNotaPie"></ion-input>
+  </ion-item>    
+  <ion-item> 
+    <ion-label position="floating">CampanyaTarjetaLogo</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaTarjetaLogo"></ion-input>
+  </ion-item>      
+  <ion-item> 
+    <ion-label position="floating">CampanyaTarjetaPunts</ion-label>
+    <ion-input clearInput="true" type="number" formControlName="CampanyaTarjetaPunts"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">CampanyaDescripcioPublica</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaDescripcioPublica"></ion-input>
+  </ion-item>          
+  <ion-item> 
+    <ion-label position="floating">CampanyaCondicionsLegals</ion-label>
+    <ion-input clearInput="true" formControlName="CampanyaCondicionsLegals"></ion-input>
+  </ion-item>            
+  <ion-item> 
+    <ion-label position="floating">Campanya Activa</ion-label>
+    <ion-toggle slot="end" formControlName="CampanyaActiva"></ion-toggle>
+  </ion-item>
+   <ion-button type="submit" [disabled]="!campanyaDetailForm.valid">Guarda</ion-button>
+</form>
+<ion-button (click)="goBack()">Cancela</ion-button>
+

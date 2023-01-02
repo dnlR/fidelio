@@ -7,7 +7,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
+  public usuariID: string = "";
+  public usuariEMAIL: string = "";  
   private supabase: SupabaseClient;
 
   constructor() {

@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Terminals</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>
+    <div align="center">
+      <!--<input [(ngModel)]="filtre" class="input-100" placeholder="filtre ràpid..." (ngModelChange)="applyFilter()"/>
+      <button (click)="applyFilter()">>></button> -->
+    </div>
+    <p>
+    <div class="user">
+      <table>
+        <tr>
+          <th>##</th>
+          <th>Terminal</th>
+          <th>Estat</th>
+        </tr>
+
+        <tr *ngFor="let terminal of llistatTerminals">
+          <td><a routerLink="./terminal-details/{{terminal.company_id}}/{{terminal.id}}">{{terminal.id}}</a></td>
+          <td>{{terminal.name}}</td>
+          <td>{{terminal.active}}</td>
+        </tr>
+      </table>
+      </div>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+          <ion-icon name="add" (click)="addTerminal()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>      
+      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+        <ion-fab-button>
+          <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>      
+</ion-content>

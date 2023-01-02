@@ -1,0 +1,17 @@
+export interface iTerminal {
+    company_id:number;
+    id:number|undefined;
+    name:string;
+    description:string;
+    terminal_password:string;
+    active:boolean;
+    timeout:number;
+    modification_date:Date;
+    modification_user:string;
+}
+export interface iTerminalList {
+    company_id:number;
+    id:number;
+    name:string;
+    active:boolean;
+}

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>campanyes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>
+    <div align="center">
+      <!--<input [(ngModel)]="filtre" class="input-100" placeholder="filtre ràpid..." (ngModelChange)="applyFilter()"/>
+      <button (click)="applyFilter()">>></button> -->
+    </div>
+    <p>
+    <div class="user">
+      <table>
+        <tr>
+          <th>##</th>
+          <th>Campanya</th>
+          <th>Estat</th>
+          <th>Imatge</th>
+        </tr>
+
+        <tr *ngFor="let campanya of llistatCampanyes">
+          <td><a routerLink="./campanya-details/{{campanya.company_id}}/{{campanya.id}}">{{campanya.id}}</a></td>
+          <td>{{campanya.name}}</td>
+          <td>{{campanya.active}}</td>
+          <td><img src={{campanya.card_main_image}}></td>
+        </tr>
+      </table>
+      </div>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+          <ion-icon name="add" (click)="addCampanya()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+        <ion-fab-button>
+          <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>            
+</ion-content>

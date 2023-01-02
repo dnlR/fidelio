@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="profileEmpresa">empresa {{profileEmpresa.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="empresaForm">
+  <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
+   <ion-item> 
+     <ion-label position="floating">Nom</ion-label>
+     <ion-input clearInput="true" formControlName="EmpresaNom"></ion-input>
+   </ion-item>
+   <ion-item> 
+    <ion-label position="floating">NIF</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaNIF"></ion-input>
+  </ion-item>
+  <ion-item> 
+    <ion-label position="floating">EMAIL</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaEmail"></ion-input>
+    <ion-note slot="error">Email invalid</ion-note>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Telèfon</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaTelefon"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Codi Postal</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaCP"></ion-input>
+  </ion-item> 
+<!--    
+  <ion-item> 
+    <ion-label position="floating">Població</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaPoblacio"></ion-input>
+    <ion-note slot="helper">Nom de la població</ion-note>
+    <ion-note slot="error">Poblacio invalid</ion-note>
+  </ion-item>    
+  <ion-item> 
+    <ion-label position="floating">Provincia</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaProvincia"></ion-input>
+    <ion-note slot="helper">Nom de la provincia</ion-note>
+    <ion-note slot="error">Nom invalid</ion-note>
+  </ion-item>    
+  <ion-item> 
+    <ion-label position="floating">Pais</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaPais"></ion-input>
+    <ion-note slot="helper">Nom del pais</ion-note>
+    <ion-note slot="error">Nom invalid</ion-note>
+  </ion-item>   -->
+  <ion-item>
+    <ion-label position="floating">Logo</ion-label>
+    <ion-img formControlNmae="EmpresaLogo" src={{profileEmpresa.logo}}></ion-img>
+  </ion-item>
+   <ion-button type="submit" [disabled]="!empresaForm.valid">Guarda</ion-button>
+</form>
+
+<ion-button (click)="goBack()">Cancela</ion-button>
+<!-- <p>Form Status: {{ empresaForm.status }}</p> -->
+
