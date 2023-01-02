@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from 'src/environments/environment';
+//import { createClient, SupabaseClient } from '@supabase/supabase-js';
+//import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +11,9 @@ import { environment } from 'src/environments/environment';
 export class HomePage {
   public usuariID: string = "";
   public usuariEMAIL: string = "";  
-  private supabase: SupabaseClient;
+//  private supabase: SupabaseClient;
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-    console.log(this.supabase);
+
   }
 }
