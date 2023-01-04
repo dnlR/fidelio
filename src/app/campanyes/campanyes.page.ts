@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CampanyaDataService } from '../services/campanya-data.service';
 import { iCampanya, iCampanyaList } from '../interfaces/iCampanya';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -12,18 +12,18 @@ import { Location } from '@angular/common';
 
 export class CampanyesPage implements OnInit {
   llistatCampanyes!: iCampanyaList[];
-  constructor(private campanyaDS: CampanyaDataService, private router: Router, private location: Location) { }
+  empID:string="";
+  constructor(private campanyaDS: CampanyaDataService, private router: Router, private location: Location, private route: ActivatedRoute) { }
 
   async ngOnInit() {
-    this.llistatCampanyes = await this.campanyaDS.campanya_getallbyEmpID(this.getUserEmpresa());
+    this.empID = this.route.snapshot.paramMap.get('empID')!;
+    this.llistatCampanyes = await this.campanyaDS.campanya_getallbyEmpID(this.empID);
     //this.campanyaDS._test_campanya_insupd()
   }
   addCampanya() {
-    this.router.navigate(["/campanyes/campanya-details/",this.getUserEmpresa(),"0"]);
+    this.router.navigate(["/campanyes/campanya-details/",this.empID,"0"]);
   }
-  getUserEmpresa():string {
-    return ("1")
-  }
+
   goBack(): void {
     this.router.navigate(["/menu-empresari"]);
   }

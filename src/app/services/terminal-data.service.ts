@@ -5,6 +5,7 @@ import { empty } from 'rxjs';
 import { environment } from '../../environments/environment'
 import { iTerminal } from "../interfaces/iTerminal"
 import { StorageSupabaseService } from './storage-supabase.service';
+import { AuthService } from '../services/auth.service'
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { StorageSupabaseService } from './storage-supabase.service';
 export class TerminalDataService {
   private supabase: SupabaseClient
 
-  constructor(private storageDS: StorageSupabaseService) {
+  constructor(private storageDS: StorageSupabaseService, private AuthS:AuthService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
   }
 
@@ -55,7 +56,7 @@ export class TerminalDataService {
 
   async terminal_insupd(terminal:iTerminal):Promise<PostgrestError|null>{
     terminal.modification_date=new Date();
-    terminal.modification_user=this.storageDS.user;
+    terminal.modification_user=await this.AuthS.profile_uuid();
     //Cal elimnar
     if (terminal.id==0) {
       let e!:number

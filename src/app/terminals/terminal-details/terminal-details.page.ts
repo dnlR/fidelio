@@ -15,7 +15,7 @@ import { delay } from 'rxjs';
 export class TerminalDetailsPage implements OnInit {
   terminal!:iTerminal;
   terminalDetailForm!: FormGroup;
- 
+  empID!:string;
     constructor(
       private route: ActivatedRoute,
       private router: Router,
@@ -40,14 +40,14 @@ export class TerminalDetailsPage implements OnInit {
     }
     
     async getterminal(): Promise<void> {
-      const empID : string = this.route.snapshot.paramMap.get('empresaID')!;
-      const terID : string = this.route.snapshot.paramMap.get('terminalID')!;
+      this.empID = this.route.snapshot.paramMap.get('empID')!;
+      const terID : string = this.route.snapshot.paramMap.get('terID')!;
       if (terID!="0") {
-        this.terminal = await this.terminalDS.terminal_getbyid(empID, terID);
+        this.terminal = await this.terminalDS.terminal_getbyid(this.empID, terID);
       }
       else {
         const ter:iTerminal={
-          company_id: Number(empID),
+          company_id: Number(this.empID),
           id: 0,
           name: '',
           description: '',
@@ -79,7 +79,7 @@ export class TerminalDetailsPage implements OnInit {
       else
         await this.storageDS.createNotice('Canvis guardats correctament');
       //this.location.back();
-      this.router.navigate(['/terminals']);
+      this.router.navigate(['/terminals', this.empID]);
     }
   
   }

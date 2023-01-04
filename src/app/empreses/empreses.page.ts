@@ -7,6 +7,7 @@ import { iEmpresa } from '../interfaces/iEmpresa';
 //import { SupabaseService } from '../supabase.service'
 import { PostgrestError } from '@supabase/supabase-js';
 import { EmpresaDataService } from '../services/empresa-data.service';
+import { AuthService } from '../services/auth.service'
 import { StorageSupabaseService } from '../services/storage-supabase.service';
 
 @Component({
@@ -17,9 +18,11 @@ import { StorageSupabaseService } from '../services/storage-supabase.service';
 export class EmpresesPage implements OnInit {
   profileEmpresa! : iEmpresa;
   empresaForm!: FormGroup;
-  user: string = "1";
-  
-  constructor(private fb: FormBuilder, private storageDS:StorageSupabaseService, private location: Location, private empresaDS:EmpresaDataService) {
+  usuariUUID = "";
+  usuariEMAIL = "";
+  usuariID = "";
+   
+  constructor(private fb: FormBuilder, private storageDS:StorageSupabaseService, private location: Location, private empresaDS:EmpresaDataService, private readonly supabase: AuthService) {
   }
   
  
@@ -63,10 +66,14 @@ export class EmpresesPage implements OnInit {
   }
   uploadImage() {
     //const b = this.existsHttpFile("https://nzuvywtkatghqhczkckv.supabase.co/storage/v1/object/public/aubimedia/empresa/" + tuser + ".jpg")
-    this.storageDS.storage_upload("empresa/" + this.user + ".jpg");
+    this.storageDS.storage_upload("empresa/" + this.usuariID + ".jpg");
   }
   async loadEmpresa() {
-    this.profileEmpresa = await this.empresaDS.empresa_getbyuserid(this.user) as unknown as iEmpresa;
+    const x = await this.supabase.user1;
+    this.usuariUUID = x.data.user.id;
+    this.usuariEMAIL = x.data.user.email;
+    this.usuariID = await this.supabase.profile_uuid();
+    this.profileEmpresa = await this.empresaDS.empresa_getbyuserid(this.usuariID) as unknown as iEmpresa;
     if (this.profileEmpresa==null){
       //crear empresa
       const emp:iEmpresa={

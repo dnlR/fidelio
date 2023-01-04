@@ -21,7 +21,7 @@
         </tr>
 
         <tr *ngFor="let campanya of llistatCampanyes">
-          <td><a routerLink="./campanya-details/{{campanya.company_id}}/{{campanya.id}}">{{campanya.id}}</a></td>
+          <td><a routerLink="/campanyes/campanya-details/{{campanya.company_id}}/{{campanya.id}}">{{campanya.id}}</a></td>
           <td>{{campanya.name}}</td>
           <td>{{campanya.active}}</td>
           <td><img src={{campanya.card_main_image}}></td>
@@ -37,5 +37,6 @@
         <ion-fab-button>
           <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
         </ion-fab-button>
-      </ion-fab>            
+      </ion-fab>  
+{{empID}}          
 </ion-content>

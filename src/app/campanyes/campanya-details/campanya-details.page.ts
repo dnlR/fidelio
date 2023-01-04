@@ -16,6 +16,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class CampanyaDetailsPage implements OnInit {
   campanya!: iCampanya;
   campanyaDetailForm!: FormGroup;
+  empID!:string;
   public color = 'rgba(48, 48, 48, 1)';
 
   constructor(
@@ -50,14 +51,14 @@ setFormCampanyaDetail() {
   }
    
   async getCampanya(): Promise<void> {
-    const empID : string = this.route.snapshot.paramMap.get('empresaID')!;
-    const camID : string = this.route.snapshot.paramMap.get('campanyaID')!;
+    this.empID = this.route.snapshot.paramMap.get('empID')!;
+    const camID : string = this.route.snapshot.paramMap.get('camID')!;
     if (camID!="0") {
-      this.campanya = await this.campanyaDS.campanya_getbyid(empID, camID);
+      this.campanya = await this.campanyaDS.campanya_getbyid(this.empID, camID);
     }
     else {
       const cam:iCampanya={
-          company_id:Number(empID),
+          company_id:Number(this.empID),
           id:0,
           name:"",
           type:"S",
@@ -103,7 +104,7 @@ async onSubmit() {
       await this.storageDS.createNotice(er.message);
     else
       await this.storageDS.createNotice('Canvis guardats correctament');
-  this.router.navigate(['/campanyes']);
+  this.router.navigate(['/campanyes',this.empID]);
   }
 
 }

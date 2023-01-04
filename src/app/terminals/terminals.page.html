@@ -20,7 +20,7 @@
         </tr>
 
         <tr *ngFor="let terminal of llistatTerminals">
-          <td><a routerLink="./terminal-details/{{terminal.company_id}}/{{terminal.id}}">{{terminal.id}}</a></td>
+          <td><a routerLink="/terminals/terminal-details/{{terminal.company_id}}/{{terminal.id}}">{{terminal.id}}</a></td>
           <td>{{terminal.name}}</td>
           <td>{{terminal.active}}</td>
         </tr>

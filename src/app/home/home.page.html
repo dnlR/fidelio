@@ -22,8 +22,11 @@
       </div>
       <div class="ion-text-center">
         <ion-button expand="block" [routerLink]="['../menu-client']">Mode Client</ion-button>
-      </div>    
+      </div>
+      <div class="ion-text-center">
+        <ion-button expand="block" (click)="logout()">Logout</ion-button>
+      </div>          
   </div>
-  {{usuariID}}<BR>
-  {{usuariEMAIL}}
+  {{usuariID}} : {{usuariUUID}} <br> {{usuariEMAIL}}
 </ion-content>
+

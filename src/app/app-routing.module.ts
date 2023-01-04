@@ -10,12 +10,13 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },  {
-    path: 'terminal-details',
+  },
+  {
+    path: 'terminals/terminal-details/:empID/:terID',
     loadChildren: () => import('./terminals/terminal-details/terminal-details.module').then( m => m.TerminalDetailsPageModule)
   },
   {
-    path: 'campanya-details',
+    path: 'campanyes/campanya-details/:empID/:camID',
     loadChildren: () => import('./campanyes/campanya-details/campanya-details.module').then( m => m.CampanyaDetailsPageModule)
   },
   {
@@ -27,11 +28,11 @@ const routes: Routes = [
     loadChildren: () => import('./menu-empresari/menu-empresari.module').then( m => m.MenuEmpresariPageModule)
   },
   {
-    path: 'terminals',
+    path: 'terminals/:empID',
     loadChildren: () => import('./terminals/terminals.module').then( m => m.TerminalsPageModule)
   },
   {
-    path: 'campanyes',
+    path: 'campanyes/:empID',
     loadChildren: () => import('./campanyes/campanyes.module').then( m => m.CampanyesPageModule)
   },
   {

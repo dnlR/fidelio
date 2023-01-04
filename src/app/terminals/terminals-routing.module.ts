@@ -9,7 +9,7 @@ const routes: Routes = [
     component: TerminalsPage
   },
   {
-    path: 'terminal-details/:empresaID/:terminalID',
+    path: 'terminals/terminal-details/:empID/:terID',
     loadChildren: () => import('./terminal-details/terminal-details.module').then( m => m.TerminalDetailsPageModule)
   }
 ];

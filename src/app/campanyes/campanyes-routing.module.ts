@@ -9,7 +9,7 @@ const routes: Routes = [
     component: CampanyesPage
   },
   {
-    path: 'campanya-details/:empresaID/:campanyaID',
+    path: 'campanyes/campanya-details/:empID/:camID',
     loadChildren: () => import('./campanya-details/campanya-details.module').then( m => m.CampanyaDetailsPageModule)
   }
 ];

@@ -9,10 +9,10 @@
   <ion-button expand="block" [routerLink]="['../empreses']">Empresa</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../campanyes']" [disabled]="!empresaexist">Campanyes</ion-button>
+    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist">Campanyes</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../terminals']" [disabled]="!empresaexist">Terminals</ion-button>
+    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Terminals</ion-button>
   </div>
 </ion-content>
 

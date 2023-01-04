@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment'
 import { iCampanya } from '../interfaces/iCampanya';
 import { StorageSupabaseService } from './storage-supabase.service';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthService } from '../services/auth.service'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CampanyaDataService {
 
   private supabase: SupabaseClient
 
-  constructor(private storageDS: StorageSupabaseService) {
+  constructor(private storageDS: StorageSupabaseService, private AuthS:AuthService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
   }
 
@@ -67,7 +68,7 @@ export class CampanyaDataService {
 
   async campanya_insupd(campanya:iCampanya):Promise<PostgrestError|null>{
     campanya.modification_date=new Date();
-    campanya.modification_user=this.storageDS.user;
+    campanya.modification_user=await this.AuthS.profile_uuid();
     //Cal eliminar ja que la bd genera serial sol
     //Si camID es 0 es un NEW
     if (campanya.id==0) {

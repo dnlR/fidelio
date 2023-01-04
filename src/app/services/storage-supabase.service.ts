@@ -49,8 +49,8 @@ export class StorageSupabaseService {
     await toast.present()
   }
 
-  get user() : any {
-    //return this.supabase.auth.getUser()
-    return "1"
-  }
+  // get user() : any {
+  //   //return this.supabase.auth.getUser()
+  //   return "1"
+  // }
 }

@@ -4,6 +4,8 @@ import { createClient, PostgrestError, SupabaseClient } from '@supabase/supabase
 import { environment } from '../../environments/environment'
 import { iEmpresa } from "../interfaces/iEmpresa"
 import { StorageSupabaseService } from './storage-supabase.service';
+import { AuthService } from '../services/auth.service'
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class EmpresaDataService {
 
   private supabase: SupabaseClient
 
-  constructor(private toastCtrl: ToastController, private storageDS: StorageSupabaseService) {
+  constructor(private toastCtrl: ToastController, private storageDS: StorageSupabaseService, private AuthS:AuthService) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
   }
 
@@ -31,8 +33,8 @@ export class EmpresaDataService {
 
   async empresa_insupd(empresa:iEmpresa){
     empresa.modification_date=new Date();
-    empresa.modification_user_id=this.storageDS.user;
-    empresa.user_id=this.storageDS.user;
+    empresa.modification_user_id=await this.AuthS.profile_uuid();
+    empresa.user_id=await this.AuthS.profile_uuid();
     const { data, error } = await this.supabase.from('companies').upsert(empresa)
     return error
   }
@@ -45,6 +47,16 @@ export class EmpresaDataService {
     .single()
     return (data!=null)
   }
+
+  async empresa_getfromuser(uuid:string) {
+    const { data, error } = await this.supabase
+    .from('companies')
+    .select()
+    .eq("user_id", uuid)
+    .single()
+    return (data.id)
+  }
+
   async empresa_delete(empid:number):Promise<PostgrestError|null> {
     //No utilitzar!
     const { data, error } = await this.supabase
