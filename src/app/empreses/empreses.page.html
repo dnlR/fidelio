@@ -24,8 +24,8 @@
     <ion-input clearInput="true" formControlName="EmpresaTelefon"></ion-input>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">Codi Postal</ion-label>
-    <ion-input clearInput="true" formControlName="EmpresaCP"></ion-input>
+    <ion-label position="floating">Codi PostalZ</ion-label>
+    <ion-input clearInput="true" formControlName="EmpresaCP" (ionChange)="onChange($event)" (ionBlur)=getCP($event)></ion-input>
   </ion-item> 
 <!--    
   <ion-item> 
@@ -48,7 +48,13 @@
   </ion-item>   -->
   <ion-item>
     <ion-label position="floating">Logo</ion-label>
-    <ion-img formControlNmae="EmpresaLogo" src={{profileEmpresa.logo}}></ion-img>
+    <ion-thumbnail slot="end">
+      <img *ngIf="profileEmpresa.logo" alt="Selecciona una imatge" formControlNmae="EmpresaLogo" src={{profileEmpresa.logo}}/>
+    </ion-thumbnail>
+    <br><br><br>
+    <!-- <ion-img *ngIf="profileEmpresa.logo" width="80" height="40" formControlNmae="EmpresaLogo" src={{profileEmpresa.logo}}></ion-img> -->
+    <ion-icon name="cloud-upload-outline" (click)="addLogo()"></ion-icon>
+    <ion-icon name="close-circle-outline" (click)="removeLogo()"></ion-icon>
   </ion-item>
    <ion-button type="submit" [disabled]="!empresaForm.valid">Guarda</ion-button>
 </form>

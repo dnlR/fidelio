@@ -24,7 +24,10 @@
           <td><a routerLink="/campanyes/campanya-details/{{campanya.company_id}}/{{campanya.id}}">{{campanya.id}}</a></td>
           <td>{{campanya.name}}</td>
           <td>{{campanya.active}}</td>
-          <td><img src={{campanya.card_main_image}}></td>
+          <td>
+            <ion-thumbnail>
+              <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}}/>
+            </ion-thumbnail>
         </tr>
       </table>
       </div>

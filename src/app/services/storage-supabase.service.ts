@@ -21,13 +21,16 @@ export class StorageSupabaseService {
       source: CameraSource.Camera,
       quality: 100});
       const aa = decode(capturedPhoto.base64String!);
+      console.log(this.supabase)
     const { data, error } = await this.supabase
     .storage
-    .from('aubimedia')
+    .from('fidelio')
     .upload(storage_path, decode(capturedPhoto.base64String!), {
       cacheControl: '3600',
       upsert: true
     })
+    data.path= "https://jvavmszzitymsnzrvhth.supabase.co/storage/v1/object/public/fidelio/" + storage_path
+   return {data, error}
   }
   
   existsHttpFile(url:string) {
@@ -40,7 +43,7 @@ export class StorageSupabaseService {
   async storage_download(file:string) {
     const { data, error } = await this.supabase
     .storage
-    .from('aubimedia')
+    .from('fidelio')
     .download(file)
     return { data, error }
   }

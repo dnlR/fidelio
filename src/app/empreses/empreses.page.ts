@@ -9,6 +9,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import { EmpresaDataService } from '../services/empresa-data.service';
 import { AuthService } from '../services/auth.service'
 import { StorageSupabaseService } from '../services/storage-supabase.service';
+import { NoDataRowOutlet } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-empreses',
@@ -52,7 +53,7 @@ export class EmpresesPage implements OnInit {
     //this.profileEmpresa!.EmpresaProvincia=this.empresaForm.get('EmpresaProvincia')?.value!;
     //this.profileEmpresa!.EmpresaPais=this.empresaForm.get('EmpresaPais')?.value!;
     this.profileEmpresa!.phone=this.empresaForm.get('EmpresaTelefon')?.value!;
-    this.profileEmpresa!.logo=this.empresaForm.get('EmpresaLogo')?.value!;
+    //this.profileEmpresa!.logo=this.empresaForm.get('EmpresaLogo')?.value!;
     console.log(this.profileEmpresa);
     const er = await this.empresaDS.empresa_insupd(this.profileEmpresa);
     if (er!=null)
@@ -64,10 +65,22 @@ export class EmpresesPage implements OnInit {
   goBack(): void {
     this.location.back();
   }
-  uploadImage() {
+  async addLogo() {
     //const b = this.existsHttpFile("https://nzuvywtkatghqhczkckv.supabase.co/storage/v1/object/public/aubimedia/empresa/" + tuser + ".jpg")
-    this.storageDS.storage_upload("empresa/" + this.usuariID + ".jpg");
+    const { data, error } = await this.storageDS.storage_upload("empresa/" + this.usuariID + ".jpg");
+    this.profileEmpresa.logo = data.path + "?t=" + Date();
   }
+  removeLogo(){
+    this.profileEmpresa.logo = null;
+  }
+  onChange($event){
+    console.log($event.target.value);
+  }
+  getCP($event){
+    console.log($event.detail);
+    console.log($event.target.value);
+  }
+
   async loadEmpresa() {
     const x = await this.supabase.user1;
     this.usuariUUID = x.data.user.id;
