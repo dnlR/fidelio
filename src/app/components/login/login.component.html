@@ -1,0 +1,37 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <div *ngIf="!linkSuccess; else check_mails">
+          <form [formGroup]="formGroupLogin">
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="emailControl" [errorStateMatcher]="matcher" id="email"
+                required>
+              <mat-error *ngIf="formGroupLogin.get('emailControl').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+              <mat-error
+                *ngIf="formGroupLogin.get('emailControl').hasError('email') && !formGroupLogin.get('emailControl').hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="signIn()" type="submit">Log in</button>
+          </form>
+        </div>
+
+        <ng-template #check_mails> Please check your emails! </ng-template>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

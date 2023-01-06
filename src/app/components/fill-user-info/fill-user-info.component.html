@@ -1,0 +1,385 @@
+<ion-header [translucent]="true">
+  <!-- <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <mat-stepper orientation="vertical" linear #stepper>
+
+          <mat-step [stepControl]="formGroupName">
+            <form [formGroup]="formGroupName">
+              <ng-template matStepLabel>Fill out your name</ng-template>
+              <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" formControlName="nameControl" [errorStateMatcher]="matcher" id="name"
+                  required>
+                <mat-error *ngIf="formGroupName.get('nameControl').hasError('required')">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <div>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="formGroupZipCode">
+            <form [formGroup]="formGroupZipCode">
+              <ng-template matStepLabel>Fill out your Zip Code</ng-template>
+              <mat-form-field appearance="fill">
+                <mat-label>Zip Code</mat-label>
+                <input matInput type="text" debounce="2000" formControlName="zipcodeControl"
+                  [errorStateMatcher]="matcher" id="zipcode" required (input)="getItems($event)"
+                  [(ngModel)]="searchedZipCode">
+
+                <mat-error *ngIf="formGroupZipCode.get('zipcodeControl').hasError('required')">
+                  Zip Code is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroupZipCode.get('zipcodeControl').hasError('minlength')">
+                  Zip Code must be at least <strong>5 characters</strong> long
+                </mat-error>
+                <mat-error *ngIf="formGroupZipCode.get('zipcodeControl').hasError('nozipcode')">
+                  Zip Code does <strong>not</strong> exists
+                </mat-error>
+              </mat-form-field>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="formGroupAddress">
+            <form [formGroup]="formGroupAddress">
+              <ng-template matStepLabel>Fill out your Address</ng-template>
+              <mat-form-field appearance="fill">
+                <mat-label>Address</mat-label>
+                <input matInput type="text" formControlName="addressControl" [errorStateMatcher]="matcher" id="address"
+                  required>
+                <mat-error *ngIf="formGroupAddress.get('addressControl').hasError('required')">
+                  Address is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroupAddress.get('addressControl').hasError('minlength')">
+                  Address must be at least <strong>5 characters</strong> long
+                </mat-error>
+              </mat-form-field>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="formGroupPhone">
+            <form [formGroup]="formGroupPhone">
+              <ng-template matStepLabel>Fill out your Phone</ng-template>
+              <mat-form-field appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput type="text" formControlName="phoneControl" [errorStateMatcher]="matcher" id="phone"
+                  required>
+                <mat-error *ngIf="formGroupPhone.get('phoneControl').hasError('required')">
+                  Phone is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="formGroupPhone.get('phoneControl').hasError('minlength')">
+                  Phone must be at least <strong>9 characters</strong> long
+                </mat-error>
+                <mat-error *ngIf="formGroupPhone.get('phoneControl').hasError('pattern')">
+                  Phone must contain <strong>only</strong> numbers
+                </mat-error>
+              </mat-form-field>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="formGroupTOS">
+            <form [formGroup]="formGroupTOS">
+              <ng-template matStepLabel>Terms of service</ng-template>
+              <mat-form-field appearance="fill">
+                <textarea matInput cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5">
+Información relativa a la Promoción de apoyo al pequeño comercio
+
+Para ayudar a la recuperación del pequeño comercio en la nueva normalidad, Fidelio ofrece una prueba gratuita de 14 días del servicio con un límite de 25 usuarios o tarjetas activas. Es necesario crear una cuenta en Fidelio para acceder y utilizar el servicio
+
+Una vez superado el límite de 25 usuarios o 14 días, el cliente deberá de suscribirse a uno de los planes de pago para aumentar el número de usuarios. El resto de servicios se mantendrán activos.
+
+Fidelio ofrece a sus clientes la posibilidad de configurar y diseñar la Carta Digital de su negocio, sin coste adicional. El cliente podrá disfrutar de este servicio mientras su cuenta en Fidelio permanezca activa, independientemente del número de usuarios activos de la Tarjeta de Sellos. La oferta es para 1 carta digital sin limitación en el tiempo. La carta debe ser del propio comercio que se ha registrado y se supone un uso razonable.
+
+Fidelio se reserva el derecho de cancelar cuentas que superan límites razonables de uso, se usan para actividades ilegales o amorales, se usan para otro usuario que el usuario y comercio identificados en el perfil de la cuenta, o son inactivas durante más de 180 días.
+
+El uso del servicio supone la aceptación de estas condiciones particulares, así como los términos y condiciones generales de Fidelio.
+
+Por favor, lee lo siguiente cuidadosamente antes de utilizar el servicio Fidelio, estos términos y condiciones constituyen un acuerdo legal entre el cliente y  Fidelio S.L.
+
+Acuerdo
+De uso de Fidelio (como se define a continuación) para generar tarjetas de sellos digitales para su uso a través del Wallet, Passbook y cualquier otro sistema operativo, aplicación y dispositivos compatibles.
+
+Fidelio S.L. está dispuesto a otorgar al cliente el uso de Fidelio para generar tarjetas de sellos digitales en los términos y condiciones establecidos en este Acuerdo.
+
+1. Aceptación del Acuerdo y Definiciones
+1.1 Aceptación
+Para utilizar el software Fidelio y los servicios relacionados, primero debes aceptar este Acuerdo. Si no aceptas o no puedes aceptar este Acuerdo, no tienes permitido utilizar Fidelio.
+
+Aceptas y estás de acuerdo con los términos de este Acuerdo en tu propio nombre y/o en nombre de tu empresa, organización, institución educativa, agencia, o departamento del Gobierno como tu representante legal autorizado, haciendo lo siguiente:
+
+Marcando el cuadro Términos de uso y haciendo clic en «Registrarse» en la página de registro.
+Mediante el uso del software Fidelio.
+1.2 Definiciones
+Siempre que se remarque en este Acuerdo:
+
+«Acuerdo» se refiere al Acuerdo de licencia de Fidelio, incluidos los archivos adjuntos y cualquier prueba que se incorpore por medio de esta referencia.
+«Apple» significa Apple Inc., una corporación de California con su sede principal en One Infinite Loop, Cupertino, California 95014, EE. UU.
+
+«Documentación» hace referencia a cualquier especificación o documentación técnica u otra que Fidelio pueda proporcionar para su uso en relación con Fidelio.
+
+«Tarjeta digital» se refiere a una o más tarjetas digitales desarrolladas por el cliente en virtud de este Acuerdo.
+
+«Pass ID» se refiere a la combinación de un certificado emitido por Apple e ID de aplicación Push que tú utilizas para firmar digitalmente tus Tarjetas Digitales y enviar notificaciones push a las Tarjetas Digitales utilizando los servicios Fidelio, Apple y Android.
+
+«Información de la Tarjeta Digital» significa el texto, descripciones, representaciones o información relacionada con una Tarjeta que tú proporcionas a tus usuarios finales en relación con una Tarjeta Digital.
+
+«Wallet» significa la función instalada de Apple que tiene la capacidad de almacenar y mostrar Passes para usar en en el móvil.
+
+«Passbook» significa la función Android que tiene la capacidad de almacenar y mostrar Passes para usar en Productos con Sistema operativo Android.
+
+«Fidelio» significa los servicios en línea proporcionados y mantenidos por Fidelio S.L. para el diseño, producción, distribución, gestión y análisis de Tarjetas Digitales para Passbook y Wallet. Para los propósitos del Anexo 1, Fidelio significa Fidelio S.L.
+
+«Fidelio S.L.» significa Fidelio S.L., una empresa con sede en Calle Valle del Roncal S/N, Centro comercial El Castillo, Local 61, oficina 20, 28692 Villanueva de la Cañada, Madrid, España, Registrada en el Registro Mercantil de Madrid, Hoja M-707037, Folio 12 del Tomo 39791 / Fecha: 29/10/2019 / Inscripción: 1ª
+
+«Notificación Push» significa un mensaje, que incluye cualquier contenido o datos en el mismo, que tú transmites a los usuarios finales y que se entrega en su Tarjeta Digital, dentro del Passbook o Wallet.
+
+«Tú», «tu» y «ti» significa y se refiere a la persona(s) o entidad legal (ya sea la empresa, organización, institución educativa o agencia, instrumental o departamento gubernamental) que utiliza Fidelio o ejerce los derechos de conformidad con este Acuerdo. En aras de la claridad, puede autorizar a los contratistas a utilizar Fidelio en su nombre.
+
+«Declaración de privacidad» Fidelio S.L. informa al usuario de que el tratamiento de todos los datos de carácter personal se realiza de conformidad con lo dispuesto en la Ley Orgánica 15/1999, de 13 de diciembre de Protección de Datos y con el Real Decreto 1720/2007, de 21 de diciembre, por el que se aprueba el Reglamento de desarrollo de la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter personal.
+
+2. Uso de Fidelio y restricciones
+2.1 Usos permitidos y restricciones
+Sujeto a los términos y condiciones de este Acuerdo, Fidelio S.L., por la presente te otorga un permiso limitado, no exclusivo, personal, revocable, no sublicenciable e intransferible para, generar, distribuir y actualizar Tarjetas Digitales.
+
+El uso de tu propia Pass ID bajo la disposición de que las Tarjetas digitales que genera y distribuye se realizan de acuerdo con todos los acuerdos legales con Apple y Fidelio S.L.
+
+3. Tus obligaciones
+3.1 General
+Certificas a Fidelio S.L. y aceptas que: (a) Tienes la mayoría de edad legal en la jurisdicción en la que resides (al menos 18 años en muchos países) y tienes el derecho y la autoridad para ingresar a este Acuerdo en tu propio nombre, o si estás celebrando este Acuerdo en nombre de tu empresa, organización, institución educativa, agencia, o departamento del gobierno federal, que tienes el derecho y la autoridad para obligar legalmente a dicha entidad o organización a los términos y obligaciones de este Acuerdo; (b) Toda la información que tú proporciones a Fidelio S.L. o a tus usuarios finales en relación con este Acuerdo o Tarjetas Digitales, incluida, entre otras, la Información de la Tarjeta Digital, será actual, verdadera, precisa, soportable y completa y, con respecto a la información que proporcionas a Fidelio S.L., notificarás de inmediato a Fidelio S.L. sobre cualquier cambio en dicha información. Además, aceptas que Fidelio S.L.  puede compartir dicha información (incluida la dirección de correo electrónico y la dirección de correo) con terceros que necesiten saber para fines relacionados con el mismo (por ejemplo, preguntas de propiedad intelectual, consultas de servicio al cliente, etc.); (c) Cumplirás con los términos y cumplirás tus obligaciones en virtud de este Acuerdo, y aceptas ser totalmente responsable de cualquier acción que emprendas en relación con tus Tarjetas Digitales y su cumplimiento con los términos de este Acuerdo; (d) Serás el único responsable de todos los costos, gastos, pérdidas y responsabilidades incurridas, y actividades que realices en relación con Fidelio, tus Tarjetas Digitales y desarrollos relacionados y sus esfuerzos de distribución, incluidos, entre otros, cualquier esfuerzo de desarrollo, equipo de red y servidor, servicio(s) de Internet, o cualquier otro hardware, software o servicios que utilices en relación con su uso de cualquier servicio; (e) A los fines del Anexo 1, declaras y garantizas que posees o controlas los derechos necesarios para designar a Fidelio S.L. como tu agente mundial para la entrega de tus Tarjetas Digitales, y que el cumplimiento de dicha cita por parte de Fidelio S.L. no violará ni infringirá los derechos de ningún tercero; y (f) No actuarás de una manera que entre en conflicto o interfiera con cualquier compromiso u obligación existente que pueda tener y ningún acuerdo celebrado previamente interferirá con el cumplimiento de tus obligaciones en virtud de este Acuerdo.
+
+3.2 Uso de Fidelio
+Como condición para usar Fidelio, aceptas que: (a) Solo usarás Fidelio para los fines y de la manera expresamente permitida por este Acuerdo y de acuerdo con todas las leyes y regulaciones aplicables; (b) No utilizarás Fidelio para ninguna actividad ilegal o alegal, ni para generar una Tarjeta Digital que pueda cometer o facilitar la comisión de un delito u otro acto ilegal o alegal; (c) A tu leal saber y entender, tus Tarjetas Digitales y la Información que incluyen no violan, no maltratarán ni infringirán los derechos de autor, marcas registradas, derechos de privacidad y publicidad, secretos comerciales, patentes u otros derechos legales (por ejemplo, derechos de fotografía o imagen, derechos de logotipo, derechos de datos de terceros); (d) Aceptas que todo desarrollo de Tarjetas Digitales, debe realizarse de acuerdo con los términos de este Acuerdo.
+
+3.3 Privacidad
+Debes proporcionar información clara y completa a los usuarios sobre tu Tarjeta Digital, el uso y la divulgación de los datos del usuario o dispositivo, por ejemplo, un enlace a su política de privacidad. Además, debes tomar las medidas adecuadas para proteger dichos datos del uso no autorizado, divulgación o acceso por parte de terceros. Si un usuario deja de dar su consentimiento o revoca afirmativamente el consentimiento para su recopilación, uso o divulgación de los datos de su usuario o dispositivo, debes dejar de usarlo de inmediato.
+
+4. Distribución de las Tarjetas Digitales; Permisos de comercialización
+Sujeto a los términos de este Acuerdo, puedes distribuir tus Tarjetas Digitales a los usuarios finales por la web, correo electrónico o una Aplicación. Comprendes y aceptas que tus usuarios finales deben aceptar tus Tarjetas Digitales antes de que se carguen en Passbook, Wallet o cualquier otro dispositivo y que puedan eliminar tus Tarjetas Digitales de Passbook, Wallet o cualquier otro dispositivo en cualquier momento.
+
+Al distribuir tus Tarjetas Digitales de esta manera, declaras y garantizas a Fidelio S.L. que tus Tarjetas Digitales cumplen con los términos de este acuerdo. Fidelio S.L. y Apple no serán responsables de ningún costo, gasto, daño, pérdida (incluidas, entre otras, oportunidades comerciales perdidas o ganancias perdidas) u otras responsabilidades en las que puedas incurrir como resultado de distribuir tus Tarjetas Digitales de esta manera. También indemnizarás a Fidelio S.L. y Apple por los costos, gastos, daños, pérdidas (incluidas, entre otras, oportunidades comerciales perdidas o ganancias perdidas) u otras responsabilidades en las que puedas incurrir como resultado de distribuir tus Tarjetas Digitales de esta manera. Serás responsable de adjuntar o de otra manera incluir, a tu discreción, cualquier término relevante de uso del usuario final con tus Tarjetas. Fidelio S.L. no será responsable de ninguna violación de los términos de uso del usuario final. Será el único responsable de toda la asistencia al usuario, la garantía y el soporte de Tarjetas Digitales.
+
+Al distribuir tus Tarjetas Digitales según lo permitido en este Acuerdo, por la presente permites que Fidelio S.L. y Apple utilicen (i) capturas de pantalla de tu Tarjeta Digital; (ii) marcas registradas, logotipos e imágenes asociadas con tu Tarjeta Digital; y (iii) Información de la Tarjeta, con fines promocionales en materiales de marketing y tarjetas de regalo, excluyendo aquellas porciones que no tiene derecho a usar con fines promocionales y que identifica por escrito a Fidelio S.L.
+
+5. Fidelio S.L. tiene derecho a revisar tus tarjetas Digitales
+Comprendes y aceptas que Fidelio S.L. se reserva el derecho de revisar y aprobar o rechazar tu (s) Tarjeta (s) Digital(es) en cualquier momento durante la vigencia de este Acuerdo.
+
+6. Descargo de responsabilidad
+Fidelio Y APPLE NO SERÁN RESPONSABLES POR NINGÚN DAÑO O PÉRDIDA DERIVADO DE CUALQUIER USO, MAL USO, CONFIANZA, INHABILIDAD DE USO, INTERRUPCIÓN, SUSPENSIÓN O TERMINACIÓN DE Fidelio, PASSBOOK, TU ID DE PASS, SUS TARJETAS DIGITALES O CUALQUIER SERVICIO PROPORCIONADO EN CONEXIÓN POR LO TANTO, INCLUYENDO PERO NO LIMITADO A CUALQUIER PÉRDIDA O FALTA DE VISUALIZACIÓN DE SU PASO EN LA CONTRASEÑA O CUALQUIER RECLAMO DE USUARIO FINAL DERIVADO DE CUALQUIER USO DE LO ANTERIOR POR SUS USUARIOS FINALES.
+
+7. Indemnización
+
+En la medida permitida por la ley aplicable, aceptas indemnizar y eximir de responsabilidad a Fidelio S.L., sus directores, empleados, contratistas y agentes independientes (cada uno de ellos, una «Parte indemnizada por Fidelio S.L.») por cualquier reclamo, pérdidas, responsabilidades, daños, impuestos, gastos y costos, incluidos, entre otros, honorarios de abogados y costos judiciales (colectivamente, «Pérdidas»), incurridos por una parte indemnizada por Fidelio S.L. y que surjan de o estén relacionados con cualquiera de los siguientes: (i) Tu incumplimiento de cualquier certificación, pacto, obligación, representación o garantía en este Acuerdo; (ii) cualquier reclamación de que tu Tarjeta Digital o Información de la Tarjeta Digital viola o infringe cualquier propiedad intelectual de terceros o derechos de propiedad; (iii) el uso permitido de una promoción de Fidelio S.L. o entrega de la Tarjeta Digital, Información de la Tarjeta Digital, metadatos, marcas registradas y logotipos relacionados, o imágenes y otros materiales que proporcionas a Fidelio S.L. en virtud de este Acuerdo; (iv) cualquier reclamo, incluidos, entre otros, cualquier reclamo del usuario final, con respecto a tu Tarjeta Digital, Información de la Tarjeta Digital o logotipos, marcas registradas, contenido o imágenes relacionados; o (v) Tu uso de Tarjeta Digital, Información de Tarjeta Digital, metadatos o su desarrollo y distribución de cualquier Aplicación o Pass.
+
+En la medida permitida por la ley, aceptas indemnizar, defender y eximir de responsabilidad a cada parte indemnizada de Fidelio S.L. por cualquier pérdida incurrida por dicha Parte indemnizada por Fidelio S.L. en razón de dicho uso.
+
+8. Tarifas y pago
+
+Como contraprestación por los derechos que se te otorgan en virtud del Acuerdo, aceptas pagar a Fidelio S.L. las tarifas mensuales requeridas según lo establecido en el sitio web de Fidelio.com. Las tarifas no son reembolsables. Cualquier impuesto que pueda recaudarse sobre el software Fidelio o su uso será responsabilidad tuya.
+
+Fidelio S.L. se reserva el derecho de modificar las tarifas y otros cargos para el Plazo de suscripción de renovación posterior, previa notificación, antes del comienzo de dicho Plazo de suscripción de renovación.
+
+El sitio web utiliza técnicas de seguridad de la información generalmente aceptada en la industria, tales como firewalls, procedimientos de control de acceso y mecanismos criptográficos, todo ello con el objeto de evitar el acceso no autorizado de datos. Para lograr estos fines, el usuario/cliente acepta que el prestador obtenga datos para efecto de la correspondiente autenticación de los controles de acceso.
+
+9. Plazo y rescisión
+
+9.1 Plazo
+
+El plazo de este Acuerdo se extenderá hasta el primer aniversario de la fecha de activación original de tu cuenta de suscripción («Fecha de entrada en vigencia»). Posteriormente, sujeto a su cumplimiento de los términos de este Acuerdo, el Plazo se renovará automáticamente por períodos sucesivos iguales y según tu suscripción, a menos que se rescinda antes de acuerdo con este Acuerdo.
+
+9.2 Terminación
+
+Este Acuerdo y todos los derechos otorgados por Fidelio S.L. en virtud del presente y todos los servicios prestados en virtud del presente finalizarán, con efecto inmediato después de la notificación de Fidelio S.L. (a) si no cumples con algún término de este Acuerdo y no resuelves dicha violación dentro de los 30 días después de enterarte o recibir notificación de tal incumplimiento; (b) si te declaras insolvente, no pagas tus deudas cuando vence, te disuelves o dejas de hacer negocios, te declaras en bancarrota o presentas una demanda en su contra; o (c) si participas o alientas a otros a participar, en cualquier acto engañoso, fraudulento, impropio, ilegal o deshonesto relacionado con este Acuerdo, Fidelio S.L. también puede rescindir este Acuerdo o suspender tus derechos para usar Fidelio, si No aceptas los nuevos términos del Acuerdo.
+
+10. Sin garantía
+
+Los servicios Fidelio pueden contener imprecisiones o errores que podrían causar fallas o pérdida de datos. Fidelio S.L., o sus licenciantes, pueden proporcionar o poner a disposición a través de Fidelio ciertas aplicaciones basadas en la web, software relacionado con el servicio, servicios de emisión de certificados u otros servicios para su uso (colectivamente, los «Servicios» a los efectos de las secciones 6 y 10). Fidelio S.L. y sus licenciantes se reservan el derecho de cambiar, suspender, eliminar o deshabilitar el acceso a cualquier Servicio (o parte de los mismos) en cualquier momento sin previo aviso. En ningún caso Fidelio S.L. o sus licenciantes serán responsables de la eliminación o inhabilitación del acceso a dichos Servicios. Fidelio S.L. o sus licenciantes también pueden imponer límites en el uso o acceso a ciertos Servicios, o pueden eliminar los Servicios por períodos de tiempo indefinidos o cancelar los Servicios en cualquier momento y en cualquier caso y sin previo aviso ni responsabilidad.
+
+Los datos de ubicación, así como los datos de mapas proporcionados por cualquier Servicio o software, son solo para fines básicos de navegación y no están destinados a ser utilizados en situaciones donde se necesita información de ubicación precisa o donde los datos de ubicación erróneos, inexactos o incompletos pueden conducir a la muerte, lesiones personales, daños a la propiedad o al medio ambiente. Ni Fidelio S.L. ni ninguno de sus licenciantes garantiza la disponibilidad, precisión, integridad, confiabilidad u oportunidad de los datos de ubicación o cualquier otro dato o información mostrada por cualquier Servicio o software.
+
+11. Avisos
+
+Cualquier notificación relacionada con este Acuerdo se hará por escrito. Fidelio S.L. considerará que los avisos se envían a la dirección de correo electrónico o la dirección de correo que proporcionaste durante el proceso de registro. Todas las notificaciones a Fidelio S.L. relacionadas con este Acuerdo se considerarán entregadas cuando tú las envíes al correo electrónico info@Fidelio.com. Aceptas recibir avisos por correo electrónico y acepta que dichos avisos que Fidelio S.L. le envíe electrónicamente satisfarán cualquier requisito de comunicación legal. Cualquier parte puede cambiar su dirección de correo electrónico o postal enviando a la otra notificación por escrito como se describe anteriormente.
+
+12. Cambios al Acuerdo
+
+Fidelio S.L. puede cambiar los términos de este Acuerdo en cualquier momento. Para continuar usando Fidelio, debes aceptar y estar de acuerdo con los nuevos términos de este Acuerdo. Si no estás de acuerdo con los nuevos términos, Fidelio S.L. suspenderá o cancelará tu uso de Fidelio. Estás de acuerdo a que su aceptación de los nuevos términos del Acuerdo puede ser indicada electrónicamente, incluyendo, entre otros, al marcar una casilla o haciendo clic en un botón «aceptar» o similar.
+
+Anexo 1
+
+1. Nombramiento de agente
+
+1.1 Por la presente, designas a Fidelio como tu agente mundial para la entrega de Las Tarjetas Digitales a los usuarios finales, durante el Período de entrega. Por la presente, reconoces que Fidelio entregará las Tarjetas Digitales a los usuarios finales para ti y en tu nombre. Para los propósitos de este Anexo 1, el término «Tarjetas Digitales» incluye cualquier funcionalidad, contenido o servicios permitidos adicionales que tú proporciones.
+
+1.2 En cumplimiento de la designación de Fidelio según la Sección 1.1 de este Anexo 1, autorizas e instruyes a Fidelio a:
+
+(a) proporcionarle servicios de alojamiento para ti, a fin de permitir el almacenamiento y el acceso del usuario final a las Tarjetas Digitales y permitir el alojamiento de dichas Tarjetas Digitales por parte de terceros únicamente según lo autorizado o autorizado por Fidelio;
+
+(b) permitir a los usuarios finales acceder y volver a acceder a las copias de las Tarjetas Digitales, para que los usuarios finales puedan adquirir de ti y descargar electrónicamente esas Tarjetas Digitales.
+
+(c) usar (i) capturas de pantalla de las Tarjetas Digitales; (ii) marcas registradas y logotipos asociados con las Tarjetas Digitales; y (iii) Información de las Tarjetas Digitales, con fines promocionales en materiales de marketing; y
+
+(d) de otro modo, usar Tarjetas Digitales, Información de la Tarjeta Digital y metadatos asociados como sea razonablemente necesario en la entrega de la Tarjetas Digitales de acuerdo con este Anexo 1. Aceptas que no se pagarán regalías u otra compensación por los derechos descritos anteriormente en la Sección 1.2 de este Anexo 1.
+
+1.3 Las partes reconocen y acuerdan que su relación bajo este Anexo 1 es, y será, la del principal y el agente, y que tú, como principal, eres y serás el único responsable de todas y cada una de las reclamaciones y responsabilidades relacionadas o relacionadas a, las Tarjetas Digitales, según lo dispuesto en este Anexo 1. Las partes reconocen y aceptan que tu nombramiento de Fidelio como tu agente en virtud de este Anexo 1 no es exclusivo.
+
+1.4 Para los propósitos de este Anexo 1, el «Período de entrega» significará el período que comienza en la Fecha de entrada en vigencia del Acuerdo y que expira el último día del Acuerdo o cualquier renovación del mismo; siempre, sin embargo, que el nombramiento de Fidelio como tu agente sobrevivirá a la expiración del Acuerdo por un período de eliminación razonable que no exceda los treinta (30) días y además, únicamente con respecto a tus usuarios finales, subsecciones 1.2 (b) , (c) y (d) de este Anexo 1 sobrevivirán a la terminación o vencimiento del Acuerdo a menos que indiques lo contrario de conformidad con las secciones 3.1 y 5.2 de este Anexo 1.
+
+2. Propiedad y entrega de las Tarjetas Digitales a usuarios finales
+
+Reconoces y aceptas que Fidelio, en el curso de su actuación como agente para ti, es el anfitrión, o de conformidad con la Sección 1.2 (b) de este Anexo 1, puede permitir que terceros autorizados alojen las Tarjetas Digitales y permita descarga de esas Tarjetas por parte de los usuarios finales, en tu nombre.
+
+Las partes reconocen y acuerdan que Fidelio no adquirirá ningún interés de propiedad sobre ninguna de las Tarjetas o la Información de estas, y el título, el riesgo de pérdida, la responsabilidad y el control sobre las Tarjetas permanecerán en todo momento a ti.
+
+3. Restricciones de contenido
+
+3.1 Declaras y garantizas que: (a) Tienes derecho a celebrar este Acuerdo, reproducir y distribuir cada una de las Tarjetas, y autorizar a Fidelio a permitir que los usuarios finales descarguen y usen cada una de las Tarjetas; (b) ninguna de las Tarjetas, o los usos permitidos por los usuarios finales de esas Tarjetas, violan o infringen ninguna patente, derecho de autor, marca registrada, secreto comercial u otra propiedad intelectual o derechos contractuales de cualquier otra persona, empresa, corporación u otra entidad y que no estás enviando las Aplicaciones con licencia a Fidelio en nombre de uno o más terceros; (c) cada una de la Tarjetas está autorizada para su distribución, uso, exportación e importación a cada uno de los países designados por ti en virtud de la Sección 2 de este Anexo 1, de conformidad con las leyes y reglamentos de dichos países; (d) ninguno de las tarjetas contiene materiales obscenos, ofensivos u otros que estén prohibidos o restringidos por las leyes o reglamentos; (e) toda la información que proporcione es precisa y que, si dicha información deja de ser precisa, la actualizarás de inmediato para que sea precisa; y (f) en caso de que surja una disputa sobre el contenido de tu Tarjeta o el uso de su propiedad intelectual, aceptas seguir el proceso de disputa de la Tarjeta Digital de Fidelio de manera no exclusiva y sin que ninguna de las partes renuncie a sus derechos legales.
+
+4. Responsabilidad y responsabilidad
+
+4.1 Fidelio no será responsable de la instalación y/o uso de ninguna de las Tarjetas Digitales por parte de ningún usuario final. Tú serás el único responsable de toda la asistencia y soporte al usuario final con respecto a cada una de las tarjetas Digitales.
+
+4.2 Tú serás el único responsable y Fidelio no tendrá responsabilidad alguna con respecto a ninguna y todas las reclamaciones, demandas, responsabilidades, pérdidas, daños, costos y gastos derivados de las Tarjetas Digitales y / o los uso de estas por parte de cualquier usuario final, incluidos, entre otros: (i) reclamos de incumplimiento de la garantía; (ii) reclamos de responsabilidad del producto; y (iii) afirma que cualquiera de las Tarjetas Digitales y / o la posesión o uso de dichas Tarjetas por parte del usuario final infringe los derechos de autor u otros derechos de propiedad intelectual de un tercero.
+
+5. Terminación
+
+5.1 Este Anexo 1, y todas las obligaciones de Fidelio en virtud del presente, finalizarán al vencimiento o finalización del Acuerdo.
+
+5.2 En caso de que ya no tengas el derecho legal de distribuir las Tarjetas Digitales, o de autorizar Fidelio para permitir el acceso a esas Tarjetas por parte de los usuarios finales, de acuerdo con este Anexo 1, deberás notificarlo de inmediato a Fidelio.
+
+5.3 Fidelio se reserva el derecho de dejar de permitir la descarga por parte de los usuarios finales de las Tarjetas Digitales en cualquier momento, con o sin causa, notificándole la finalización. Sin limitar la generalidad de esta Sección 5.3, reconoces que Fidelio puede dejar de permitir que los usuarios finales descarguen algunos o todas las Tarjetas Digitales si Fidelio cree razonablemente que: (i) esas Tarjetas y/o cualquier posesión del usuario final y/o uso de estas, supone infringir patentes, derechos de autor, marcas comerciales, secretos comerciales u otros derechos de propiedad intelectual de terceros; o (ii) la distribución y/o uso de esas Tarjetas viola cualquier ley aplicable en cualquier país. Una elección de Fidelio para dejar de permitir la descarga de cualquier Pass, de conformidad con esta Sección 5.3, no te eximirá de tus obligaciones en virtud de este Anexo 1.
+
+5.4 Puedes invalidar cualquiera o todas las Tarjetas en cualquier momento y por cualquier motivo, utilizando las herramientas proporcionadas, excepto que, con respecto a sus usuarios finales, tú autorizas e instruyes a Fidelio a cumplir con las secciones 1.2 (b), (c) y (d) de este Anexo 1, que sobrevivirá a la terminación o vencimiento del Acuerdo a menos que tú indiques lo contrario de conformidad con las secciones 3.1 y 5.2 de este Anexo 1.
+
+6. Consecuencias legales
+
+La relación entre tú y Fidelio establecida por este Anexo 1 puede tener importantes consecuencias legales para ti. Reconoces y aceptas que es tu responsabilidad consultar con tus asesores legales con respecto a tus obligaciones legales a continuación.
+
+Anexo 2
+
+«Tú declaras y garantizas que tienes todo el derecho necesario sobre las imágenes que cargas, y además permites que Fidelio use estas imágenes para generar Tarjetas Digitales».
+
+«Tú permites que Fidelio (» Proveedor de servicios «) te permita acceder y utilizar Apple Push Network en tus Tarjetas Digitales»
+
+Anexo 3
+
+Adjunto 1 (del Acuerdo) Términos adicionales para el servicio de notificaciones push de Apple y notificaciones locales
+
+Los siguientes términos son adicionales a los términos del Acuerdo y se aplican a cualquier uso del APN (servicio de notificaciones push de Apple):
+
+1. Uso de APN y notificaciones locales
+
+1.1 Puedes usar el APN solo en tus aplicaciones, tus Passes y/o al enviar notificaciones push del sitio web de macOS al escritorio de OS X de los usuarios de tu sitio que hayan optado por recibir notificaciones a través de Safari en macOS. Tú, su aplicación y/o tu Pass pueden acceder a APN solo a través de la API de APN y solo si Apple te ha asignado un ID de aplicación de inserción. Excepto para el propósito limitado de la Sección 6 a continuación, aceptas no compartir tu ID de aplicación Push con ningún tercero. Comprendes que no se te permitirá acceder o usar el APN después de la expiración o terminación de tu Acuerdo.
+
+1.2 Se te permite usar APN y las API de APN solo con el fin de enviar notificaciones push a tu aplicación o tu Pass en un producto iOS y / o al escritorio macOS de los usuarios de su sitio que hayan optado por recibir notificaciones a través de Safari u otro navegador en macOS según lo permitido expresamente por el Acuerdo (incluido, entre otros, este Anexo 1), la Documentación de APN y todas las leyes y regulaciones aplicables (incluidas todas las leyes de propiedad intelectual). Además, aceptas que debes divulgar a Apple cualquier uso de la APN como parte del proceso de envío de tu solicitud.
+
+1.3 Comprende que antes de enviar a un usuario final las Notificaciones Push a través de APN, el usuario final debe dar su consentimiento para recibir dichas Notificaciones. Aceptas no deshabilitar, anular o interferir con los paneles de consentimiento implementados por Apple o las preferencias del sistema de Apple para habilitar o deshabilitar la funcionalidad de Notificación. Si el consentimiento del usuario final para recibir Notificaciones Push es denegado o posteriormente retirado, no puedes enviar las Notificaciones Push del usuario final.
+
+2. Requisitos adicionales
+
+2.1 No puedes usar el APN o las notificaciones locales con el fin de enviar mensajes no solicitados a usuarios finales o con el fin de suplantar la identidad o enviar correo no deseado, lo que incluye, entre otros, participar en cualquier tipo de actividades que violen las leyes antispam y regulaciones, o que de otra manera sean inapropiadas, inapropiadas o ilegales. Por ejemplo, aceptas no incluir enlaces a phishing u otros sitios web maliciosos en las notificaciones automáticas de tu sitio web macOS.
+
+2.2 No puedes usar el APN o las notificaciones locales con fines publicitarios, de promoción de productos o de marketing directo de ningún tipo (por ejemplo, ventas adicionales, ventas cruzadas, etc.), incluido, entre otros, el envío de mensajes para promover el uso de tu aplicación o anunciar la disponibilidad de nuevas funciones o versiones. Sin perjuicio de lo anterior, puedes utilizar el APN o las notificaciones locales con fines promocionales en relación con tu Pass siempre que dicho uso esté directamente relacionado con el Pass, por ejemplo, se puede enviar un cupón de la tienda a tu Pass en el Wallet.
+
+2.3 No puedes utilizar en exceso la capacidad de red general o el ancho de banda de la APN, ni cargar indebidamente un Producto iOS, macOS o un usuario final con Notificaciones Push o Notificaciones Locales excesivas, según lo determine Apple a su discreción razonable. Además, aceptas no dañar ni interferir con las redes o servidores de Apple, ni con servidores o redes de terceros conectados a APN, ni interrumpir el uso de APN por parte de otros desarrolladores.
+
+2.4 No puedes usar el APN o las notificaciones locales para enviar material que contenga contenido obsceno, pornográfico, ofensivo o difamatorio o materiales de cualquier tipo (texto, gráficos, imágenes, fotografías, sonidos, etc.) u otro contenido o materiales que a juicio razonable de Apple, el usuario final de su Aplicación, Pass o Sitio puede considerarlo objetable.
+
+2.5 No puedes transmitir, almacenar ni poner a disposición ningún material que contenga virus o cualquier otro código de computadora, archivos o programas que puedan dañar, interrumpir o limitar el funcionamiento normal de APN o un Producto iOS o macOS, y aceptas no deshabilitar, falsificar, piratear o interferir de otra manera con cualquier mecanismo de seguridad, firma digital, verificación o autenticación que esté incorporado o utilizado por APN, o que permita que otros lo hagan.
+
+3. Términos adicionales para las identificaciones Push del sitio web
+
+3.1 Sujeto a los términos de este Acuerdo, comprendes y aceptas que las notificaciones que envíe utilizando su ID de inserción del sitio web deben enviarse con tu propio nombre, marca comercial o marca (por ejemplo, un usuario debe saber que la comunicación proviene de tu sitio) y debe incluir un icono, marca comercial, logotipo u otra marca de identificación. Aceptas no tergiversar o hacerte pasar por otro sitio o entidad, ni engañar a los usuarios sobre el creador de la notificación push del sitio web. En la medida en que haga referencia a la marca comercial o la marca de un tercero dentro de tu Notificación, declara y garantiza que tienes los derechos necesarios.
+
+3.2 Al habilitar el APN y enviar notificaciones automáticas del sitio web de macOS para tu sitio según lo permitido en este Acuerdo, permites a Apple usar (i) capturas de pantalla de las notificaciones automáticas del sitio web de macOS en macOS; y (ii) marcas comerciales y logotipos asociados con dichas Notificaciones, con fines promocionales en los materiales de marketing de Apple, excluyendo aquellas partes que no tienes derecho a utilizar con fines promocionales y que identificas por escrito a Apple. También permites que Apple use imágenes y otros materiales que puede proporcionar a Apple, a solicitud razonable de Apple, con fines promocionales en materiales de marketing.
+
+4. Entrega por APN o vía Notificaciones locales. Comprendes y aceptas que para proporcionar el APN y hacer que tus notificaciones push estén disponibles en productos iOS o macOS, Apple puede transmitir tus notificaciones push a través de varias redes públicas, en varios medios, y modificar o cambiar tus notificaciones push para cumplir con el Requisitos técnicos y de otro tipo para conectarse a redes o dispositivos. Reconoces y aceptas que el APN no es, y no está destinado a ser, un servicio de entrega garantizado o seguro, y que no deberás usarlo ni confiar en él como tal. Además, como condición para usar el APN o entregar notificaciones locales, tú aceptas no transmitir información personal o confidencial que pertenezca a un individuo (por ejemplo, un número de seguridad social, cuenta bancaria o información transaccional, o cualquier información donde el individuo pueda tener una expectativa razonable de transmisión segura) como parte de dicha Notificación, y tú aceptas cumplir con cualquier aviso aplicable o requisitos de consentimiento con respecto a cualquier recopilación, transmisión, mantenimiento, procesamiento o uso de la información personal de un usuario final.
+
+5. Tus agradecimientos. Reconoces y aceptas que:
+
+5.1 Apple puede en cualquier momento, y de vez en cuando, con o sin previo aviso a ti (a) modificar el APN, incluido el cambio o eliminación de cualquier característica o funcionalidad, o (b) modificar, desaprobar, reemitir o volver a publicar las API de APN . Comprendes que dichas modificaciones pueden requerir que cambies o actualices tus aplicaciones, Passes o sitios a su propio costo. Apple no tiene la obligación expresa o implícita de proporcionar, o continuar proporcionando, el APN y puede suspender o descontinuar todo o parte del APN en cualquier momento. Apple no será responsable de las pérdidas, daños o costos de ningún tipo incurridos por tu parte o cualquier otra parte que surjan o estén relacionados con dicha suspensión o interrupción del servicio o cualquier modificación de las API de APN o APN.
+
+5.2 El APN no está disponible en todos los idiomas o en todos los países y Apple no garantiza que el APN sea apropiado o esté disponible para su uso en una ubicación en particular. En la medida en que elija acceder y utilizar el APN, lo hace bajo tu propia iniciativa y eres responsable del cumplimiento de las leyes aplicables, incluidas, entre otras, las leyes locales.
+
+5.3 Apple te proporciona el APN para tu uso con su aplicación, Pass o sitio, y no le proporciona el APN directamente a ningún usuario final. Reconoces y aceptas que las Notificaciones Push son enviadas por ti, no por Apple, al usuario final de Tu Aplicación, Pass o Sitio, y tú eres el único responsable y responsable de cualquier dato o contenido transmitido en el mismo y de cualquier uso del mismo. APN. Además, reconoces y aceptas que cualquier notificación local es enviada por ti, no por Apple, al usuario final de su aplicación, y tú eres el único responsable de cualquier dato o contenido transmitido en el mismo.
+
+5.4 Apple no te garantiza en relación con la disponibilidad o el tiempo de actividad de APN y no está obligado a proporcionar ningún mantenimiento, soporte técnico u otro tipo de soporte para APN.
+
+5.5 Apple se reserva el derecho de eliminar tu acceso a la APN, limitar tu uso de la APN o revocar tu ID de aplicación Push en cualquier momento a su exclusivo criterio.
+
+5.6 Apple puede monitorear y recopilar información (incluidos, entre otros, datos técnicos y información de diagnóstico) sobre tu uso de la APN para ayudar a Apple a mejorar la APN y otros productos o servicios de Apple y para verificar tu cumplimiento con este Acuerdo; siempre que Apple no acceda o divulgue el contenido de ninguna Notificación Push a menos que Apple crea de buena fe que dicho acceso o divulgación es razonablemente necesario para: (a) cumplir con el proceso legal o solicitud; (b) hacer cumplir los términos de este Acuerdo, incluida la investigación de cualquier posible violación del mismo; (c) detectar, prevenir o abordar problemas de seguridad, fraude o técnicos; o (d) proteger los derechos, la propiedad o la seguridad de Apple, sus desarrolladores, clientes o el público según lo exija o permita la ley.
+
+6. Terceros proveedores de servicios. Se te permite contratar o contratar a un tercero («Proveedor de servicios») para que lo ayude a acceder y utilizar el APN en sus Aplicaciones, Passes o Sitios, lo que incluye, entre otros, involucrar a dicho Proveedor de servicios para mantener y administrar los servidores de aplicaciones en tu nombre, siempre que el acceso y uso de dicho proveedor de servicios a APN solo se realice en tu nombre al proporcionarte dichos servicios para tu aplicación, tu Pass y / o tus sitios y de acuerdo con estos términos, y está sujeto a un acuerdo vinculante por escrito entre tú y el proveedor de servicios con términos al menos tan restrictivos y protectores de Apple como los establecidos en este documento, que incluyen, entre otros, la confidencialidad de las versiones preliminares de APN y las obligaciones de indemnización a Apple . Cualquier acción emprendida por dicho Proveedor de servicios en relación con Sus notificaciones automáticas y / o derivadas de este Acuerdo se considerará tomada por ti, y tú (además del Proveedor de servicios) serás responsable ante Apple de todas estas acciones (o cualquier inacción), que incluyen, pero no se limitan a indemnizar a Apple por cualquier daño causado por el Proveedor de servicios que actúa en tu nombre. En caso de acciones o inacciones que constituyan una violación de este Acuerdo o que de otra manera causen algún daño, Apple se reserva el derecho de exigirle que cambie de Proveedor de servicios.
+
+7. Renuncia de responsabilidad adicional 
+
+APPLE NO SERÁ RESPONSABLE DE NINGÚN DAÑO O PÉRDIDA QUE SURJA DE CUALQUIER USO DEL APN, INCLUYENDO CUALQUIER INTERRUPCIÓN EN EL APN O CUALQUIER USO DE NOTIFICACIONES, INCLUYENDO, PERO SIN LIMITARSE, A CUALQUIER CORTE DE CORRIENTE, FALLOS DEL SISTEMA, ATAQUES DE RED, PROGRAMADOS O NO PROGRAMADOS ,MANTENIMIENTO U OTRAS INTERRUPCIONES.
+
+Anexo 4
+
+1. Separabilidad
+
+Si alguno de los términos, condiciones o disposiciones contenidas en estos Términos y Condiciones, o cualquier parte del mismo se considera inexigible, entonces dicho término, condición o disposición o parte de éste, se anulará en el alcance necesario y todos los demás términos, condiciones o provisiones mantendrán su efecto, como si el término, la condición o disposición anulada, o parte de ella, no haya existido.
+
+2. Jurisdicción y Ley Aplicable
+
+El presente Acuerdo (y cualquier controversia, litigio o reclamación de cualquier naturaleza que surjan o de algunas maneras relacionadas con él o su formación) se regirá e interpretará de conformidad con la legislación española. Todas las disputas que surjan del presente Acuerdo serán sometidas a los Juzgados y Tribunales de Madrid Capital.
+                </textarea>
+              </mat-form-field>
+              <mat-checkbox formControlName="tosControl" id="tos">
+                I agree to the terms of service and privacy policy
+              </mat-checkbox>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>Congratulations! You are now done!</p>
+            <div>
+              <!-- <button mat-raised-button matStepperPrevious>Back</button>
+              <button mat-raised-button (click)="stepper.reset()">Reset</button> -->
+              <button mat-raised-button color="primary" (click)="addUser()">Save</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
