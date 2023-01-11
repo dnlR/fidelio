@@ -44,21 +44,21 @@ export class AuthService {
     return this.supabase.auth.getSession()
   }
 
-  async profile_uuid() {
-    const x = await this.supabase.auth.getUser()
-    const u = x.data.user.id
-    const t =  await this.supabase
-      .from('users')
-      .select(`id`)
-      .eq('uuid', u)
-      .single()
-    if (t!=null) {
-      return((await t).data.id);
-    }
-    else {
-      return ("");
-    }
-  }
+  // async profile_uuid() {
+  //   const x = await this.supabase.auth.getUser()
+  //   const u = x.data.user.id
+  //   const t =  await this.supabase
+  //     .from('users')
+  //     .select(`id`)
+  //     .eq('id', u)
+  //     .single()
+  //   if (t!=null) {
+  //     return((await t).data.id);
+  //   }
+  //   else {
+  //     return ("");
+  //   }
+  // }
   
     
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {

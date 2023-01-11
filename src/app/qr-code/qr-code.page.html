@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>qr-code</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <a [href]="qrCodeDownloadLink" download="qrcode">
+    <ion-fab-button>
+      <ion-icon name="cloud-download"></ion-icon>
+    </ion-fab-button>
+    </a>
+  </ion-fab>    
+</ion-content>

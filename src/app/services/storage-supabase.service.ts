@@ -50,6 +50,7 @@ export class StorageSupabaseService {
   async createNotice(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 5000 })
     await toast.present()
+    console.log(message)
   }
 
   // get user() : any {

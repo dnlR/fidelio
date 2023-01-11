@@ -9,7 +9,6 @@ import { EmpresaDataService } from '../services/empresa-data.service';
 })
 export class MenuEmpresariPage implements OnInit {
   public usuariID: string = "";
-  public usuariUUID: string = "";
   public usuariEMAIL: string = "";
   public empresaID: string;
   public empresaexist! : boolean;
@@ -17,14 +16,15 @@ export class MenuEmpresariPage implements OnInit {
 
   async ngOnInit() {
     const x = await this.supabase.user1;
-    this.usuariUUID = x.data.user.id;
+    this.usuariID = x.data.user.id;
     this.usuariEMAIL = x.data.user.email;
-    this.usuariID = await this.supabase.profile_uuid();
     this.empresaexist = await this.empresaDS.empresa_existforuser(this.usuariID)
     if (! this.empresaexist) {
       alert("Cal crear una empresa")
     }
-    this.empresaID = await this.empresaDS.empresa_getfromuser(this.usuariID)
+    else {
+      this.empresaID = await this.empresaDS.empresa_getfromuser(this.usuariID)
+    }
     console.log(this.usuariID + " " + this.usuariEMAIL);
   }
 }

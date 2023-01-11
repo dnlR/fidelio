@@ -28,6 +28,8 @@
             <ion-thumbnail>
               <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}}/>
             </ion-thumbnail>
+          </td>
+          <td><a routerLink="/qrcode/{{campanya.company_id}}-{{campanya.id}}"><ion-icon name="qr-code"></ion-icon> </a></td>
         </tr>
       </table>
       </div>

@@ -68,7 +68,7 @@ export class CampanyaDataService {
 
   async campanya_insupd(campanya:iCampanya):Promise<PostgrestError|null>{
     campanya.modification_date=new Date();
-    campanya.modification_user=await this.AuthS.profile_uuid();
+    campanya.modification_user=this.AuthS.sp_userID;
     //Cal eliminar ja que la bd genera serial sol
     //Si camID es 0 es un NEW
     if (campanya.id==0) {

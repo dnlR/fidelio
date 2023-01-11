@@ -12,17 +12,15 @@ import { AuthService } from '../services/auth.service'
 
 export class HomePage {
   public usuariID: any;
-  public usuariUUID: string = "";
   public usuariEMAIL: string = "";
   public empresaexist! : boolean;
   constructor(private readonly supabase: AuthService) { }
 
   async ngOnInit() {
     const x = await this.supabase.user1;
-    this.usuariUUID = x.data.user.id;
+    this.usuariID = x.data.user.id;
     this.usuariEMAIL = x.data.user.email;
-    this.usuariID = await this.supabase.profile_uuid();
-    console.log(this.usuariID + " " + this.usuariUUID + " " + this.usuariEMAIL);
+    console.log(this.usuariID + " " + this.usuariEMAIL);
   }
   logout() {
     this.supabase.signOut();

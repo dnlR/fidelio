@@ -3,6 +3,7 @@ export interface iTerminal {
     id:number|undefined;
     name:string;
     description:string;
+    terminal_user:string;
     terminal_password:string;
     active:boolean;
     timeout:number;

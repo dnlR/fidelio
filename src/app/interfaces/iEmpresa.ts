@@ -3,8 +3,11 @@ export interface iEmpresa {
     name:string;
     nif:string;
     email:string;
-    user_id:string;
+    uuser_id:string;
     zip_code_id:string;
+    city:string;
+    region:string;
+    country:string;
     phone:string;
     logo:string;//URL
     active:boolean;

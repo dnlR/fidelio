@@ -8,8 +8,10 @@ import { iEmpresa } from '../interfaces/iEmpresa';
 import { PostgrestError } from '@supabase/supabase-js';
 import { EmpresaDataService } from '../services/empresa-data.service';
 import { AuthService } from '../services/auth.service'
+import { ZipCodesService } from '../services/zip-codes.service'
 import { StorageSupabaseService } from '../services/storage-supabase.service';
 import { NoDataRowOutlet } from '@angular/cdk/table';
+
 
 @Component({
   selector: 'app-empreses',
@@ -19,11 +21,10 @@ import { NoDataRowOutlet } from '@angular/cdk/table';
 export class EmpresesPage implements OnInit {
   profileEmpresa! : iEmpresa;
   empresaForm!: FormGroup;
-  usuariUUID = "";
   usuariEMAIL = "";
   usuariID = "";
-   
-  constructor(private fb: FormBuilder, private storageDS:StorageSupabaseService, private location: Location, private empresaDS:EmpresaDataService, private readonly supabase: AuthService) {
+  CPOldValue = "";
+  constructor(private fb: FormBuilder, private storageDS:StorageSupabaseService, private location: Location, private empresaDS:EmpresaDataService, private readonly supabase: AuthService, private zipDS:ZipCodesService) {
   }
   
  
@@ -36,9 +37,9 @@ export class EmpresesPage implements OnInit {
       EmpresaNIF:[this.profileEmpresa.nif, Validators.required],
       EmpresaEmail:[this.profileEmpresa.email, [Validators.required, Validators.email]],
       EmpresaCP:[this.profileEmpresa.zip_code_id, Validators.required],
-      //EmpresaPoblacio:[this.profileEmpresa.EmpresaPoblacio, Validators.required],
-      //EmpresaProvincia:[this.profileEmpresa.EmpresaProvincia, Validators.required],
-      //EmpresaPais:[this.profileEmpresa.EmpresaPais, Validators.required],
+      EmpresaPoblacio:[this.profileEmpresa.city, Validators.required],
+      EmpresaProvincia:[this.profileEmpresa.region, Validators.required],
+      EmpresaPais:[this.profileEmpresa.country, Validators.required],
       EmpresaTelefon:[this.profileEmpresa.phone, Validators.required],
       EmpresaLogo:[this.profileEmpresa.logo]
     });    
@@ -49,9 +50,9 @@ export class EmpresesPage implements OnInit {
     this.profileEmpresa!.nif=this.empresaForm.get('EmpresaNIF')?.value!;
     this.profileEmpresa!.email=this.empresaForm.get('EmpresaEmail')?.value!;
     this.profileEmpresa!.zip_code_id=this.empresaForm.get('EmpresaCP')?.value!;
-    //this.profileEmpresa!.EmpresaPoblacio=this.empresaForm.get('EmpresaPoblacio')?.value!;
-    //this.profileEmpresa!.EmpresaProvincia=this.empresaForm.get('EmpresaProvincia')?.value!;
-    //this.profileEmpresa!.EmpresaPais=this.empresaForm.get('EmpresaPais')?.value!;
+    this.profileEmpresa!.city=this.empresaForm.get('EmpresaPoblacio')?.value!;
+    this.profileEmpresa!.region=this.empresaForm.get('EmpresaProvincia')?.value!;
+    this.profileEmpresa!.country=this.empresaForm.get('EmpresaPais')?.value!;
     this.profileEmpresa!.phone=this.empresaForm.get('EmpresaTelefon')?.value!;
     //this.profileEmpresa!.logo=this.empresaForm.get('EmpresaLogo')?.value!;
     console.log(this.profileEmpresa);
@@ -73,19 +74,32 @@ export class EmpresesPage implements OnInit {
   removeLogo(){
     this.profileEmpresa.logo = null;
   }
-  onChange($event){
-    console.log($event.target.value);
+  onFocus($event){
+    this.CPOldValue=$event.target.value;
   }
-  getCP($event){
-    console.log($event.detail);
-    console.log($event.target.value);
+  async getCP($event){
+    //console.log($event.detail);
+    if ($event.target.value!=this.CPOldValue) {
+      //Get ZIP details
+      console.log($event.detail);
+      const d = await this.zipDS.zip_getbycode("ES", this.empresaForm.get('EmpresaCP')?.value)
+      if (d.length>0) {
+        this.empresaForm.get('EmpresaPoblacio').setValue(d[0].city);
+        this.empresaForm.get('EmpresaProvincia').setValue(d[0].province);
+        this.empresaForm.get('EmpresaPais').setValue("España");
+      }
+      else {
+        this.empresaForm.get('EmpresaPoblacio').setValue("");
+        this.empresaForm.get('EmpresaProvincia').setValue("");
+        this.empresaForm.get('EmpresaPais').setValue("");
+      }
+    }
   }
 
   async loadEmpresa() {
     const x = await this.supabase.user1;
-    this.usuariUUID = x.data.user.id;
     this.usuariEMAIL = x.data.user.email;
-    this.usuariID = await this.supabase.profile_uuid();
+    this.usuariID = x.data.user.id;
     this.profileEmpresa = await this.empresaDS.empresa_getbyuserid(this.usuariID) as unknown as iEmpresa;
     if (this.profileEmpresa==null){
       //crear empresa
@@ -94,8 +108,11 @@ export class EmpresesPage implements OnInit {
         name: '',
         nif: '',
         email: '',
-        user_id: '',
+        uuser_id: '',
         zip_code_id: '',
+        city:'',
+        region:'',
+        country:'',
         phone: '',
         logo: '',
         active: true,

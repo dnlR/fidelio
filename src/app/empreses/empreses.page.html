@@ -25,27 +25,20 @@
   </ion-item>  
   <ion-item> 
     <ion-label position="floating">Codi PostalZ</ion-label>
-    <ion-input clearInput="true" formControlName="EmpresaCP" (ionChange)="onChange($event)" (ionBlur)=getCP($event)></ion-input>
-  </ion-item> 
-<!--    
+    <ion-input clearInput="true" formControlName="EmpresaCP" (ionFocus)="onFocus($event)" (ionBlur)=getCP($event)></ion-input>
+  </ion-item>    
   <ion-item> 
     <ion-label position="floating">Població</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaPoblacio"></ion-input>
-    <ion-note slot="helper">Nom de la població</ion-note>
-    <ion-note slot="error">Poblacio invalid</ion-note>
   </ion-item>    
   <ion-item> 
     <ion-label position="floating">Provincia</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaProvincia"></ion-input>
-    <ion-note slot="helper">Nom de la provincia</ion-note>
-    <ion-note slot="error">Nom invalid</ion-note>
   </ion-item>    
   <ion-item> 
     <ion-label position="floating">Pais</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaPais"></ion-input>
-    <ion-note slot="helper">Nom del pais</ion-note>
-    <ion-note slot="error">Nom invalid</ion-note>
-  </ion-item>   -->
+  </ion-item>
   <ion-item>
     <ion-label position="floating">Logo</ion-label>
     <ion-thumbnail slot="end">
