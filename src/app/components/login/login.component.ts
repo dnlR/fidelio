@@ -2,16 +2,8 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MyErrorStateMatcher } from 'src/app/utils/error-state-matcher';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +43,6 @@ export class LoginComponent implements OnInit {
       if (!result.error) {
         this.linkSuccess = true;
       } else {
-        // alert(result.error.message);
         alert(`Currently we do not support that email provider. Try a different one please.`);
       }
     }

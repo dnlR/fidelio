@@ -1,37 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
-import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActionSheetController, ActionSheetButton } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FirstTimeService } from 'src/app/services/first-time.service';
-
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
-interface ZipCode {
-  id: string,
-  zip_code: string,
-  city: string
-}
-export class User {
-
-  constructor(
-    public id: string,
-    public name: string,
-    public email: string,
-    public zipcode: number,
-    public address: string,
-    public phone: string,
-    public tos_accepted: boolean
-  ) { }
-}
+import { ZipCode } from 'src/app/interfaces/zipcode';
+import { User } from 'src/app/models/user';
+import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 
 
 @Component({
@@ -125,10 +102,6 @@ export class FillUserInfoComponent implements OnInit {
   async getItems(event: any) {
     // set zipCode to the value of the search input
     const zipCode = event.target.value;
-
-    // if (event.inputType === 'deleteContentBackward') {
-    //   console.log('delete pressed');
-    // }
 
     if (zipCode
       && zipCode.trim() !== ''
