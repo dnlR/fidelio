@@ -8,12 +8,15 @@ import { UsertabsPageRoutingModule } from './usertabs-routing.module';
 
 import { UsertabsPage } from './usertabs.page';
 
+import { MaterialModule } from 'src/app/material.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UsertabsPageRoutingModule
+    UsertabsPageRoutingModule,
+    MaterialModule
   ],
   declarations: [UsertabsPage]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usertabs',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsertabsPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  openUser() {
+    this.router.navigateByUrl('/user', { replaceUrl: true });
+  }
+
+  openCompany() {
+    this.router.navigateByUrl('/company', { replaceUrl: true });
+  }
+
+  openTerminal() {
+    this.router.navigateByUrl('/terminal', { replaceUrl: true });
+  }
 }
