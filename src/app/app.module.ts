@@ -14,13 +14,15 @@ import { GravatarModule } from 'ngx-gravatar';
 import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
 import { FillUserInfoComponent } from './components/fill-user-info/fill-user-info.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FillUserInfoComponent
+    FillUserInfoComponent,
+    TutorialComponent,
   ],
   imports: [
     BrowserModule, 

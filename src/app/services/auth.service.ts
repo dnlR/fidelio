@@ -48,8 +48,17 @@ export class AuthService {
   }
 
   async getUser() {
-    const { data: { user } } = await this.supabase.auth.getUser();
+    const { data: { user }, error } = await this.supabase.auth.getUser();
     return user;
+  }
+
+  async userIsAuthenticated() {
+    const user = await this.getUser();
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   get currentUser() {

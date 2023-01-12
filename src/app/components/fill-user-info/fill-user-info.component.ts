@@ -4,6 +4,9 @@ import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActionSheetController, ActionSheetButton } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { FirstTimeService } from 'src/app/services/first-time.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,9 +23,9 @@ interface ZipCode {
 export class User {
 
   constructor(
-    // public id: number,
+    public id: string,
     public name: string,
-    // public email: string,
+    public email: string,
     public zipcode: number,
     public address: string,
     public phone: string,
@@ -52,7 +55,12 @@ export class FillUserInfoComponent implements OnInit {
 
   private supabase: SupabaseClient;
 
-  constructor(private actionSheetCtrl: ActionSheetController) {
+  constructor(
+    private actionSheetCtrl: ActionSheetController,
+    private auth: AuthService,
+    private router: Router,
+    private firstTimeService: FirstTimeService
+  ) {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
@@ -71,24 +79,46 @@ export class FillUserInfoComponent implements OnInit {
     });
     this.formGroupTOS = new FormGroup({
       'tosControl': new FormControl('', [Validators.requiredTrue])
-    })
+    });
   }
 
-  addUser() {
+  async addUser() {
     if (this.formGroupName.valid
       && this.formGroupZipCode.valid
       && this.formGroupAddress.valid
       && this.formGroupPhone.valid) {
 
+      const authUser = await this.auth.getUser();
       const user: User = {
+        id: authUser.id,
+        email: authUser.email!,
         name: this.formGroupName.get('nameControl').value,
-        zipcode: this.searchedZipCodeId,
         address: this.formGroupAddress.get('addressControl').value,
+        zipcode: this.searchedZipCodeId,
         phone: this.formGroupPhone.get('phoneControl').value,
         tos_accepted: this.formGroupTOS.get('tosControl').value
       }
-      console.log(user);
-      // this.router.navigate(['/home']);
+
+      const { data, error } = await this.supabase
+        .from('users')
+        .insert([
+          {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            address: user.address,
+            zipcode: user.zipcode,
+            phone: user.phone,
+            tos_accepted: user.tos_accepted,
+          },
+        ]);
+
+      if (error) {
+        alert(`There was something wrong trying to save this user. Please try again.`);
+      } else {
+        this.firstTimeService.updateFirstTimeForCurrentUser();
+        this.router.navigate(['/tutorial']);
+      }
     }
   }
 
@@ -137,7 +167,7 @@ export class FillUserInfoComponent implements OnInit {
   }
 
   async getMatchingZipCodesForZipCode(code): Promise<ZipCode[]> {
-    let { data: zip_codes, error } = await this.supabase
+    const { data: zip_codes, error } = await this.supabase
       .from('zip_codes')
       .select("id, zip_code, city")
       .ilike('zip_code', `%${code}%`);
