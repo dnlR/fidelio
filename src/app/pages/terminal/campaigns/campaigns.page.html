@@ -1,0 +1,42 @@
+<!-- fidelio toolbar -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fidelio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- chip toolbar     -->
+ 
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Campañas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list-header>    
+    <ion-chip *ngIf="nameCompany">
+      <ion-icon name="storefront-outline"></ion-icon>
+      <ion-label>{{nameCompany.name}}</ion-label>    
+    </ion-chip>    
+    <ion-chip *ngIf="nameTerminal">
+      <ion-icon name="calculator-outline"></ion-icon>
+     <ion-label>{{nameTerminal.name|titlecase}}</ion-label> 
+    </ion-chip>
+
+<!-- buscador -->
+  </ion-list-header>
+  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>  
+<!-- cards -->
+  <ion-row>
+    <ion-col sizeLg="6" sizeMd="6" sizeXl="12" *ngFor="let item of campania_filtrados">
+     
+      <ion-card>
+        <button ion-item (click)="showCampaignModal(item)">
+          <img src={{item.card_main_image}}>
+          <ion-card-content [style.background-color]="item.card_color" style="padding-top:0px"></ion-card-content>
+          <div  class="card-title"> {{ item.name| titlecase }}</div>       
+        </button> 
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

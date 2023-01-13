@@ -28,9 +28,33 @@ const routes: Routes = [
     canActivate: [AuthenticatedGuard]
   },
   {
+    path: 'login-terminal',
+    loadChildren: () => import('./pages/terminal/login-terminal/login-terminal.module').then( m => m.LoginTerminalPageModule),
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'campaigns/:company/:terminal',
+    loadChildren: () => import('./pages/terminal/campaigns/campaigns.module').then( m => m.CampaignsPageModule)
+  },
+ 
+  {
+    path: 'modal-campaign',
+    loadChildren: () => import('./pages/terminal/modal-campaign/modal-campaign.module').then( m => m.ModalCampaignPageModule)
+  },
+  {
+    path: 'reader-qr/:company/:campaign/:points/:terminal',
+    loadChildren: () => import('./pages/terminal/reader-qr/reader-qr.module').then( m => m.ReaderQrPageModule)
+  },
+  {
+    path: 'customers/:company/:campaign/:points/:terminal',
+    loadChildren: () => import('./pages/terminal/customers/customers.module').then( m => m.CustomersPageModule)
+  },
+  {
     path: '**',
     redirectTo: '/',
   },
+  
+  
 ];
 
 @NgModule({

@@ -26,3 +26,25 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+
+// alineacion botones alarma     
+.alert-button-group  {
+    flex-direction: row !important;   
+ }
+// permitir que la pantalla al leer QR sea transparente
+ body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+  .card-alert {
+   width: 100%;
+   height: 150px;
+   object-fit:cover;  
+}
+
+ .item-alert{
+   height: 30px;
+ }
+ 

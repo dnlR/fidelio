@@ -21,7 +21,5 @@ export class UsertabsPage implements OnInit {
     this.router.navigateByUrl('/company', { replaceUrl: true });
   }
 
-  openTerminal() {
-    this.router.navigateByUrl('/terminal', { replaceUrl: true });
-  }
+ 
 }

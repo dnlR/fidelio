@@ -15,14 +15,17 @@ const routes: Routes = [
       {
         path: 'userqr',
         loadChildren: () => import('../userqr/userqr.module').then(m => m.UserqrPageModule)
-      }
+      },
+      
+     
     ]
   },
   {
     path: '',
     redirectTo: 'usertabs/usercards',
     pathMatch: 'full'
-  }
+  },
+  
 ];
 
 @NgModule({
