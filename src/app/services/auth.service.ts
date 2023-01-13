@@ -1,49 +1,53 @@
-import { Injectable } from '@angular/core'
-import { LoadingController, ToastController } from '@ionic/angular'
-import { AuthChangeEvent, createClient, PostgrestError, Session, SupabaseClient, User, UserResponse } from '@supabase/supabase-js'
-import { environment } from '../../environments/environment'
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router'
+import { createClient, SupabaseClient, User } from '@supabase/supabase-js'
+import { BehaviorSubject } from 'rxjs'
+import { environment } from 'src/environments/environment'
 
-// export interface Profile {
-//   username: string
-//   website: string
-//   avatar_url: string
-// }
-
-const tuser= "0f3c866e-ebf3-4e8a-b35b-9d3d29946ee2";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private supabase: SupabaseClient
-  public sp_userID!:string
-  public sp_userEmail!:string
-  constructor(private loadingCtrl: LoadingController, private toastCtrl: ToastController) {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
-    this.initsetup();
+  private supabase: SupabaseClient;
+  private _currentUser: BehaviorSubject<boolean | User | any> = new BehaviorSubject(null);
+
+  constructor(private router: Router) {
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.init();
   }
 
-  async initsetup(){
-    const x = await this.user1;
-    this.sp_userID = x.data.user.id;
-    this.sp_userEmail = x.data.user.email;
-    console.log(this.sp_userID + " " + this.sp_userEmail);
+  async init() {
+    // Manually load user session once on page load
+    const { data: { user } } = await this.supabase.auth.getUser();
+
+    if (user) {
+      this._currentUser.next(user)
+    } else {
+      this._currentUser.next(false)
+    }
+
+    this.supabase.auth.onAuthStateChange((event, session) => {
+      if (event == 'SIGNED_IN') {
+        this._currentUser.next(session!.user)
+      } else {
+        this._currentUser.next(false)
+        this.router.navigateByUrl('/', { replaceUrl: true })
+      }
+    })
   }
 
-  get user() : any {
-    //return this.supabase.auth.getUser()
-    //const x:any = await this.supabase.auth.getUser;
-    //const r = x.data.user.id;
-    return this.sp_userID
-  }
-  get user1() : any {
-    return this.supabase.auth.getUser()
+  async signInWithEmail(email: string) {
+    return await this.supabase.auth.signInWithOtp({
+      email: email,
+    });
   }
 
-  get session() : any {
-    return this.supabase.auth.getSession()
+  logout() {
+    this.supabase.auth.signOut();
   }
 
+<<<<<<< HEAD
   // async profile_uuid() {
   //   const x = await this.supabase.auth.getUser()
   //   const u = x.data.user.id
@@ -63,24 +67,23 @@ export class AuthService {
     
   authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return this.supabase.auth.onAuthStateChange(callback)
+=======
+  async getUser() {
+    const { data: { user }, error } = await this.supabase.auth.getUser();
+    return user;
+>>>>>>> 9cfd3dcdc3f324b98da32ee392a9d934f1e7c4c6
   }
 
-  signIn(email:string) {
-    return this.supabase.auth.signInWithOtp({ email })
+  async userIsAuthenticated() {
+    const user = await this.getUser();
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  signOut() {
-    return this.supabase.auth.signOut()
+  get currentUser() {
+    return this._currentUser.asObservable();
   }
-
-
-  async createNotice(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 5000 })
-    await toast.present()
-  }
-
-  createLoader() {
-    return this.loadingCtrl.create()
-  }
-
 }

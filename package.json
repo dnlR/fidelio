@@ -27,7 +27,6 @@
     "@capacitor/core": "4.6.1",
     "@capacitor/haptics": "4.1.0",
     "@capacitor/keyboard": "4.1.0",
-    "@capacitor/preferences": "^4.0.2",
     "@capacitor/status-bar": "4.1.1",
     "@ionic-native/core": "^5.22.0-beta-1",
     "@ionic-native/google-maps": "^5.27.0-beta-20200630",
@@ -41,6 +40,7 @@
     "jssha": "^3.3.0",
     "ngx-color-picker": "^13.0.0",
     "ngx-gravatar": "^13.0.0",
+    "ngx-spinner": "^15.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
