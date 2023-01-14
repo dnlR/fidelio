@@ -24,7 +24,7 @@
   </ion-list-header>
   <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
   <ion-list lines="none" *ngFor="let item of filter_users; index as i">
-        <ion-item button detail="true"(click)="showCustomer(item)"  detail-icon="ellipsis-vertical-outline"> 
+        <ion-item button detail="true"(click)="presentActionSheet(item)"  detail-icon="ellipsis-vertical-outline"> 
           {{ item.name| titlecase }}
         </ion-item>        
   </ion-list>  

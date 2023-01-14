@@ -23,8 +23,8 @@ export class ReaderQrPage implements OnInit {
   points!: number;
   terminal_id!: number;
   terminal: any;
-  imageUrl='https://img.freepik.com/vector-premium/copa-ganador-felicidades-premio-triunfo-icono-victoria-ilustracion_100456-1422.jpg?w=2000';
-
+  // direccion imagen'https://img.freepik.com/vector-premium/copa-ganador-felicidades-premio-triunfo-icono-victoria-ilustracion_100456-1422.jpg?w=2000';
+  imageUrl='../../../../assets/winnerCup.webp';  
   constructor(private route: ActivatedRoute,
               private campaignService: CampaignService,
               private terminalService: TerminalService,
@@ -65,7 +65,7 @@ export class ReaderQrPage implements OnInit {
       this.mobileweb=false;
     } 
   }
-
+ //Permisos Lector QR
   async checkPermission() {
     return new Promise(async (resolve, reject) => {
       const status = await BarcodeScanner.checkPermission({ force: true });
@@ -111,7 +111,7 @@ export class ReaderQrPage implements OnInit {
     BarcodeScanner.stopScan();
     this.scanActive = false;
   }
-
+  //Actualizamos datos usuario en campaña y añadimos registro en transaction
   sumaPuntos(idUSer: string){
 
     this.userCardsService.getUserCardByCustomerCampaing(idUSer, this.campaign_id)
@@ -145,7 +145,7 @@ export class ReaderQrPage implements OnInit {
                     });
     
   }
-
+ //Muestra si el cliente obtiene premio o los puntos conseguidos con la nueva compra
   showPrize(currentUser: any, won_prizes:number, message_prize:string, points:number, remained_points:number, image:string) {
     this.alertController.create({
       header: message_prize,
@@ -170,7 +170,7 @@ export class ReaderQrPage implements OnInit {
     });
   }
 
-
+// Alarma de que el usuario no está inscrito en la campaña
   errorAlarm() {
     this.alertController.create({
       header: 'Usuario no inscrito en campaña',

@@ -49,6 +49,11 @@ const routes: Routes = [
     path: 'customers/:company/:campaign/:points/:terminal',
     loadChildren: () => import('./pages/terminal/customers/customers.module').then( m => m.CustomersPageModule)
   },
+  
+  {
+    path: 'stats/:company/:campaign/:terminal',
+    loadChildren: () => import('./pages/terminal/stats/stats.module').then( m => m.StatsPageModule)
+  },
   {
     path: '**',
     redirectTo: '/',

@@ -35,7 +35,7 @@ export class LoginTerminalPage implements OnInit {
       console.log('es el formulario valido');
       console.log(this.formTerminal.value.terminal,
         this.formTerminal.value.password);
-  
+      // si se loguea correctamente va a las campañas activas de empresa
       this.terminalService.loginTerminal(this.formTerminal.value.terminal,
                                        this.formTerminal.value.password)
                                       .then((response) => {                                 

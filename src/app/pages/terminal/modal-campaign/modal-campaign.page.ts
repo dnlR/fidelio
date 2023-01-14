@@ -15,16 +15,10 @@ export class ModalCampaignPage implements OnInit {
  
   
   constructor(private modalController:ModalController,
-              private router: Router,
-             
-             
-    ) {
-      
-     }
+              private router: Router,            
+            ) {}
 
-  ngOnInit() {   
-      
-  }
+  ngOnInit() {}
   dismiss(){
     this.modalController.dismiss();
   }

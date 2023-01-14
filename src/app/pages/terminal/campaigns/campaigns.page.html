@@ -32,7 +32,7 @@
      
       <ion-card>
         <button ion-item (click)="showCampaignModal(item)">
-          <img src={{item.card_main_image}}>
+          <img style="height:100px;width:150px" src={{item.card_main_image}}>
           <ion-card-content [style.background-color]="item.card_color" style="padding-top:0px"></ion-card-content>
           <div  class="card-title"> {{ item.name| titlecase }}</div>       
         </button> 

@@ -13,10 +13,10 @@ export class UsersService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
    }
 
-  async getCustomerName(id_customer:number){
+  async getCustomer(id_customer:number){
     let { data: customer, error } = await this.supabase
                                                       .from('users')
-                                                      .select('name') 
+                                                      .select('*') 
                                                       .eq('id', id_customer)
                                                       return customer;
 

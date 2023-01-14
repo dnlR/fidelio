@@ -1,14 +1,12 @@
-
-
+<!-- card con los datos de la campaña elegida -->
 <ion-content>
   <ion-card>
     <img alt="" src={{currentCampaign.card_main_image}} />
     <ion-card-content [style.background-color]="currentCampaign.card_color" style="padding-top:0px"></ion-card-content>
     <ion-card-header>
       <ion-row>
-        <ion-card-title>{{currentCampaign.card_title}}
-          <!-- añadir estadisticas -->
-        <!-- <button class="statsButton" (click)="stats()"><ion-icon style="font-size:20px;" name="stats-chart-outline"></ion-icon></button> -->
+        <ion-card-title>{{currentCampaign.card_title}}          
+        <button class="statsButton" (click)="stats()"><ion-icon style="font-size:20px;" name="stats-chart-outline"></ion-icon></button>
       </ion-card-title>
       </ion-row>
    

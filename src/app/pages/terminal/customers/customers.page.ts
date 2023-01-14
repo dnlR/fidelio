@@ -22,11 +22,11 @@ export class CustomersPage implements OnInit {
   company!: any;
   terminal!: any;  
   customers: any;
-  users:{user:any, name:string}[]=[];
-  filter_users:{user:any, name:string}[]=[];
-  //imageUrl="https://w7.pngwing.com/pngs/529/972/png-transparent-award-prize-medal-computer-icons-award-culture-trophy-symbol-thumbnail.png";
-  imageUrl='https://img.freepik.com/vector-premium/copa-ganador-felicidades-premio-triunfo-icono-victoria-ilustracion_100456-1422.jpg?w=2000';
-  //imageUrl='../../../assets/images/copa.jpg'
+  textoPuntos: string;
+  users:{user: any, name: string, email: string}[] = [];
+  filter_users:{user: any, name: string, email: string}[] = [];
+  // direccion imagen: 'https://img.freepik.com/vector-premium/copa-ganador-felicidades-premio-triunfo-icono-victoria-ilustracion_100456-1422.jpg?w=2000';
+  imageUrl='../../../../assets/winnerCup.webp';  
   constructor(private route: ActivatedRoute,
               private campaignService: CampaignService,
               private terminalService: TerminalService,
@@ -35,8 +35,7 @@ export class CustomersPage implements OnInit {
               private usersService: UsersService,
               private transactionsService: TransactionsService,
               public alertController: AlertController,
-              private actionSheetCtrl: ActionSheetController,
-             
+              private actionSheetCtrl: ActionSheetController,             
               private router: Router) { }
 
   ngOnInit() {
@@ -45,6 +44,8 @@ export class CustomersPage implements OnInit {
     this.company_id = this.route.snapshot.params['company']; 
     this.points = this.route.snapshot.params['points'];
     this.terminal_id = this.route.snapshot.params ['terminal'];
+
+    this.textoPuntos = this.points==1? 'punto': 'puntos';
 
     //Obtener datos campaña
     this.campaignService.getCampaign(this.campaign_id)
@@ -68,10 +69,10 @@ export class CustomersPage implements OnInit {
                                       } else {                                                    
                                         console.log('clientes',response);
                                         this.customers.forEach((arr:any) => {  
-                                                  this.usersService.getCustomerName(arr.user_id)
+                                                  this.usersService.getCustomer(arr.user_id)
                                                                   .then((response)=>{                                                    
-                                                                                    this.users.push({user:arr, name:response[0].name});
-                                                                                    this.filter_users.push({user:arr, name:response[0].name});
+                                                                                    this.users.push({user:arr, name:response[0].name, email:response[0].email});
+                                                                                    this.filter_users.push({user:arr, name:response[0].name, email:response[0].email});
                                                                                      });                                                   
                                                                             })                        
                                         };                                                                                                  
@@ -89,29 +90,35 @@ export class CustomersPage implements OnInit {
 
 
   //Muestra ventana cliente seleccionado
-  async showCustomer(currentUser:any){
-    let alert = await this.alertController.create({   
-      header: 'Cliente',
-      subHeader: currentUser.name,
-      message: `<h6>Campaña:${this.campaign[0].name}</h6><h6>Puntos:${this.points}</h6>`,     
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Ok',
-          handler: data => {            
-            this.addPoints(currentUser);
-          }
-        },
-        
-      ]
-    });
-    await alert.present();
-  }
  
+  async presentActionSheet(currentUser:any) {
+    console.log('currentuser', currentUser);
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: currentUser.name,
+      subHeader: currentUser.email,
+      
+      buttons: [        
+        {
+          text: `Añadir ${this.points} ${this.textoPuntos}`,
+          handler: () => {            
+            this.addPoints(currentUser);
+          }          
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
 
+    await actionSheet.present();
+  }
+
+  //Actualiza los datos del usuario en la campaña y añade
+  //registro a transacciones
   addPoints(currentUser: any){
     let new_points = currentUser.user.card_points_current + (+this.points);
     let won_prizes = Math.trunc(new_points / currentUser.user.card_points);
@@ -136,7 +143,7 @@ export class CustomersPage implements OnInit {
   }
 
 
-
+// Indica si el usuario obtiene premio o los puntos que consigue con la compra
   showPrize(currentUser: any, won_prizes:number, message_prize:string, points:number, remained_points:number, image:string) {
     this.alertController.create({
       header: message_prize,
@@ -162,7 +169,7 @@ export class CustomersPage implements OnInit {
   }
   
 
-
+//avisa su si no hay usuarios inscritos en campaña
   errorAlarm() {
     this.alertController.create({
       header: 'No hay usuarios inscritos en campaña',

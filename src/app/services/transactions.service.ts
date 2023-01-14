@@ -29,4 +29,28 @@ export class TransactionsService {
                                               .eq('campaign_id', campaign_id)
                                               return transactions;
   }
+
+  async getTransactionByCustomer(campaign_id:number){
+    const { data:transactions, error } = await this.supabase
+                                              .from('transaction_by_user')
+                                              .select('*')
+                                              .eq('campaign_id', campaign_id)
+                                              return transactions;
+  }
+
+  async getTransactionByDay(campaign_id:number){
+    const { data:transactions, error } = await this.supabase
+                                              .from('transaction_by_time')
+                                              .select('*')
+                                              .eq('campaign_id', campaign_id)
+                                              return transactions;
+  }
+  async getTransactionByPrize(campaign_id:number){
+    const { data:transactions, error } = await this.supabase
+                                              .from('transaction_by_prize')
+                                              .select('*')
+                                              .eq('campaign_id', campaign_id)
+                                              return transactions;
+  }
+
 }
