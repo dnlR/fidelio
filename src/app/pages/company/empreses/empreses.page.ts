@@ -3,14 +3,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { iEmpresa } from '../interfaces/iEmpresa';
+import { iEmpresa } from '../../../interfaces/iEmpresa';
 //import { SupabaseService } from '../supabase.service'
-import { PostgrestError } from '@supabase/supabase-js';
-import { EmpresaDataService } from '../services/empresa-data.service';
-import { AuthService } from '../services/auth.service'
-import { ZipCodesService } from '../services/zip-codes.service'
-import { StorageSupabaseService } from '../services/storage-supabase.service';
-import { NoDataRowOutlet } from '@angular/cdk/table';
+//import { PostgrestError } from '@supabase/supabase-js';
+import { EmpresaDataService } from '../../../services/empresa-data.service';
+import { AuthService } from '../../../services/auth.service'
+import { ZipCodesService } from '../../../services/zip-codes.service'
+import { StorageSupabaseService } from '../../../services/storage-supabase.service';
+//import { NoDataRowOutlet } from '@angular/cdk/table';
 
 
 @Component({
@@ -36,6 +36,7 @@ export class EmpresesPage implements OnInit {
       EmpresaNom:[this.profileEmpresa.name, Validators.required],
       EmpresaNIF:[this.profileEmpresa.nif, Validators.required],
       EmpresaEmail:[this.profileEmpresa.email, [Validators.required, Validators.email]],
+      EmpresaAdreca:[this.profileEmpresa.address, [Validators.required]],
       EmpresaCP:[this.profileEmpresa.zip_code_id, Validators.required],
       EmpresaPoblacio:[this.profileEmpresa.city, Validators.required],
       EmpresaProvincia:[this.profileEmpresa.region, Validators.required],
@@ -49,6 +50,7 @@ export class EmpresesPage implements OnInit {
     this.profileEmpresa!.name=this.empresaForm.get('EmpresaNom')?.value!;
     this.profileEmpresa!.nif=this.empresaForm.get('EmpresaNIF')?.value!;
     this.profileEmpresa!.email=this.empresaForm.get('EmpresaEmail')?.value!;
+    this.profileEmpresa!.address=this.empresaForm.get('EmpresaAdreca')?.value!;
     this.profileEmpresa!.zip_code_id=this.empresaForm.get('EmpresaCP')?.value!;
     this.profileEmpresa!.city=this.empresaForm.get('EmpresaPoblacio')?.value!;
     this.profileEmpresa!.region=this.empresaForm.get('EmpresaProvincia')?.value!;
@@ -97,9 +99,9 @@ export class EmpresesPage implements OnInit {
   }
 
   async loadEmpresa() {
-    const x = await this.supabase.user1;
-    this.usuariEMAIL = x.data.user.email;
-    this.usuariID = x.data.user.id;
+    const x = await this.supabase.getUser();
+    this.usuariEMAIL = x.email;
+    this.usuariID = x.id;
     this.profileEmpresa = await this.empresaDS.empresa_getbyuserid(this.usuariID) as unknown as iEmpresa;
     if (this.profileEmpresa==null){
       //crear empresa
@@ -109,6 +111,7 @@ export class EmpresesPage implements OnInit {
         nif: '',
         email: '',
         uuser_id: '',
+        address: '',
         zip_code_id: '',
         city:'',
         region:'',

@@ -55,8 +55,9 @@ export class TerminalDataService {
   }
 
   async terminal_insupd(terminal:iTerminal):Promise<PostgrestError|null>{
+    const x = await this.AuthS.getUser();
     terminal.modification_date=new Date();
-    terminal.modification_user=this.AuthS.sp_userID;
+    terminal.modification_user_id=x.id;
     //Cal elimnar
     if (terminal.id==0) {
       let e!:number

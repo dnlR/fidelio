@@ -4,6 +4,7 @@ export interface iEmpresa {
     nif:string;
     email:string;
     uuser_id:string;
+    address:string;
     zip_code_id:string;
     city:string;
     region:string;

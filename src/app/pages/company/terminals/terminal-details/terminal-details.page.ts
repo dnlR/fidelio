@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { TerminalDataService } from '../../services/terminal-data.service';
-import { iTerminal, iTerminalList } from '../../interfaces/iTerminal';
+import { TerminalDataService } from '../../../../services/terminal-data.service';
+import { iTerminal, iTerminalList } from '../../../../interfaces/iTerminal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StorageSupabaseService } from '../../services/storage-supabase.service';
-import { delay } from 'rxjs';
+import { StorageSupabaseService } from '../../../../services/storage-supabase.service';
+//import { delay } from 'rxjs';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -76,7 +76,7 @@ export class TerminalDetailsPage implements OnInit {
           active: true,
           timeout: 60, //segons
           modification_date: new Date(),
-          modification_user: ''
+          modification_user_id: ''
         }
         this.terminal=ter;
       }

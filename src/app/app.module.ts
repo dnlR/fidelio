@@ -16,7 +16,6 @@ import { MaterialModule } from './material.module';
 import { FillUserInfoComponent } from './components/fill-user-info/fill-user-info.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

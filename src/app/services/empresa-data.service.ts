@@ -32,9 +32,10 @@ export class EmpresaDataService {
   }
 
   async empresa_insupd(empresa:iEmpresa){
+    const x = await this.AuthS.getUser();
     empresa.modification_date=new Date();
-    empresa.modification_user_id=this.AuthS.sp_userID;
-    empresa.uuser_id=this.AuthS.sp_userID;
+    empresa.modification_user_id=x.id
+    empresa.uuser_id=x.id
     const { data, error } = await this.supabase.from('companies').upsert(empresa)
     return error
   }
@@ -43,8 +44,10 @@ export class EmpresaDataService {
     const { data, error } = await this.supabase
     .from('companies')
     .select()
-    .eq("uuser_id", uuid)
+    .eq('uuser_id', uuid)
     .single()
+    console.log(uuid)
+    console.log(data)
     return (data!=null)
   }
 

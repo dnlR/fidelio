@@ -47,37 +47,9 @@ export class AuthService {
     this.supabase.auth.signOut();
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  // async profile_uuid() {
-  //   const x = await this.supabase.auth.getUser()
-  //   const u = x.data.user.id
-  //   const t =  await this.supabase
-  //     .from('users')
-  //     .select(`id`)
-  //     .eq('id', u)
-  //     .single()
-  //   if (t!=null) {
-  //     return((await t).data.id);
-  //   }
-  //   else {
-  //     return ("");
-  //   }
-  // }
-  
-    
-  authChanges(callback: (event: AuthChangeEvent, session: Session | null) => void) {
-    return this.supabase.auth.onAuthStateChange(callback)
-=======
   async getUser() {
     const { data: { user }, error } = await this.supabase.auth.getUser();
     return user;
->>>>>>> 9cfd3dcdc3f324b98da32ee392a9d934f1e7c4c6
-=======
-  async getUser() {
-    const { data: { user }, error } = await this.supabase.auth.getUser();
-    return user;
->>>>>>> 9cfd3dcdc3f324b98da32ee392a9d934f1e7c4c6
   }
 
   async userIsAuthenticated() {

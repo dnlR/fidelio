@@ -14,7 +14,7 @@ export interface iCampanya {
     description:string;
     conditions:string;
     modification_date:Date;
-    modification_user:string;
+    modification_user_id:string;
 }
 export interface iCampanyaList {
     company_id:number

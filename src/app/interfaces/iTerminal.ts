@@ -8,7 +8,7 @@ export interface iTerminal {
     active:boolean;
     timeout:number;
     modification_date:Date;
-    modification_user:string;
+    modification_user_id:string;
 }
 export interface iTerminalList {
     company_id:number;

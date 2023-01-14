@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { CampanyaDataService } from '../../services/campanya-data.service';
-import { iCampanya, iCampanyaList } from '../../interfaces/iCampanya';
+import { CampanyaDataService } from '../../../../services/campanya-data.service';
+import { iCampanya, iCampanyaList } from '../../../../interfaces/iCampanya';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StorageSupabaseService } from '../../services/storage-supabase.service';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { StorageSupabaseService } from '../../../../services/storage-supabase.service';
+//import { ColorPickerModule } from 'ngx-color-picker';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -74,7 +74,7 @@ setFormCampanyaDetail() {
           description:"",
           conditions:"",
           modification_date:new Date(),
-          modification_user:""    
+          modification_user_id:""    
       }
       this.campanya=cam;
     }

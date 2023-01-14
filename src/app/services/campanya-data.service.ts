@@ -38,7 +38,7 @@ export class CampanyaDataService {
       description:"DescP",
       conditions:"DescL",
       modification_date:new Date(),
-      modification_user:""
+      modification_user_id:""
     }
     const x = await this.campanya_insupd(cam);
     if (x!=null)
@@ -67,8 +67,9 @@ export class CampanyaDataService {
   }
 
   async campanya_insupd(campanya:iCampanya):Promise<PostgrestError|null>{
+    const x = await this.AuthS.getUser();
     campanya.modification_date=new Date();
-    campanya.modification_user=this.AuthS.sp_userID;
+    campanya.modification_user_id=x.id;
     //Cal eliminar ja que la bd genera serial sol
     //Si camID es 0 es un NEW
     if (campanya.id==0) {

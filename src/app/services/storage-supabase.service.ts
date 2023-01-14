@@ -37,7 +37,7 @@ export class StorageSupabaseService {
     var http = new XMLHttpRequest();
     http.open('HEAD', url, false);
     http.send();
-    return http.status!=404;
+    return http.status!=404; 
   }
   
   async storage_download(file:string) {

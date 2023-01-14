@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CampanyaDataService } from '../services/campanya-data.service';
-import { iCampanya, iCampanyaList } from '../interfaces/iCampanya';
+import { CampanyaDataService } from '../../../services/campanya-data.service';
+import { iCampanya, iCampanyaList } from '../../../interfaces/iCampanya';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -23,7 +23,7 @@ export class CampanyesPage implements OnInit {
   addCampanya() {
     this.router.navigate(["/campanyes/campanya-details/",this.empID,"0"]);
   }
-
+ 
   goBack(): void {
     this.router.navigate(["/menu-empresari"]);
   }

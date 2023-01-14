@@ -29,37 +29,38 @@ const routes: Routes = [
     canActivate: [AuthenticatedGuard]
   },
   {
-    path: '**',
-    redirectTo: '/',
-  },
-  {
     path: 'terminals/terminal-details/:empID/:terID',
-    loadChildren: () => import('./terminals/terminal-details/terminal-details.module').then( m => m.TerminalDetailsPageModule)
+    loadChildren: () => import('./pages/company/terminals/terminal-details/terminal-details.module').then( m => m.TerminalDetailsPageModule)
   },
   {
     path: 'campanyes/campanya-details/:empID/:camID',
-    loadChildren: () => import('./campanyes/campanya-details/campanya-details.module').then( m => m.CampanyaDetailsPageModule)
+    loadChildren: () => import('./pages/company/campanyes/campanya-details/campanya-details.module').then( m => m.CampanyaDetailsPageModule)
   },
   {
     path: 'empreses',
-    loadChildren: () => import('./empreses/empreses.module').then( m => m.EmpresesPageModule)
+    loadChildren: () => import('./pages/company/empreses/empreses.module').then( m => m.EmpresesPageModule)
   },
   {
     path: 'menu-empresari',
-    loadChildren: () => import('./menu-empresari/menu-empresari.module').then( m => m.MenuEmpresariPageModule)
+    loadChildren: () => import('./pages/company/menu-empresari/menu-empresari.module').then( m => m.MenuEmpresariPageModule)
   },
   {
     path: 'terminals/:empID',
-    loadChildren: () => import('./terminals/terminals.module').then( m => m.TerminalsPageModule)
+    loadChildren: () => import('./pages/company/terminals/terminals.module').then( m => m.TerminalsPageModule)
   },
   {
     path: 'campanyes/:empID',
-    loadChildren: () => import('./campanyes/campanyes.module').then( m => m.CampanyesPageModule)
+    loadChildren: () => import('./pages/company/campanyes/campanyes.module').then( m => m.CampanyesPageModule)
   },
   {
     path: 'qrcode/:QRCode',
-    loadChildren: () => import('./qr-code/qr-code.module').then( m => m.QrCodePageModule)
+    loadChildren: () => import('./pages/company/qr-code/qr-code.module').then( m => m.QrCodePageModule)
   },  
+    {
+    path: '**',
+    redirectTo: '/',
+  },
+
 ];
 
 @NgModule({

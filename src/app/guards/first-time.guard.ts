@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
-import { Preferences } from '@capacitor/preferences';
+//import { Preferences } from '@capacitor/preferences';
 import { FirstTimeService } from '../services/first-time.service';
 
 @Injectable({

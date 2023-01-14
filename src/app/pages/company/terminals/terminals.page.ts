@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { TerminalDataService } from '../services/terminal-data.service';
-import { iTerminal, iTerminalList } from '../interfaces/iTerminal';
+import { TerminalDataService } from '../../../services/terminal-data.service';
+import { iTerminal, iTerminalList } from '../../../interfaces/iTerminal';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
