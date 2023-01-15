@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="terminal">{{terminal.company_id}}/{{terminal.id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="terminalDetailForm">
+  <form [formGroup]="terminalDetailForm" (ngSubmit)="onSubmit()">
+   <ion-item> 
+     <ion-label position="floating">Nom</ion-label>
+     <ion-input clearInput="true" formControlName="terminalNom"></ion-input>
+     <ion-note slot="error">Nom obligatori</ion-note>
+   </ion-item>
+  <ion-item> 
+    <ion-label position="floating">Descripcio</ion-label>
+    <ion-input clearInput="true" formControlName="terminalDescripcio"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Time Out</ion-label>
+    <ion-input type="number" clearInput="true" formControlName="terminalTimeOut"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Usuari</ion-label>
+    <ion-input [readonly]="true" clearInput="true" formControlName="terminalUser"></ion-input>
+  </ion-item>    
+  <ion-item> 
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" clearInput="true" formControlName="terminalPassword"></ion-input>
+  </ion-item>  
+  <ion-item> 
+    <ion-label position="floating">Actiu</ion-label>
+    <ion-toggle slot="end" formControlName="terminalActiu"></ion-toggle>
+  </ion-item>
+   <ion-button type="submit" [disabled]="!terminalDetailForm.valid">Guarda</ion-button>
+</form>
+
+<ion-button (click)="goBack()">Cancela</ion-button>
+

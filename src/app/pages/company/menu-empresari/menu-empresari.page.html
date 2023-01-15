@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mode Empresari</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center">
+  <ion-button expand="block" [routerLink]="['../empreses']">Empresa</ion-button>
+  </div>
+  <div class="ion-text-center">
+    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist">Campanyes</ion-button>
+  </div>
+  <div class="ion-text-center">
+    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Terminals</ion-button>
+  </div>
+</ion-content>
+
+{{usuariID}}<BR>
+{{usuariEMAIL}}
