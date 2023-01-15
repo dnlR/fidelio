@@ -55,10 +55,6 @@ const routes: Routes = [
   {
     path: 'qrcode/:QRCode',
     loadChildren: () => import('./pages/company/qr-code/qr-code.module').then( m => m.QrCodePageModule)
-  },  
-    {
-    path: '**',
-    redirectTo: '/',
   },
   {
     path: 'login-terminal',
