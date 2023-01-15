@@ -1,0 +1,62 @@
+<!-- fidelio toolbar -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fidelio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list-header>  
+    <ion-chip>
+      <ion-icon name="stats-chart-outline"></ion-icon>
+      <ion-label>Estadísticas</ion-label>
+      </ion-chip>      
+    <ion-chip *ngIf="campaign">
+      <ion-icon name="fast-food-outline"></ion-icon>
+      <ion-label>{{campaign[0].name}}</ion-label>
+      </ion-chip>    
+  </ion-list-header>
+
+  <!-- transacciones por tiempo  -->
+  <h4>Transacciones por día</h4>
+  <div class="chart-container" style="position: relative; height:130px; width:300px;margin:0 auto;">
+    <canvas
+        baseChart
+        [type]="'line'"
+        [data]="lineChartData"  
+        [legend]="false">
+    </canvas> 
+  </div>  
+  <!-- transacciones por usuario  -->
+  <h4>Participación clientes</h4>
+  <div class="chart-container" style="position: relative; height:130px; width:150px;margin:0 auto;">
+    <canvas 
+      baseChart
+      [type]="'doughnut'"
+      [data]="pieChartData"    
+      [legend]="false">
+    </canvas>
+  </div>
+  <!-- premios por usuario -->
+  <h4>Premios por usuario</h4>
+  <div class="chart-container" style="position: relative; height:150px; width:200px;margin:0 auto;">
+    <canvas 
+      baseChart
+      [type]="'bar'"
+      [data]="barChartData"           
+      [legend]="false">
+    </canvas>
+  </div>   
+</ion-content>
+<ion-footer> 
+   <ion-toolbar color="primary">
+    <ion-row class="ion-justify-content-center">
+    <ion-buttons>
+      <ion-button (click)="volver()">Campañas</ion-button>
+    </ion-buttons>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+    
+
+

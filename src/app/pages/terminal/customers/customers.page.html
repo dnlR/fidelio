@@ -1,0 +1,31 @@
+<!-- fidelio toolbar -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Fidelio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+    <!-- chip toolbar     -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>customers</ion-title>
+    </ion-toolbar>
+  </ion-header>   
+  <ion-list-header>        
+    <ion-chip *ngIf="campaign">
+      <ion-icon name="fast-food-outline"></ion-icon>
+      <ion-label>{{campaign[0].name}}</ion-label>
+      </ion-chip>
+    <ion-chip *ngIf="terminal">
+      <ion-icon name="calculator-outline"></ion-icon>
+      <ion-label>{{terminal.name|titlecase}}</ion-label>
+    </ion-chip>
+  </ion-list-header>
+  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
+  <ion-list lines="none" *ngFor="let item of filter_users; index as i">
+        <ion-item button detail="true"(click)="presentActionSheet(item)"  detail-icon="ellipsis-vertical-outline"> 
+          {{ item.name| titlecase }}
+        </ion-item>        
+  </ion-list>  
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-content>
+  <div class = "centralize">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Login terminal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup] = "formTerminal">
+          <ion-list>
+            <ion-item>
+              <ion-label position = "floating">Terminal</ion-label>
+              <ion-input type = "email" formControlName = "terminal"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position = "floating">Password</ion-label>
+              <ion-input type = "password" formControlName = "password"></ion-input>
+            </ion-item>
+          </ion-list>         
+          <ion-button color = "primary" size = "full" [disabled] = "!formTerminal.valid" (click) = "login()"
+            test-id = "login-button">
+            Entrar
+          </ion-button>         
+        </form>        
+      </ion-card-content>      
+    </ion-card>   
+    <ion-label [ngStyle] = "{color: good_user === true ? 'green': 'red'}" style = "margin-left: 20px;">{{mensaje_validacion}}</ion-label>
+  </div>
+</ion-content>
