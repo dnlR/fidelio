@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router'
+import { isPlatform } from '@ionic/angular';
 import { createClient, SupabaseClient, User } from '@supabase/supabase-js'
 import { BehaviorSubject } from 'rxjs'
 import { environment } from 'src/environments/environment'
@@ -38,9 +39,20 @@ export class AuthService {
   }
 
   async signInWithEmail(email: string) {
-    return await this.supabase.auth.signInWithOtp({
-      email: email,
-    });
+    if (isPlatform('capacitor')) {
+      return await this.supabase.auth.signInWithOtp({
+        email: email,
+        options: { emailRedirectTo: 'supachat://login' },
+      })
+    } else {
+      return await this.supabase.auth.signInWithOtp({
+        email: email,
+      });
+    }
+  }
+
+  async setSession(access_token, refresh_token) {
+    return this.supabase.auth.setSession({ access_token, refresh_token });
   }
 
   logout() {
