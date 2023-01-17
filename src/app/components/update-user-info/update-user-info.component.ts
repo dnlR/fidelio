@@ -8,6 +8,7 @@ import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 import { ZipCodesService } from 'src/app/services/zip-codes.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UpdateUser } from 'src/app/models/update-user';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-user-info',
@@ -32,7 +33,8 @@ export class UpdateUserInfoComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private zipCodeService: ZipCodesService,
-    private userService: UsersService
+    private userService: UsersService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
@@ -96,15 +98,20 @@ export class UpdateUserInfoComponent implements OnInit {
         phone: this.phoneControl.value,
       }
 
-      console.log(`UPDATE USER: ${user.name},${user.zipcode},${user.address},${user.phone}`);
-
+      this.spinner.show();
       const { data, error } = await this.userService.updateUser(user);
 
+      this.spinner.hide();
       if (error) {
         alert(`There was something wrong trying to update your details. Please try again.`);
       } else {
         this.router.navigate(['/user']);
       }
+    } else {
+      this.nameControl.markAllAsTouched();
+      this.zipcodeControl.markAllAsTouched();
+      this.addressControl.markAllAsTouched();
+      this.phoneControl.markAllAsTouched();
     }
   }
 }
