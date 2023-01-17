@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActionSheetController, ActionSheetButton } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,6 +7,8 @@ import { FirstTimeService } from 'src/app/services/first-time.service';
 import { ZipCode } from 'src/app/interfaces/zipcode';
 import { User } from 'src/app/models/user';
 import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
+import { ZipCodesService } from 'src/app/services/zip-codes.service';
+import { UsersService } from 'src/app/services/users.service';
 
 
 @Component({
@@ -30,16 +30,14 @@ export class FillUserInfoComponent implements OnInit {
 
   actionSheetPresented = false;
 
-  private supabase: SupabaseClient;
-
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private auth: AuthService,
     private router: Router,
-    private firstTimeService: FirstTimeService
-  ) {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
-  }
+    private firstTimeService: FirstTimeService,
+    private zipCodeService: ZipCodesService,
+    private userService: UsersService
+  ) {}
 
   ngOnInit() {
     this.formGroupName = new FormGroup({
@@ -76,19 +74,7 @@ export class FillUserInfoComponent implements OnInit {
         tos_accepted: this.formGroupTOS.get('tosControl').value
       }
 
-      const { data, error } = await this.supabase
-        .from('users')
-        .insert([
-          {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            address: user.address,
-            zipcode: user.zipcode,
-            phone: user.phone,
-            tos_accepted: user.tos_accepted,
-          },
-        ]);
+      const { data, error } = await this.userService.createUser(user);
 
       if (error) {
         alert(`There was something wrong trying to save this user. Please try again.`);
@@ -99,7 +85,7 @@ export class FillUserInfoComponent implements OnInit {
     }
   }
 
-  async getItems(event: any) {
+  async searchZipCode(event: any) {
     // set zipCode to the value of the search input
     const zipCode = event.target.value;
 
@@ -108,7 +94,7 @@ export class FillUserInfoComponent implements OnInit {
       && 3 < zipCode.length
       && event.inputType !== 'deleteContentBackward') {
 
-      let matchingZipCodes = await this.getMatchingZipCodesForZipCode(zipCode);
+      let matchingZipCodes = await this.zipCodeService.getMatchingZipCodesForZipCode(zipCode);
       if (0 < matchingZipCodes.length && !this.actionSheetPresented) {
         this.actionSheetPresented = true;
         await this.presentActionSheetForZipCodes(matchingZipCodes);
@@ -137,14 +123,5 @@ export class FillUserInfoComponent implements OnInit {
     const result = await actionSheet.onDidDismiss();
     this.searchedZipCodeId = result.data.zipCodeId;
     this.searchedZipCode = result.data.zipCode;
-  }
-
-  async getMatchingZipCodesForZipCode(code): Promise<ZipCode[]> {
-    const { data: zip_codes, error } = await this.supabase
-      .from('zip_codes')
-      .select("id, zip_code, city")
-      .ilike('zip_code', `%${code}%`);
-
-    return zip_codes;
   }
 }

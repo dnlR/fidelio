@@ -42,7 +42,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Zip Code</mat-label>
                 <input matInput type="text" debounce="2000" formControlName="zipcodeControl"
-                  [errorStateMatcher]="matcher" id="zipcode" required (input)="getItems($event)"
+                  [errorStateMatcher]="matcher" id="zipcode" required (input)="searchZipCode($event)"
                   [(ngModel)]="searchedZipCode">
 
                 <mat-error *ngIf="formGroupZipCode.get('zipcodeControl').hasError('required')">

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { createClient, PostgrestError, SupabaseClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { environment } from '../../environments/environment'
-import { iEmpresa } from "../interfaces/iEmpresa"
+import { ZipCode } from 'src/app/interfaces/zipcode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,14 @@ export class ZipCodesService {
     .eq("country_code", country_code)
     .eq("zip_code", zip_code)
     return data
+  }
+
+  async getMatchingZipCodesForZipCode(code): Promise<ZipCode[]> {
+    const { data: zip_codes, error } = await this.supabase
+      .from('zip_codes')
+      .select("id, zip_code, city")
+      .ilike('zip_code', `%${code}%`);
+
+    return zip_codes;
   }
 }

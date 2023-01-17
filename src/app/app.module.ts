@@ -15,12 +15,14 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
 import { FillUserInfoComponent } from './components/fill-user-info/fill-user-info.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
+import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     FillUserInfoComponent,
+    UpdateUserInfoComponent,
     TutorialComponent,
   ],
   imports: [

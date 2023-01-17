@@ -6,12 +6,18 @@ import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { FirstTimeGuard } from './guards/first-time.guard';
 import { ShowTutorialGuard } from './guards/show-tutorial.guard';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
+import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
   },
   {
     path: 'fill-user-info',
@@ -26,6 +32,11 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./pages/usertabs/usertabs.module').then(m => m.UsertabsPageModule),
+    canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'update-user-info',
+    component: UpdateUserInfoComponent,
     canActivate: [AuthenticatedGuard]
   },
   {
