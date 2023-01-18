@@ -39,6 +39,10 @@ export class StatsPage implements OnInit {
   company_id!: number;
   terminal_id!: number;
 
+  noData1: boolean = false;
+  noData2: boolean = false;
+  noData3: boolean = false;
+
   constructor(private transactionsService: TransactionsService,
               private campaignService: CampaignService,
               private route: ActivatedRoute,
@@ -65,7 +69,9 @@ export class StatsPage implements OnInit {
                                           //this.pieChartData2.datasets[0].data =campo.total
                                           //this.pieChartData2.labels.push(campo.name);
                                 });     
-                               
+                                if (listaValores.length==0){
+                                  this.noData2 = true;
+                                }
                                 let pieChartData: ChartData<'pie', number[], string | string[]> = {
                                   labels: listaLabels,
                                   datasets: [ {                                    
@@ -84,6 +90,9 @@ export class StatsPage implements OnInit {
                                           listaValores.push(campo.total);                                         
                                           listaLabels.push(campo.date_trunc.split('T',1));
                               })
+                              if (listaValores.length==0){
+                                this.noData1 = true;
+                              }
                                 let lineChartData: ChartData<'line', number[], string | string[]> = {
                                   labels: listaLabels,
                                   datasets: [ {
@@ -103,7 +112,9 @@ export class StatsPage implements OnInit {
                                         listaValores.push(campo.prizes);                            
                                         listaLabels.push(campo.name);
                             });
-                               
+                            if (listaValores.length==0){
+                              this.noData3 = true;
+                            }
                           let barChartData: ChartData<'bar', number[], string | string[]> = {
                             labels: listaLabels,
                             datasets: [ {                              

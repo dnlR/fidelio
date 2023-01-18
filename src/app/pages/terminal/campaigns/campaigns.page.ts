@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/campaign.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { TerminalService } from 'src/app/services/terminal.service';
@@ -27,30 +27,32 @@ export class CampaignsPage implements OnInit {
               private terminalService: TerminalService,
               private companyService: CompanyService,
               public alertCtrl: AlertController, 
-              private modalController:ModalController,            
+              private modalController:ModalController,
+              private loadingCtrl: LoadingController,          
               private router: Router
     ) {
     }
 
   ngOnInit() {
-
-    this.company_id = this.route.snapshot.params['company'];   
-    this.terminal_id = this.route.snapshot.params['terminal'];
-    this.campaignService.getCampaigns(this.company_id, 'company_id')
-                          .then((response) => {this.campania = response!;
-                                               console.log(this.campania);
-                                               this.campania_filtrados = this.campania;
-                                            });
-    this.companyService.getCompanyName(this.company_id)
-                          .then((response) => {this.nameCompany = response;
-                                               console.log(response);
-                                            });  
-                                            
-    this.terminalService.getTerminalName(this.terminal_id)
-                          .then((response) => {this.nameTerminal = response;
-                                                console.log(response);
-                                            });   
-     
+    this.showLoading().then(()=>{
+        this.company_id = this.route.snapshot.params['company'];   
+        this.terminal_id = this.route.snapshot.params['terminal'];
+        this.campaignService.getCampaigns(this.company_id, 'company_id')
+                              .then((response) => {this.campania = response!;
+                                                  console.log(this.campania);
+                                                  this.campania_filtrados = this.campania;
+                                                  this.loadingCtrl.dismiss();
+                                                });
+        this.companyService.getCompanyName(this.company_id)
+                              .then((response) => {this.nameCompany = response;
+                                                  console.log(response);
+                                                });  
+                                                
+        this.terminalService.getTerminalName(this.terminal_id)
+                              .then((response) => {this.nameTerminal = response;
+                                                    console.log(response);
+                                                });   
+    });
                 
  } 
  
@@ -86,7 +88,17 @@ export class CampaignsPage implements OnInit {
       });
 
       await alert.present();
-    }    
+    }   
+    
+    async showLoading() {
+      const loading = await this.loadingCtrl.create({
+        message: 'Loading...',
+        
+        showBackdrop: false
+      });
+  
+      loading.present();
+    }
 
 }
 

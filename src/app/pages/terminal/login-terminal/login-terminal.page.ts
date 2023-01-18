@@ -42,8 +42,11 @@ export class LoginTerminalPage implements OnInit {
                                               this.terminal = response;
                                               if (this.terminal.length == 0){   
                                                 this.formTerminal.reset();                                              
-                                                this.mensaje_validacion = 'Usuario o password incorrecto';  
-                                                console.log('Usuario o password incorrecto')  ;                                             
+                                                this.mensaje_validacion = 'Usuario o password incorrecto';                                              
+                                              }
+                                              else if (!this.terminal[0].active){                                                    
+                                                  this.formTerminal.reset(); 
+                                                  this.mensaje_validacion = `${this.terminal[0].name} no está activo`;                                                
                                               } else {                                                 
                                                 this.good_user = true;
                                                 this.mensaje_validacion = 'Usuario correcto';
