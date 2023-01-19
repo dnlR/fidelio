@@ -17,6 +17,9 @@ import { FillUserInfoComponent } from './components/fill-user-info/fill-user-inf
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 
+import { QRCodeModule } from 'angularx-qrcode';
+import { DummyCampaignComponent } from './components/dummy-campaign/dummy-campaign.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { UpdateUserInfoComponent } from './components/update-user-info/update-us
     FillUserInfoComponent,
     UpdateUserInfoComponent,
     TutorialComponent,
+    DummyCampaignComponent
   ],
   imports: [
     BrowserModule, 
@@ -34,7 +38,8 @@ import { UpdateUserInfoComponent } from './components/update-user-info/update-us
     FormsModule,
     ReactiveFormsModule,
     GravatarModule,
-    MaterialModule
+    MaterialModule,
+    QRCodeModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

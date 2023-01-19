@@ -23,7 +23,6 @@ export class ReaderQrPage implements OnInit {
   points!: number;
   terminal_id!: number;
   terminal: any;
-  // direccion imagen'https://img.freepik.com/vector-premium/copa-ganador-felicidades-premio-triunfo-icono-victoria-ilustracion_100456-1422.jpg?w=2000';
   imageUrl='../../../../assets/winnerCup.webp';  
   constructor(private route: ActivatedRoute,
               private campaignService: CampaignService,

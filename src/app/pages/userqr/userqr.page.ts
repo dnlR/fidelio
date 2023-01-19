@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { SafeUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { AlertController, Platform } from '@ionic/angular';
+import { CampaignService } from 'src/app/services/campaign.service';
+import { UserCardsService } from 'src/app/services/user-cards.service';
+
+
 
 @Component({
   selector: 'app-userqr',
@@ -10,9 +16,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserqrPage implements OnInit {
   QRCode: string = "";
-  qrCodeDownloadLink: SafeUrl = "";
+  scanActive: boolean = false;
+  mobileweb: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    public platform: Platform,
+    private authService: AuthService,
+    private campaignService: CampaignService,
+    private userCardService: UserCardsService
+  ) {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
         this.QRCode = user.id;
@@ -22,9 +34,73 @@ export class UserqrPage implements OnInit {
 
   ngOnInit() {
     // console.log(`qr code: ${this.QRCode}`);
+    if (this.platform.is('mobileweb') || this.platform.is('desktop')) {
+      this.mobileweb = true;
+    } else {
+      this.mobileweb = false;
+    }
   }
 
-  onChangeURL(url: SafeUrl) {
-    this.qrCodeDownloadLink = url;
+  async checkPermission() {
+    return new Promise(async (resolve, reject) => {
+      const status = await BarcodeScanner.checkPermission({ force: true });
+      if (status.granted) {
+        resolve(true);
+      } else if (status.denied) {
+        BarcodeScanner.openAppSettings();
+        resolve(false);
+      }
+    });
+  }
+
+  async startScanner() {
+    const allowed = await this.checkPermission();
+    if (allowed) {
+      this.scanActive = true;
+      BarcodeScanner.hideBackground();
+      //necesario para que camara lea QR
+      document.querySelector('body')!.classList.add('scanner-active');
+
+      const result = await BarcodeScanner.startScan();
+
+      if (result.hasContent) {
+        this.scanActive = false;
+        alert('Campaign data read');
+        // result.content es empresaId.campañaId
+        const campaignId = result.content!.split('-')[1];
+        this.currentUserJoinCampaign(campaignId);
+
+      } else {
+        alert('NO DATA FOUND!');
+      }
+    } else {
+      alert('NOT ALLOWED!');
+    }
+    document.querySelector('body')!.classList.remove('scanner-active');
+  }
+
+  stopScanner() {
+    BarcodeScanner.stopScan();
+    this.scanActive = false;
+  }
+
+  ionViewWillLeave() {
+    BarcodeScanner.stopScan();
+    this.scanActive = false;
+  }
+
+  async currentUserJoinCampaign(campaignId: string) {
+    // alert(`current user will join campaing id: ${campaignId}`);
+
+    let campaign = null;
+    await this.campaignService.getCampaign(+campaignId)
+      .then((response) => { campaign = response![0] });
+
+    if (campaign) {
+      alert(`selected campaign: ${JSON.stringify(campaign, null, 4)}`);
+
+      const currentUserId = await this.authService.getCurrentUserId();
+      this.userCardService.userJoinsCampaign(currentUserId, campaign);
+    }
   }
 }

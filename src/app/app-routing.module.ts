@@ -8,6 +8,7 @@ import { ShowTutorialGuard } from './guards/show-tutorial.guard';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { DummyCampaignComponent } from './components/dummy-campaign/dummy-campaign.component';
 
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
     path: 'update-user-info',
     component: UpdateUserInfoComponent,
     canActivate: [AuthenticatedGuard]
+  },
+  {
+    path: 'dummy-campaign',
+    component: DummyCampaignComponent
   },
   {
     path: 'terminals/terminal-details/:empID/:terID',

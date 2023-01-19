@@ -6,5 +6,31 @@
 
 <ion-content>
   THIS IS MY QR CODE: 
-  <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+  <qrcode [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+
+
+  <ion-content *ngIf="mobileweb===false; else camera"> 
+    <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
+      SCAN
+    </ion-button>
+    <ion-row class="scan-button" [hidden]="!scanActive">
+      <ion-col class="ion-no-padding">
+        <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
+      </ion-col>
+    </ion-row>
+    <div class="scan-box" [hidden]="!scanActive"></div>
+    <!-- <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">
+      return
+    </ion-button> -->
+  </ion-content>
+  <ng-template #camera>
+    <p style="color:red; margin-left:10%;">No camera on web display only on mobile</p>
+    <!-- usuario de prueba para trabajar en web -->
+    <ion-button (click)="currentUserJoinCampaign('1')">Prueba QR</ion-button>
+    <!-- <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">Campañas</ion-button> -->
+  </ng-template>
+
+
+
 </ion-content>
