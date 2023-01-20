@@ -7,7 +7,7 @@
 <ion-content *ngIf="empresaForm">
   <form [formGroup]="empresaForm" (ngSubmit)="onSubmit()">
    <ion-item> 
-     <ion-label position="floating">Nom</ion-label>
+     <ion-label position="floating">Nombre</ion-label>
      <ion-input clearInput="true" formControlName="EmpresaNom"></ion-input>
    </ion-item>
    <ion-item> 
@@ -20,16 +20,16 @@
     <ion-note slot="error">Email invalid</ion-note>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">Telèfon</ion-label>
+    <ion-label position="floating">Telefono</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaTelefon"></ion-input>
   </ion-item>
   <ion-item> 
-    <ion-label position="floating">Adreça</ion-label>
+    <ion-label position="floating">Direccion</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaAdreca"></ion-input>
   </ion-item>
   
   <mat-form-field class="example-full-width" [style.width.%]="100">
-    <mat-label>Codi Postal</mat-label>  
+    <mat-label>Codigo Postal</mat-label>  
   <!-- <ion-item> 
     <ion-label position="floating">Codi Postal</ion-label> -->
     <!-- <input matInput clearInput="true" formControlName="EmpresaCP" (focus)="ZIPonFocus($event)" (blur)="getCP($event)" [matAutocomplete]="auto"/> -->
@@ -51,7 +51,7 @@
     </ion-item>
   </ion-list>   -->
   <ion-item> 
-    <ion-label position="floating">Població</ion-label>
+    <ion-label position="floating">Población</ion-label>
     <ion-input clearInput="true" formControlName="EmpresaPoblacio"></ion-input>
   </ion-item>    
   <ion-item> 
@@ -72,8 +72,8 @@
     <ion-icon name="cloud-upload-outline" (click)="addLogo()"></ion-icon>
     <ion-icon name="close-circle-outline" (click)="removeLogo()"></ion-icon>
   </ion-item>
-   <ion-button expand="block" type="submit" [disabled]="!empresaForm.valid">Guarda</ion-button>
+   <ion-button expand="block" type="submit" [disabled]="!empresaForm.valid">Guardar</ion-button>
 </form>
-<ion-button expand="block" (click)="goBack()">Cancela</ion-button>
+<ion-button expand="block" (click)="goBack()">Cancelar</ion-button>
 <!-- <p>Form Status: {{ empresaForm.status }}</p> -->
 

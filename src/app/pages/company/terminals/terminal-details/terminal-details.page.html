@@ -7,12 +7,12 @@
 <ion-content *ngIf="terminalDetailForm">
   <form [formGroup]="terminalDetailForm" (ngSubmit)="onSubmit()">
    <ion-item> 
-     <ion-label position="floating">Nom</ion-label>
+     <ion-label position="floating">Nombre</ion-label>
      <ion-input clearInput="true" formControlName="terminalNom"></ion-input>
      <ion-note slot="error">Nom obligatori</ion-note>
    </ion-item>
   <ion-item> 
-    <ion-label position="floating">Descripcio</ion-label>
+    <ion-label position="floating">Descripcion</ion-label>
     <ion-input clearInput="true" formControlName="terminalDescripcio"></ion-input>
   </ion-item>  
   <ion-item> 
@@ -20,7 +20,7 @@
     <ion-input type="number" clearInput="true" formControlName="terminalTimeOut"></ion-input>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">Usuari</ion-label>
+    <ion-label position="floating">Usuario</ion-label>
     <ion-input [readonly]="true" clearInput="true" formControlName="terminalUser"></ion-input>
   </ion-item>    
   <ion-item> 
@@ -28,11 +28,11 @@
     <ion-input type="password" clearInput="true" formControlName="terminalPassword"></ion-input>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">Actiu</ion-label>
+    <ion-label position="floating">Activo</ion-label>
     <ion-toggle slot="end" formControlName="terminalActiu"></ion-toggle>
   </ion-item>
-   <ion-button expand="block" type="submit" [disabled]="!terminalDetailForm.valid">Guarda</ion-button>
+   <ion-button expand="block" type="submit" [disabled]="!terminalDetailForm.valid">Guardar</ion-button>
 </form>
 
-<ion-button expand="block" (click)="goBack()">Cancela</ion-button>
+<ion-button expand="block" (click)="goBack()">Cancelar</ion-button>
 

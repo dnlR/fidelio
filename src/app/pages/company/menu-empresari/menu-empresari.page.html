@@ -6,18 +6,18 @@
 
 <ion-content>
   <div class="ion-text-center">
-  <ion-button expand="block" [routerLink]="['../empreses']">Empresa</ion-button>
+  <ion-button expand="block" [routerLink]="['../empreses']">Perfil Empresa</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist">Campanyes</ion-button>
+    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist">Gestion de Campañas</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Terminals</ion-button>
+    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Gestion de Terminales</ion-button>
   </div>
   <div class="ion-text-center">
     <ion-button expand="block" (click)="logout()">Logout</ion-button>
   </div>  
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']"> Empresa-Maps</ion-button>
+    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']"> Catalogo de Empresas en mapa</ion-button>
   </div>    
 </ion-content>

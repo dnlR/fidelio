@@ -7,7 +7,7 @@
 <ion-content *ngIf="campanyaDetailForm">
   <form [formGroup]="campanyaDetailForm" (ngSubmit)="onSubmit()">
    <ion-item> 
-     <ion-label position="floating">Nom</ion-label>
+     <ion-label position="floating">Nombre</ion-label>
      <ion-input clearInput="true" formControlName="CampanyaNom"></ion-input>
     </ion-item>
 
@@ -30,7 +30,7 @@
   </ion-item>   -->
 
   <ion-item>
-    <ion-label position="floating">Imatge Principal de la Tarjeta</ion-label>
+    <ion-label position="floating">Imagen Principal de la Tarjeta</ion-label>
     <ion-thumbnail slot="end">
       <img *ngIf="campanya.card_main_image" alt="Selecciona una imatge" formControlNmae="CampanyaTarjetaImatgePrincipal" src={{campanya.card_main_image}}/>
     </ion-thumbnail>
@@ -41,12 +41,12 @@
   </ion-item>  
 
   <ion-item> 
-    <ion-label position="floating">Tarjeta: Titul</ion-label>
+    <ion-label position="floating">Tarjeta: Titulo</ion-label>
     <ion-input clearInput="true" formControlName="CampanyaTarjetaTitulo"></ion-input>
-    <ion-note slot="error">Tarjeta Titul Obligatori</ion-note>
+    <ion-note slot="error">Titulo Obligatorio</ion-note>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">Tarjeta: SubTitul</ion-label>
+    <ion-label position="floating">Tarjeta: SubTitulo</ion-label>
     <ion-input clearInput="true" formControlName="CampanyaTarjetaSubTitulo"></ion-input>
   </ion-item>    
   <ion-item> 
@@ -62,27 +62,23 @@
     <ion-icon name="cloud-upload-outline" (click)="add_card_logo()"></ion-icon>
     <ion-icon name="close-circle-outline" (click)="remove_card_logo()"></ion-icon>
   </ion-item>  
-  <!-- <ion-item> 
-    <ion-label position="floating">CampanyaTarjetaLogo</ion-label>
-    <ion-input clearInput="true" formControlName="CampanyaTarjetaLogo"></ion-input>
-  </ion-item>       -->
   <ion-item> 
-    <ion-label position="floating">Tarjeta: Punts</ion-label>
+    <ion-label position="floating">Tarjeta: Puntos</ion-label>
     <ion-input clearInput="true" type="number" formControlName="CampanyaTarjetaPunts"></ion-input>
   </ion-item>  
   <ion-item> 
-    <ion-label position="floating">CampanyaDescripcioPublica</ion-label>
+    <ion-label position="floating">Descripcion Publica</ion-label>
     <ion-input clearInput="true" formControlName="CampanyaDescripcioPublica"></ion-input>
   </ion-item>          
   <ion-item> 
-    <ion-label position="floating">CampanyaCondicionsLegals</ion-label>
+    <ion-label position="floating">Condiciones Legales</ion-label>
     <ion-input clearInput="true" formControlName="CampanyaCondicionsLegals"></ion-input>
   </ion-item>            
   <ion-item> 
-    <ion-label position="floating">Campanya Activa</ion-label>
+    <ion-label position="floating">Activa</ion-label>
     <ion-toggle slot="end" formControlName="CampanyaActiva"></ion-toggle>
   </ion-item>
-   <ion-button expand="block" type="submit" [disabled]="!campanyaDetailForm.valid">Guarda</ion-button>
+   <ion-button expand="block" type="submit" [disabled]="!campanyaDetailForm.valid">Guardar</ion-button>
 </form>
-<ion-button expand="block" (click)="goBack()">Cancela</ion-button>
+<ion-button expand="block" (click)="goBack()">Cancelar</ion-button>
 
