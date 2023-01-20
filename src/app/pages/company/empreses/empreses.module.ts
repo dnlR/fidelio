@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { EmpresesPageRoutingModule } from './empreses-routing.module';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { EmpresesPage } from './empreses.page';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -14,8 +16,12 @@ import { EmpresesPage } from './empreses.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    EmpresesPageRoutingModule
+    EmpresesPageRoutingModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  declarations: [EmpresesPage]
+  declarations: [EmpresesPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EmpresesPageModule {}

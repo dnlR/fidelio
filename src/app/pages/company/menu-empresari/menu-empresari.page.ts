@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service'
 import { EmpresaDataService } from '../../../services/empresa-data.service';
+import { UtilsService } from '../../../services/utils.service';
 
 @Component({
   selector: 'app-menu-empresari',
@@ -12,7 +13,7 @@ export class MenuEmpresariPage implements OnInit {
   public usuariEMAIL: string = "";
   public empresaID: string;
   public empresaexist! : boolean;
-  constructor(private readonly supabase: AuthService, private empresaDS:EmpresaDataService) { }
+  constructor(private readonly supabase: AuthService, private empresaDS:EmpresaDataService, private utilsDS:UtilsService) { }
 
   async ngOnInit() {
     const x = await this.supabase.getUser();
@@ -20,11 +21,16 @@ export class MenuEmpresariPage implements OnInit {
     this.usuariEMAIL = x.email;
     this.empresaexist = await this.empresaDS.empresa_existforuser(this.usuariID)
     if (! this.empresaexist) {
-      alert("Cal crear una empresa")
+      this.utilsDS.createNotice("Cal crear una empresa")
     }
     else {
       this.empresaID = await this.empresaDS.empresa_getfromuser(this.usuariID)
     }
+    //console.log(this.utilsDS.dialogConfirmation("Hola", "Que dius?"));
     console.log(this.usuariID + " " + this.usuariEMAIL);
   }
+  logout() {
+    this.supabase.logout();
+  }
+
 }

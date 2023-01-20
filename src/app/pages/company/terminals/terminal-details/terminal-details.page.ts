@@ -35,8 +35,9 @@ export class TerminalDetailsPage implements OnInit {
     }
   
   generateTerminalUser():string {
-    const x=this.empID + this.terID;
-    const s = this.utilsSvc.str2SHA256(x);
+    //const x=this.empID + this.terID;
+    //const s = this.utilsSvc.str2SHA256(x);
+    const s = this.empID + "." + this.terID;
     return(s)
   }
   

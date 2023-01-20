@@ -14,4 +14,6 @@ export interface iEmpresa {
     active:boolean;
     modification_date:Date;
     modification_user_id:string;
+    coor_lng:number;
+    coor_lat:number;
   }

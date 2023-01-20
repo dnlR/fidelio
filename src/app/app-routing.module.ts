@@ -41,6 +41,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/company/empreses/empreses.module').then( m => m.EmpresesPageModule)
   },
   {
+    path: 'empreses-maps',
+    loadChildren: () => import('./pages/company/empreses/empresa-map/empresa-map.module').then( m => m.EmpresaMapPageModule)
+  },
+  {
     path: 'menu-empresari',
     loadChildren: () => import('./pages/company/menu-empresari/menu-empresari.module').then( m => m.MenuEmpresariPageModule)
   },

@@ -16,9 +16,11 @@ export class CampanyesPage implements OnInit {
   constructor(private campanyaDS: CampanyaDataService, private router: Router, private location: Location, private route: ActivatedRoute) { }
 
   async ngOnInit() {
+    //this.campanyaDS._test_campanya_insupd()
+  }
+  async ionViewWillEnter() {
     this.empID = this.route.snapshot.paramMap.get('empID')!;
     this.llistatCampanyes = await this.campanyaDS.campanya_getallbyEmpID(this.empID);
-    //this.campanyaDS._test_campanya_insupd()
   }
   addCampanya() {
     this.router.navigate(["/campanyes/campanya-details/",this.empID,"0"]);

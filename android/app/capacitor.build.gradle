@@ -12,12 +12,15 @@ dependencies {
     implementation project(':capacitor-community-barcode-scanner')
     implementation project(':capacitor-app')
     implementation project(':capacitor-camera')
+    implementation project(':capacitor-geolocation')
+    implementation project(':capacitor-google-maps')
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
 
 }
-
+apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/tbxml-android.gradle"
+apply from: "../../node_modules/cordova-plugin-googlemaps/src/android/frameworks/pgm-custom.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

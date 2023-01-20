@@ -14,7 +14,10 @@
   <div class="ion-text-center">
     <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Terminals</ion-button>
   </div>
+  <div class="ion-text-center">
+    <ion-button expand="block" (click)="logout()">Logout</ion-button>
+  </div>  
+  <div class="ion-text-center">
+    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']"> Empresa-Maps</ion-button>
+  </div>    
 </ion-content>
-
-{{usuariID}}<BR>
-{{usuariEMAIL}}

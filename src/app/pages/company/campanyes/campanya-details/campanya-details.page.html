@@ -82,7 +82,7 @@
     <ion-label position="floating">Campanya Activa</ion-label>
     <ion-toggle slot="end" formControlName="CampanyaActiva"></ion-toggle>
   </ion-item>
-   <ion-button type="submit" [disabled]="!campanyaDetailForm.valid">Guarda</ion-button>
+   <ion-button expand="block" type="submit" [disabled]="!campanyaDetailForm.valid">Guarda</ion-button>
 </form>
-<ion-button (click)="goBack()">Cancela</ion-button>
+<ion-button expand="block" (click)="goBack()">Cancela</ion-button>
 

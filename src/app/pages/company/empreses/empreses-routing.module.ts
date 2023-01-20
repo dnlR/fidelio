@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: EmpresesPage
+  },
+  {
+    path: 'empresa-map',
+    loadChildren: () => import('./empresa-map/empresa-map.module').then( m => m.EmpresaMapPageModule)
   }
 ];
 
