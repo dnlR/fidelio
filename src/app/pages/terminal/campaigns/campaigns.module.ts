@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CampaignsPageRoutingModule } from './campaigns-routing.module';
 
 import { CampaignsPage } from './campaigns.page';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CampaignsPageRoutingModule
+    CampaignsPageRoutingModule,
+    MaterialModule
   ],
   declarations: [CampaignsPage]
 })

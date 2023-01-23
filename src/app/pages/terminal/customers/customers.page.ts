@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ActionSheetController } from '@ionic/angular';
+import { AlertController, ActionSheetController, LoadingController } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/campaign.service';
 import { CompanyService } from 'src/app/services/company.service';
 import { TerminalService } from 'src/app/services/terminal.service';
@@ -35,7 +35,8 @@ export class CustomersPage implements OnInit {
               private usersService: UsersService,
               private transactionsService: TransactionsService,
               public alertController: AlertController,
-              private actionSheetCtrl: ActionSheetController,             
+              private actionSheetCtrl: ActionSheetController,
+              private loadingCtrl: LoadingController,             
               private router: Router) { }
 
   ngOnInit() {
@@ -46,38 +47,41 @@ export class CustomersPage implements OnInit {
     this.terminal_id = this.route.snapshot.params ['terminal'];
 
     this.textoPuntos = this.points==1? 'punto': 'puntos';
+    this.showLoading().then(()=>{
+        //Obtener datos campaña
+        this.campaignService.getCampaign(this.campaign_id)
+                        .then((response) => this.campaign = response!);
 
-    //Obtener datos campaña
-    this.campaignService.getCampaign(this.campaign_id)
-                    .then((response) => this.campaign = response!);
+        //Obtener datos empresa
+        this.companyService.getCompanyName(this.company_id)
+                        .then((response) => this.company = response);
 
-    //Obtener datos empresa
-    this.companyService.getCompanyName(this.company_id)
-                    .then((response) => this.company = response);
+        //Obtener datos terminal                     
+        this.terminalService.getTerminalName(this.terminal_id)
+                        .then((response) => this.terminal = response);
+                              
+        //obtener clientes misma campaña
+        this.userCardsService.getCustomersCampaign(this.campaign_id)
+                        .then((response)=>{
+                                          this.customers = response;
+                                          if (this.customers.length == 0){ 
+                                            //avisa no hay clientes en campaña                
+                                            this.errorAlarm(); 
+                                            this.loadingCtrl.dismiss();
+                                          } else {                                                    
+                                            console.log('clientes',response);
+                                            this.customers.forEach((arr:any) => {  
+                                                      this.usersService.getCustomer(arr.user_id)
+                                                                      .then((response)=>{                                                    
+                                                                                        this.users.push({user:arr, name:response[0].name, email:response[0].email});
+                                                                                        this.filter_users.push({user:arr, name:response[0].name, email:response[0].email});
+                                                                                        });                                                   
+                                                                                })  
+                                            this.loadingCtrl.dismiss();                      
+                                            };                                                                                                  
 
-    //Obtener datos terminal                     
-    this.terminalService.getTerminalName(this.terminal_id)
-                    .then((response) => this.terminal = response);
-                          
-    //obtener clientes misma campaña
-    this.userCardsService.getCustomersCampaign(this.campaign_id)
-                    .then((response)=>{
-                                      this.customers = response;
-                                      if (this.customers.length == 0){ 
-                                        //avisa no hay clientes en campaña                
-                                        this.errorAlarm(); 
-                                      } else {                                                    
-                                        console.log('clientes',response);
-                                        this.customers.forEach((arr:any) => {  
-                                                  this.usersService.getCustomer(arr.user_id)
-                                                                  .then((response)=>{                                                    
-                                                                                    this.users.push({user:arr, name:response[0].name, email:response[0].email});
-                                                                                    this.filter_users.push({user:arr, name:response[0].name, email:response[0].email});
-                                                                                     });                                                   
-                                                                            })                        
-                                        };                                                                                                  
-
-                     })
+                        })
+    });
   }
 
 
@@ -188,5 +192,15 @@ export class CustomersPage implements OnInit {
       res.present();
     });
   }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      //duration: 3000,
+      showBackdrop: false
+    });
+
+    loading.present();
+  }
+ 
 
 }
