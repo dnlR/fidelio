@@ -9,21 +9,6 @@
     <ion-row *ngFor="let userCard of userCards">
       <ion-col>
         <ion-card [style.border-color]="userCard.campaigns.card_color" style="border: solid; border-width: 10px;">
-          <!-- {
-  card_points,
-  card_points_current,
-  campaigns:
-    - name,
-    - card_title,
-    - card_subtitle,
-    - card_logo,
-    - card_main_image,
-    - card_points
-    - description
-    - card_color,
-    - type,
-    - active
-} -->
           <img src={{userCard.campaigns.card_main_image}}>
           <ion-card-header>
             <ion-card-title>
@@ -36,8 +21,14 @@
           </ion-card-header>
           <ion-card-content style="padding-top:0px">
             {{ userCard.campaigns.description }}
+            <div style="margin-top: 10px;">
+              Puntos: {{ userCard.card_points_current}} / {{ userCard.card_points }}
+            </div>
+            <ion-progress-bar [value]="userCard.card_points_current / userCard.card_points"
+              style="height: 20px;"></ion-progress-bar>
           </ion-card-content>
-          <button mat-fab color="accent" extended="true" aria-label="Leave campaign" style="float: right; margin-bottom: 5px; margin-right: 5px;" (click)="leaveCampaign(userCard.id)">
+          <button mat-fab color="accent" extended="true" aria-label="Leave campaign"
+            style="float: right; margin-bottom: 5px; margin-right: 5px;" (click)="leaveCampaign(userCard.id)">
             <mat-label>Leave campaign</mat-label>
             <mat-icon>delete</mat-icon>
           </button>

@@ -8,8 +8,6 @@
   THIS IS MY QR CODE: 
   <qrcode [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
 
-
-
   <ion-content *ngIf="mobileweb===false; else camera"> 
     <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
       SCAN
@@ -30,7 +28,4 @@
     <ion-button (click)="currentUserJoinCampaign('1')">Prueba QR</ion-button>
     <!-- <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">Campañas</ion-button> -->
   </ng-template>
-
-
-
 </ion-content>

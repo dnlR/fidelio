@@ -8,7 +8,6 @@ import { CampaignService } from 'src/app/services/campaign.service';
 import { UserCardsService } from 'src/app/services/user-cards.service';
 
 
-
 @Component({
   selector: 'app-userqr',
   templateUrl: './userqr.page.html',
@@ -33,7 +32,6 @@ export class UserqrPage implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(`qr code: ${this.QRCode}`);
     if (this.platform.is('mobileweb') || this.platform.is('desktop')) {
       this.mobileweb = true;
     } else {
@@ -65,11 +63,9 @@ export class UserqrPage implements OnInit {
 
       if (result.hasContent) {
         this.scanActive = false;
-        alert('Campaign data read');
-        // result.content es empresaId.campañaId
+        // result.content es empresaId-campañaId
         const campaignId = result.content!.split('-')[1];
         this.currentUserJoinCampaign(campaignId);
-
       } else {
         alert('NO DATA FOUND!');
       }
@@ -90,17 +86,14 @@ export class UserqrPage implements OnInit {
   }
 
   async currentUserJoinCampaign(campaignId: string) {
-    // alert(`current user will join campaing id: ${campaignId}`);
-
     let campaign = null;
     await this.campaignService.getCampaign(+campaignId)
       .then((response) => { campaign = response![0] });
 
     if (campaign) {
-      alert(`selected campaign: ${JSON.stringify(campaign, null, 4)}`);
-
       const currentUserId = await this.authService.getCurrentUserId();
       this.userCardService.userJoinsCampaign(currentUserId, campaign);
+      alert(`You successfully joined this campaign!`);
     }
   }
 }
