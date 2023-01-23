@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>empresa-map</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-text-center">
+    <ion-button expand="block" (click)="displayMarksonCurrentMap()">Buscar en mapa</ion-button>
+  </div>  
+  <capacitor-google-map #map></capacitor-google-map>  
+</ion-content>

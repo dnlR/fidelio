@@ -15,10 +15,15 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule } from './material.module';
 import { FillUserInfoComponent } from './components/fill-user-info/fill-user-info.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
+
 import { UpdateUserInfoComponent } from './components/update-user-info/update-user-info.component';
 
 import { QRCodeModule } from 'angularx-qrcode';
 import { DummyCampaignComponent } from './components/dummy-campaign/dummy-campaign.component';
+
+import { Geocoder } from '@ionic-native/google-maps';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +46,7 @@ import { DummyCampaignComponent } from './components/dummy-campaign/dummy-campai
     MaterialModule,
     QRCodeModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geocoder, NativeGeocoder],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
