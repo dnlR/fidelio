@@ -2,6 +2,7 @@
 
 <ion-header>
   <ion-toolbar>
+    <ion-title>Actualizar perfil</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/user"></ion-back-button>
     </ion-buttons>
@@ -16,12 +17,7 @@
   </ion-header>
 
   <ion-grid>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col>Update profile</ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-    <ion-row>
+    <ion-row style="margin-top: 50px;">
       <ion-col></ion-col>
       <ion-col>
         <mat-form-field appearance="fill">
@@ -71,9 +67,9 @@
             Phone number must contain <strong>only</strong> numbers
           </mat-error>
         </mat-form-field>
-
-        <div>
-          <button mat-raised-button color="primary" (click)="updateUser()">Update</button>
+        
+        <div style="margin-top: 50px; text-align: center;">
+          <button mat-raised-button color="primary" (click)="updateUser()">Actualizar perfil</button>
         </div>
       </ion-col>
       <ion-col></ion-col>
