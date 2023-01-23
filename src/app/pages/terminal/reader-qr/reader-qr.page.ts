@@ -107,7 +107,7 @@ export class ReaderQrPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    BarcodeScanner.stopScan();
+    BarcodeScanner.stopScan().catch((err) => {});
     this.scanActive = false;
   }
   //Actualizamos datos usuario en campaña y añadimos registro en transaction

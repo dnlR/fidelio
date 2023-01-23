@@ -78,11 +78,13 @@ export class UserqrPage implements OnInit {
   stopScanner() {
     BarcodeScanner.stopScan();
     this.scanActive = false;
+    document.querySelector('body')!.classList.remove('scanner-active');
   }
 
   ionViewWillLeave() {
-    BarcodeScanner.stopScan();
+    BarcodeScanner.stopScan().catch((err) => {});
     this.scanActive = false;
+    document.querySelector('body')!.classList.remove('scanner-active');
   }
 
   async currentUserJoinCampaign(campaignId: string) {

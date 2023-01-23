@@ -26,12 +26,14 @@
             </div>
             <ion-progress-bar [value]="userCard.card_points_current / userCard.card_points"
               style="height: 20px;"></ion-progress-bar>
+
+            <button mat-fab color="accent" extended="true" aria-label="Leave campaign"
+              style="float: right; margin-top: 20px; margin-bottom: 15px;" (click)="leaveCampaign(userCard.id)">
+              <mat-label>Leave campaign</mat-label>
+              <mat-icon>delete</mat-icon>
+            </button>
           </ion-card-content>
-          <button mat-fab color="accent" extended="true" aria-label="Leave campaign"
-            style="float: right; margin-bottom: 5px; margin-right: 5px;" (click)="leaveCampaign(userCard.id)">
-            <mat-label>Leave campaign</mat-label>
-            <mat-icon>delete</mat-icon>
-          </button>
+
         </ion-card>
       </ion-col>
     </ion-row>
