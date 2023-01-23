@@ -1,12 +1,20 @@
-.card-title{
-    font-size: 10px;
-    //font-weight:bold;
-    margin-top: 8px;
-    margin-bottom: 8px;
+.card-title {
+  font-size: 10px;
+  //font-weight:bold;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
-ion-card{
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
-    margin: 0 !important;
-   }
+ion-card {
+  display: flex;
+  flex-direction: column;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+ion-content.background {
+  --background: linear-gradient(#4786ef, #f4f5f8);
+}
+
+ion-chip {
+    --background: white;
+}

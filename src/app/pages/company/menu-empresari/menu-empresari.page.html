@@ -5,19 +5,22 @@
 </ion-header>
 
 <ion-content>
+  <div class="backgroundLayer">
+    <video autoplay loop muted height="100%">
+      <source src="../../../../assets/b-qr-code.mp4" type="video/mp4" />
+    </video>
+  </div>
+
   <div class="ion-text-center">
-  <ion-button expand="block" [routerLink]="['../empreses']">Perfil Empresa</ion-button>
+  <ion-button expand="block" [routerLink]="['../empreses']" class="btn-long">Perfil Empresa</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist">Gestion de Campañas</ion-button>
+    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist" class="btn-long">Gestion de Campañas</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist">Gestion de Terminales</ion-button>
+    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist" class="btn-long">Gestion de Terminales</ion-button>
   </div>
   <div class="ion-text-center">
-    <ion-button expand="block" (click)="logout()">Logout</ion-button>
-  </div>  
-  <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']"> Catalogo de Empresas en mapa</ion-button>
+    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']" class="btn-long"> Catalogo de Empresas en mapa</ion-button>
   </div>    
 </ion-content>

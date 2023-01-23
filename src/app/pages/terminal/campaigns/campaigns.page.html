@@ -29,19 +29,14 @@
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
-      <ion-title>Terminal</ion-title>
+      <ion-title>Terminal > Campañas</ion-title>
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content class="background">
   <!-- chip toolbar     -->
  
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Campañas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-list-header>    
+  <ion-list-header style="margin-top: 10px;">    
     <ion-chip *ngIf="nameCompany">
       <ion-icon name="storefront-outline"></ion-icon>
       <ion-label>{{nameCompany.name}}</ion-label>    
