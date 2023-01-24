@@ -1,31 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Terminals</ion-title>
+    <ion-title>Empresa> Gestión de Terminales</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-  <p>
-    <div align="center">
-      <!--<input [(ngModel)]="filtre" class="input-100" placeholder="filtre ràpid..." (ngModelChange)="applyFilter()"/>
-      <button (click)="applyFilter()">>></button> -->
-    </div>
-    <p>
-    <div class="user">
-      <table>
-        <tr>
-          <th>####</th>
-          <th>Terminal</th>
-          <th>Estado</th>
-        </tr>
 
-        <tr *ngFor="let terminal of llistatTerminals">
-          <td><a routerLink="/terminals/terminal-details/{{terminal.company_id}}/{{terminal.id}}">{{terminal.id}}</a></td>
-          <td>{{terminal.name}}</td>
-          <td>{{terminal.active}}</td>
-        </tr>
-      </table>
-      </div>
+  <ion-grid>
+    <ion-row *ngFor="let terminal of llistatTerminals">
+      <ion-col>
+        <ion-card color="light" *ngIf="terminal.active" [style.border-color]="'green'" style="border: solid; border-width: 10px;">
+          <ion-card-header>
+            <ion-card-title>
+              {{terminal.name}}
+            </ion-card-title>
+            <ion-card-subtitle>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-button routerLink="/terminals/terminal-details/{{terminal.company_id}}/{{terminal.id}}" fill="clear">Editar</ion-button>
+        </ion-card>
+
+        <ion-card color="light" *ngIf="!terminal.active" [style.border-color]="'red'" style="border: solid; border-width: 10px;">
+          <ion-card-header>
+            <ion-card-title>
+              {{terminal.name}}
+            </ion-card-title>
+            <ion-card-subtitle>
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-button routerLink="/terminals/terminal-details/{{terminal.company_id}}/{{terminal.id}}" fill="clear">Editar</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button>
           <ion-icon name="add" (click)="addTerminal()"></ion-icon>

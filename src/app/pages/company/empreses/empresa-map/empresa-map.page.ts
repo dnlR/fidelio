@@ -6,6 +6,7 @@ import { Geocoder, GeocoderRequest } from '@ionic-native/google-maps';
 import { EmpresaDataService } from '../../../../services/empresa-data.service';
 import { iEmpresa } from 'src/app/interfaces/iEmpresa';
 import { GeoService } from 'src/app/services/geo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-empresa-map',
@@ -17,7 +18,7 @@ export class EmpresaMapPage implements OnInit {
   @ViewChild('map') mapRef!: ElementRef<HTMLElement>;
   newMap!: GoogleMap;
   markersArray:string[]=[];
-  constructor(private nativeGeocoder: NativeGeocoder, private empresaDS:EmpresaDataService, private geoS:GeoService) { }
+  constructor(private nativeGeocoder: NativeGeocoder, private router: Router, private empresaDS:EmpresaDataService, private geoS:GeoService) { }
 
   ngOnInit() {
   }
@@ -90,5 +91,8 @@ export class EmpresaMapPage implements OnInit {
     this.markersArray.push(await this.addMarker(ee.name, ee.name, ee.logo, ee.coor_lat, ee.coor_lng))
     console.log(this.markersArray)
   });
-  }
+}
+goBack(): void {
+  this.router.navigate(["/menu-empresari"]);
+}
 }

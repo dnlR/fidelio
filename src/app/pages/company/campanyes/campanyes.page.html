@@ -1,38 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>campanyes</ion-title>
+    <ion-title>Empresa> Gestión de Campañas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
-  <p>
-    <div align="center">
-      <!--<input [(ngModel)]="filtre" class="input-100" placeholder="filtre ràpid..." (ngModelChange)="applyFilter()"/>
-      <button (click)="applyFilter()">>></button> -->
-    </div>
-    <p>
-    <div class="user">
-      <table>
-        <tr>
-          <th>####</th>
-          <th>Campaña</th>
-          <th>Estado</th>
-          <th>Imagen</th>
-        </tr>
+        <ion-grid>
+          <ion-row *ngFor="let campanya of llistatCampanyes">
+            <ion-col>
+              <ion-card color="light" *ngIf="campanya.active" [style.border-color]="'green'" style="border: solid; border-width: 10px;">
+                <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}} width="200px" style="text-align: center;">
+                <ion-card-header>
+                  <ion-card-title>
+                    {{ campanya.name | titlecase }}
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-button routerLink="/qrcode/{{campanya.company_id}}-{{campanya.id}}" fill="clear">Generar QR</ion-button>
+                <ion-button routerLink="/campanyes/campanya-details/{{campanya.company_id}}/{{campanya.id}}" fill="clear">Editar</ion-button>
+              </ion-card>
+              <ion-card color="light" *ngIf="!campanya.active" [style.border-color]="'red'" style="border: solid; border-width: 10px;">
+                <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}} width="200px" style="text-align: center;">
+                <ion-card-header>
+                  <ion-card-title>
+                    {{ campanya.name | titlecase }}
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                  </ion-card-subtitle>
+                </ion-card-header>
+                <ion-button routerLink="/qrcode/{{campanya.company_id}}-{{campanya.id}}" fill="clear">Generar QR</ion-button>
+                <ion-button routerLink="/campanyes/campanya-details/{{campanya.company_id}}/{{campanya.id}}" fill="clear">Editar</ion-button>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-        <tr *ngFor="let campanya of llistatCampanyes">
-          <td><a routerLink="/campanyes/campanya-details/{{campanya.company_id}}/{{campanya.id}}">{{campanya.id}}</a></td>
-          <td>{{campanya.name}}</td>
-          <td>{{campanya.active}}</td>
-          <td>
-            <ion-thumbnail>
-              <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}}/>
-            </ion-thumbnail>
-          </td>
-          <td><a routerLink="/qrcode/{{campanya.company_id}}-{{campanya.id}}"><ion-icon name="qr-code"></ion-icon> </a></td>
-        </tr>
-      </table>
-      </div>
       <ion-fab slot="fixed" vertical="bottom" horizontal="end">
         <ion-fab-button>
           <ion-icon name="add" (click)="addCampanya()"></ion-icon>

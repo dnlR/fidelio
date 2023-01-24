@@ -156,7 +156,9 @@ export class EmpresesPage implements OnInit {
   async addLogo() {
     //const b = this.existsHttpFile("https://nzuvywtkatghqhczkckv.supabase.co/storage/v1/object/public/aubimedia/empresa/" + tuser + ".jpg")
     const { data, error } = await this.storageDS.storage_upload("empresa/" + this.usuariID + ".jpg");
-    this.profileEmpresa.logo = data.path + "?t=" + Date();
+    //this.profileEmpresa.logo = data.path + "?t=" + Date();
+    this.profileEmpresa.logo = data.path
+    this.empresaForm.get('EmpresaLogo').setValue(data.path + "?t=" + Date())
   }
   removeLogo(){
     this.profileEmpresa.logo = null;
