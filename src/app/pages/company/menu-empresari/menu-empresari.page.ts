@@ -21,7 +21,7 @@ export class MenuEmpresariPage implements OnInit {
     this.usuariEMAIL = x.email;
     this.empresaexist = await this.empresaDS.empresa_existforuser(this.usuariID)
     if (! this.empresaexist) {
-      this.utilsDS.createNotice("Cal crear una empresa")
+      this.utilsDS.createNotice("Crea tu empresa desde la opcion Perfil de Empresa")
     }
     else {
       this.empresaID = await this.empresaDS.empresa_getfromuser(this.usuariID)

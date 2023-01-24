@@ -11,7 +11,7 @@ export class UtilsService {
   
    }
    async createNotice(message: string) {
-    const toast = await this.toastCtrl.create({ message, duration: 3000 })
+    const toast = await this.toastCtrl.create({ message, duration: 5000 })
     await toast.present()
   }
   str2SHA256(s:string):string {

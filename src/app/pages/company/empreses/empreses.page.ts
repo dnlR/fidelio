@@ -147,7 +147,7 @@ export class EmpresesPage implements OnInit {
     if (er!=null)
       await this.storageDS.createNotice(er.message);
     else
-      await this.storageDS.createNotice('Canvis guardats correctament');
+      await this.storageDS.createNotice('Cambios guardados correctamente');
     this.goBack();
   }
   goBack(): void {
