@@ -1,8 +1,16 @@
 h4{
     margin-top: 5px;
-    margin-left: 10px;
+    margin-left: 25px;
+    color: darkred;
 }
 h5 {
     color: red;   
     text-align: center;
 }
+ion-chip {
+    --background: rgb(79, 78, 78);
+    --color: white;
+}
+ion-content.background {
+    --background: linear-gradient(#4786ef, #f4f5f8);
+  }

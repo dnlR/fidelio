@@ -29,18 +29,18 @@
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
-      <ion-title>Terminal</ion-title>
+      <ion-title>Terminal > Estadísticas</ion-title>
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
-  <ion-list-header>  
-    <ion-chip>
+<ion-content class="background">
+  <ion-list-header style="margin-top: 10px;">  
+    <!-- <ion-chip>
       <ion-icon name="stats-chart-outline"></ion-icon>
       <ion-label>Estadísticas</ion-label>
-      </ion-chip>      
+      </ion-chip>       -->
     <ion-chip *ngIf="campaign">
-      <ion-icon name="fast-food-outline"></ion-icon>
+      <ion-icon style="background-color: white;" name="fast-food-outline"></ion-icon>
       <ion-label>{{campaign[0].name}}</ion-label>
       </ion-chip>    
   </ion-list-header>

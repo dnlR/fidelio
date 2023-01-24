@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/campaign.service';
 import { TerminalService } from 'src/app/services/terminal.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
@@ -30,6 +30,7 @@ export class ReaderQrPage implements OnInit {
               private userCardsService: UserCardsService,
               private transactionsService: TransactionsService,
               public platform: Platform,
+              private loadingCtrl: LoadingController,  
               public alertController: AlertController,
               private router:Router) { }
 
@@ -109,10 +110,11 @@ export class ReaderQrPage implements OnInit {
   ionViewWillLeave() {
     BarcodeScanner.stopScan().catch((err) => {});
     this.scanActive = false;
+    document.querySelector('body')!.classList.remove('scanner-active');
   }
   //Actualizamos datos usuario en campaña y añadimos registro en transaction
   sumaPuntos(idUSer: string){
-
+  this.showLoading().then(()=>{
     this.userCardsService.getUserCardByCustomerCampaing(idUSer, this.campaign_id)
                     .then((response) => {
                       
@@ -136,12 +138,15 @@ export class ReaderQrPage implements OnInit {
                         this.userCardsService.updateUserCard(response.id, remained_points, prizes);   
                         this.transactionsService.insertTransaction(response.user_id, response.campaign_id, +this.points, response.card_points, remained_points, prizes, this.terminal.name, this.terminal.user_terminal);
                         this.showPrize(response, won_prizes, message_prize, this.points, remained_points, image);
+                        this.loadingCtrl.dismiss();
                         console.log('currentUser', response);
                       
                       })
                       .catch((error)=>{console.log('Usuario no inscrito en campaña.');
                                         this.errorAlarm();
+                                        this.loadingCtrl.dismiss();
                     });
+                  });
     
   }
  //Muestra si el cliente obtiene premio o los puntos conseguidos con la nueva compra
@@ -188,5 +193,16 @@ export class ReaderQrPage implements OnInit {
       res.present();
     });
   }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      //duration: 3000,
+      showBackdrop: false
+    });
+
+    loading.present();
+  }
+ 
 
 }

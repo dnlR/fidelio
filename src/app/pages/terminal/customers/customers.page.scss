@@ -1,0 +1,17 @@
+ion-content.background {
+    --background: linear-gradient(#4786ef, #f4f5f8);
+  }  
+  ion-chip {
+      --background: rgb(79, 78, 78);
+      --color: white;
+  }
+
+  ion-list {
+    background-color: #4786ef;
+  }
+  ion-item {
+    --background: #4786ef;
+    --color:white;
+    --detail-icon-color: white;
+    --detail-icon-opacity: 1; 
+  }
