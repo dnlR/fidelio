@@ -8,5 +8,10 @@
   <div class="ion-text-center">
     <ion-button expand="block" (click)="displayMarksonCurrentMap()">Buscar en mapa</ion-button>
   </div>  
-  <capacitor-google-map #map></capacitor-google-map>  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>          
+  <capacitor-google-map #map></capacitor-google-map>    
 </ion-content>

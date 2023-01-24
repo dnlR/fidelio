@@ -13,12 +13,11 @@ export class TerminalsPage implements OnInit {
   llistatTerminals!: iTerminalList[];
   empID!:string;
   constructor(private terminalDS: TerminalDataService, private location: Location, private router: Router, private route: ActivatedRoute) { }
-
-  async ngOnInit() {
+  async ionViewWillEnter() {
     this.empID = this.route.snapshot.paramMap.get('empID')!;
     this.llistatTerminals = await this.terminalDS.terminal_getallbyEmpID(this.empID);
-    //console.log(this.llistatTerminals[0].TerminalNom);
-    //this.terminalDS._test_campanya_insupd()
+  }
+  async ngOnInit() {
   }
   goBack(): void {
     this.router.navigate(["/menu-empresari"]);
