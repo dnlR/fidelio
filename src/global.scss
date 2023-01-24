@@ -83,12 +83,7 @@ body.scanner-active {
   color:green;  
 }
 
-// .prize-alert .alert-wrapper{
-//   background: #4786ef;
-//   color:white;
-
-// }
-.prize-alert {
+.prize-alert, .userNoCampaignAlert {
   --background: #4786ef;
 }
 .prize-alert .alert-button{
@@ -115,4 +110,22 @@ body.scanner-active {
       
     }
   }
+}
+
+.userNoCampaignAlert{
+  .alert-wrapper {
+    .alert-head {        
+        h2 {           
+            color:white;
+        }            
+    } 
+    .alert-message{
+      color:white;
+    }     
+  }
+
+}
+
+.userNoCampaignAlert .alert-button{
+  color:white;
 }

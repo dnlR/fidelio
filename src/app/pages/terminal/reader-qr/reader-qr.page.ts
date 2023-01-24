@@ -180,6 +180,7 @@ export class ReaderQrPage implements OnInit {
       header: 'Usuario no inscrito en campaña',
       //subHeader: 'Beware lets confirm',
       message: 'Solicite al usuario que se inscriba en la campaña',
+      cssClass: 'userNoCampaignAlert',
       buttons: [
         {
           text: 'Volver a campañas',
