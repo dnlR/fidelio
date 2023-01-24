@@ -11,9 +11,19 @@
         <ion-card [style.border-color]="userCard.campaigns.card_color" style="border: solid; border-width: 10px;">
           <img src={{userCard.campaigns.card_main_image}}>
           <ion-card-header>
-            <ion-card-title>
-              {{ userCard.campaigns.name| titlecase }}
-            </ion-card-title>
+            <ion-row>
+              <ion-col>
+                <ion-card-title>
+                  {{ userCard.campaigns.name| titlecase }}
+                </ion-card-title>
+              </ion-col>
+              <ion-col size="auto">
+                <button
+                  (click)="basicShare(userCard.campaigns.card_title, userCard.campaigns.description, userCard.campaigns.card_main_image)"
+                  style="float: right;"><ion-icon style="font-size:25px; background-color: white;"
+                    name="share-outline"></ion-icon></button>
+              </ion-col>
+            </ion-row>
             <ion-card-subtitle>
               {{ userCard.campaigns.card_title }} |
               {{ userCard.campaigns.card_subtitle }}
@@ -29,9 +39,11 @@
 
             <button mat-fab color="accent" extended="true" aria-label="Leave campaign"
               style="float: right; margin-top: 20px; margin-bottom: 15px;" (click)="leaveCampaign(userCard.id)">
-              <mat-label>Leave campaign</mat-label>
+              <mat-label>Eliminar campaña</mat-label>
               <mat-icon>delete</mat-icon>
             </button>
+
+
           </ion-card-content>
 
         </ion-card>

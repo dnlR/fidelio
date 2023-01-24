@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-usertabs',
@@ -8,9 +10,31 @@ import { Router } from '@angular/router';
 })
 export class UsertabsPage implements OnInit {
 
-  constructor(private router: Router) { }
+  currentUserEmail = '';
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private menuController: MenuController
+  ) {
+    this.authService.currentUser.subscribe((user) => {
+      if (user) {
+        this.currentUserEmail = user.email;
+      }
+    });
+  }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(true, 'left-menu');
+    this.menuController.enable(true, 'right-menu');
+  }
+
+  ionViewWillLeave() {
+    this.menuController.enable(false, 'left-menu');
+    this.menuController.enable(false, 'right-menu');
   }
 
   openUser() {
@@ -21,5 +45,5 @@ export class UsertabsPage implements OnInit {
     this.router.navigateByUrl('/company', { replaceUrl: true });
   }
 
- 
+
 }

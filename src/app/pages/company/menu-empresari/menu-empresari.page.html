@@ -1,26 +1,89 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mode Empresari</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu side="start" menuId="left-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Fidelio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-menu-toggle menu="left-menu">
+        <ion-item [routerLink]="['/user']" detail="true" lines="full">
+          <ion-label>Cliente</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-item [routerLink]="['/menu-empresari']" detail="true" lines="full">
+        <ion-label>Empresa</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/login-terminal']" detail="true" lines="full">
+        <ion-label>Terminal</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <img src="../../../assets/logo7.png">
+</ion-menu>
 
-<ion-content>
-  <div class="backgroundLayer">
-    <video autoplay loop muted height="100%">
-      <source src="../../../../assets/b-qr-code.mp4" type="video/mp4" />
-    </video>
-  </div>
+<ion-menu side="end" menuId="right-menu" contentId="main-content" swipeGesture="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-menu-toggle menu="right-menu">
+        <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">
+          <ion-label>Actualizar perfil</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-item [routerLink]="['/logout']" detail="true" lines="full">
+        <ion-label>Logout</ion-label>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 
-  <div class="ion-text-center">
-  <ion-button expand="block" [routerLink]="['../empreses']" class="btn-long">Perfil Empresa</ion-button>
-  </div>
-  <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist" class="btn-long">Gestion de Campañas</ion-button>
-  </div>
-  <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist" class="btn-long">Gestion de Terminales</ion-button>
-  </div>
-  <div class="ion-text-center">
-    <ion-button expand="block" [routerLink]="['../empreses/empresa-map']" class="btn-long"> Catalogo de Empresas en mapa</ion-button>
-  </div>    
-</ion-content>
+  <ion-label style="font-size: large; padding-left: 20px;">Fidelio© 2023</ion-label>
+  <ion-label style="padding-left: 20px;">Jordi Aubanell</ion-label>
+  <ion-label style="padding-left: 20px;">Francisco Gil</ion-label>
+  <ion-label style="padding-left: 20px;">Daniel Romero</ion-label>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="left-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="right-menu">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>Empresa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="backgroundLayer">
+      <video autoplay loop muted height="100%">
+        <source src="../../../../assets/b-qr-code.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="ion-text-center">
+      <ion-button expand="block" [routerLink]="['../empreses']" class="btn-long">Perfil Empresa</ion-button>
+    </div>
+    <div class="ion-text-center">
+      <ion-button expand="block" [routerLink]="['../campanyes', empresaID]" [disabled]="!empresaexist"
+        class="btn-long">Gestion de Campañas</ion-button>
+    </div>
+    <div class="ion-text-center">
+      <ion-button expand="block" [routerLink]="['../terminals', empresaID]" [disabled]="!empresaexist"
+        class="btn-long">Gestion de Terminales</ion-button>
+    </div>
+    <div class="ion-text-center">
+      <ion-button expand="block" [routerLink]="['../empreses/empresa-map']" class="btn-long"> Catalogo de Empresas en
+        mapa</ion-button>
+    </div>
+  </ion-content>
+</div>
