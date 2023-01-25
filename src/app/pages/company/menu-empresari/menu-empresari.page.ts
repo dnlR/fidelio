@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { AuthService } from '../../../services/auth.service'
 import { EmpresaDataService } from '../../../services/empresa-data.service';
 import { UtilsService } from '../../../services/utils.service';
@@ -12,15 +13,23 @@ export class MenuEmpresariPage implements OnInit {
   public usuariID: string = "";
   public usuariEMAIL: string = "";
   public empresaID: string;
-  public empresaexist! : boolean;
-  constructor(private readonly supabase: AuthService, private empresaDS:EmpresaDataService, private utilsDS:UtilsService) { }
+  public empresaexist!: boolean;
+  leftMenuId;
+  rightMenuId;
+
+  constructor(
+    private readonly supabase: AuthService,
+    private empresaDS: EmpresaDataService,
+    private utilsDS: UtilsService,
+    private menuController: MenuController
+  ) { }
 
   async ngOnInit() {
     const x = await this.supabase.getUser();
     this.usuariID = x.id;
     this.usuariEMAIL = x.email;
     this.empresaexist = await this.empresaDS.empresa_existforuser(this.usuariID)
-    if (! this.empresaexist) {
+    if (!this.empresaexist) {
       this.utilsDS.createNotice("Crea tu empresa desde la opcion Perfil de Empresa")
     }
     else {
@@ -29,6 +38,12 @@ export class MenuEmpresariPage implements OnInit {
     //console.log(this.utilsDS.dialogConfirmation("Hola", "Que dius?"));
     console.log(this.usuariID + " " + this.usuariEMAIL);
   }
+
+  ionViewWillEnter() {
+    this.leftMenuId = Math.floor(Math.random() * 15);
+    this.rightMenuId = Math.floor(Math.random() * 15);
+  }
+
   logout() {
     this.supabase.logout();
   }

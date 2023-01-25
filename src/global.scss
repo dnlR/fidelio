@@ -40,6 +40,7 @@
 
 .item-alert {
   height: 30px;
+  background-color: #4786ef;
 }
 
 .scan-box {
@@ -67,4 +68,62 @@
 body.scanner-active {
   --background: transparent;
   --ion-background-color: transparent;
+}
+
+.alertCustomerClass .action-sheet-title {
+  background-color: #4786ef;
+  color: white;
+}
+
+.alertCustomerClass .action-sheet-cancel {
+  color: red;
+}
+.alertCustomerClass .alertButtonCustomerClass {
+  color: green;
+}
+
+.prize-alert,
+.userNoCampaignAlert {
+  --background: #4786ef;
+}
+.prize-alert .alert-button {
+  color: white;
+}
+
+.prize-alert {
+  .alert-wrapper {
+    .alert-head {
+      // header styling here eg. background
+      h2 {
+        // header text styling here eg. color, font size
+        color: white;
+      }
+    }
+  }
+}
+
+.prize-alert {
+  .alert-message {
+    .item-alert.item-alert::part(native) {
+      background-color: #4786ef;
+      color: white;
+    }
+  }
+}
+
+.userNoCampaignAlert {
+  .alert-wrapper {
+    .alert-head {
+      h2 {
+        color: white;
+      }
+    }
+    .alert-message {
+      color: white;
+    }
+  }
+}
+
+.userNoCampaignAlert .alert-button {
+  color: white;
 }

@@ -14,6 +14,13 @@
   </ion-header>
 
   <ion-grid>
+
+    <div class="backgroundLayer">
+      <video autoplay loop muted height="100%">
+        <source src="../../../assets/bk_qr.mp4" type="video/mp4" />
+      </video>
+    </div>
+
     <ion-row>
       <ion-col></ion-col>
       <ion-col>
@@ -21,17 +28,17 @@
 
           <mat-step [stepControl]="formGroupName">
             <form [formGroup]="formGroupName">
-              <ng-template matStepLabel>Fill out your name</ng-template>
+              <ng-template matStepLabel>Nombre</ng-template>
               <mat-form-field appearance="fill">
-                <mat-label>Name</mat-label>
+                <mat-label>Nombre</mat-label>
                 <input matInput type="text" formControlName="nameControl" [errorStateMatcher]="matcher" id="name"
                   required>
                 <mat-error *ngIf="formGroupName.get('nameControl').hasError('required')">
-                  Name is <strong>required</strong>
+                  El nombre es <strong>obligatorio</strong>
                 </mat-error>
               </mat-form-field>
               <div>
-                <button mat-raised-button matStepperNext>Next</button>
+                <button mat-raised-button matStepperNext>Siguiente</button>
               </div>
             </form>
           </mat-step>
@@ -56,8 +63,8 @@
                 </mat-error>
               </mat-form-field>
               <div>
-                <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
+                <button mat-raised-button matStepperPrevious>Anterior</button>
+                <button mat-raised-button matStepperNext>Siguiente</button>
               </div>
             </form>
           </mat-step>
@@ -77,8 +84,8 @@
                 </mat-error>
               </mat-form-field>
               <div>
-                <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
+                <button mat-raised-button matStepperPrevious>Anterior</button>
+                <button mat-raised-button matStepperNext>Siguiente</button>
               </div>
             </form>
           </mat-step>
@@ -101,15 +108,15 @@
                 </mat-error>
               </mat-form-field>
               <div>
-                <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
+                <button mat-raised-button matStepperPrevious>Anterior</button>
+                <button mat-raised-button matStepperNext>Siguiente</button>
               </div>
             </form>
           </mat-step>
 
           <mat-step [stepControl]="formGroupTOS">
             <form [formGroup]="formGroupTOS">
-              <ng-template matStepLabel>Terms of service</ng-template>
+              <ng-template matStepLabel>Condiciones</ng-template>
               <mat-form-field appearance="fill">
                 <textarea matInput cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
@@ -359,22 +366,22 @@ El presente Acuerdo (y cualquier controversia, litigio o reclamación de cualqui
                 </textarea>
               </mat-form-field>
               <mat-checkbox formControlName="tosControl" id="tos">
-                I agree to the terms of service and privacy policy
+                Acepto las condiciones
               </mat-checkbox>
-              <div>
-                <button mat-raised-button matStepperPrevious>Back</button>
-                <button mat-raised-button matStepperNext>Next</button>
+              <div style="margin-top: 10px;">
+                <button mat-raised-button matStepperPrevious>Anterior</button>
+                <button mat-raised-button matStepperNext>Siguiente</button>
               </div>
             </form>
           </mat-step>
 
           <mat-step>
             <ng-template matStepLabel>Done</ng-template>
-            <p>Congratulations! You are now done!</p>
+            <p>Enhorabuena! Ya estamos!</p>
             <div>
               <!-- <button mat-raised-button matStepperPrevious>Back</button>
               <button mat-raised-button (click)="stepper.reset()">Reset</button> -->
-              <button mat-raised-button color="primary" (click)="addUser()">Save</button>
+              <button mat-raised-button color="primary" (click)="addUser()">Guardar</button>
             </div>
           </mat-step>
         </mat-stepper>

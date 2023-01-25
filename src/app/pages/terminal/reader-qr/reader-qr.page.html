@@ -1,10 +1,71 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Terminal</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-menu side="start" menuId="left-menu33" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Fidelio</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-menu-toggle menu="left-menu33">
+        <ion-item [routerLink]="['/user']" detail="true" lines="full">
+          <ion-label>Cliente</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-item [routerLink]="['/menu-empresari']" detail="true" lines="full">
+        <ion-label>Empresa</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="['/login-terminal']" detail="true" lines="full">
+        <ion-label>Terminal</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <img src="../../../assets/logo7.png">
+</ion-menu>
 
-<ion-content *ngIf="mobileweb===false; else camera"> 
+<ion-menu side="end" menuId="right-menu33" contentId="main-content" swipeGesture="false">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <ion-menu-toggle menu="right-menu33">
+        <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">
+          <ion-label>Actualizar perfil</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-item [routerLink]="['/logout']" detail="true" lines="full">
+        <ion-label>Logout</ion-label>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-item>
+      <!-- <ion-item lines="none">
+        <ion-label>{{ currentUserEmail }}</ion-label>
+      </ion-item> -->
+    </ion-list>
+  </ion-content>
+
+  <ion-label style="font-size: large; padding-left: 20px;">Fidelio© 2023</ion-label>
+  <ion-label style="padding-left: 20px;">Jordi Aubanell</ion-label>
+  <ion-label style="padding-left: 20px;">Francisco Gil</ion-label>
+  <ion-label style="padding-left: 20px;">Daniel Romero</ion-label>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="left-menu33"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="right-menu33">
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-menu-button>
+      </ion-buttons>
+      <ion-title>Terminal > Lector QR</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content *ngIf="mobileweb===false; else camera" > 
   <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
     SCAN
   </ion-button>
@@ -19,8 +80,9 @@
   </ion-button>
 </ion-content>
 <ng-template #camera>
-  <p style="color:red; margin-left:10%;">No camera on web display only on mobile</p>
+  <p style="color:red; margin-top:80%; margin-left:10%;">No camera on web display, only on mobile</p>
   <!-- usuario de prueba para trabajar en web -->
-  <ion-button (click)="sumaPuntos('fcdb02c9-c57e-446d-8cb8-20259259b98e')">Prueba QR</ion-button>
+  <ion-button style="margin-top:auto" (click)="sumaPuntos('fcdb02c9-c57e-446d-8cb8-20259259b98e')">Prueba QR</ion-button>
   <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">Campañas</ion-button>
 </ng-template>
+</div>

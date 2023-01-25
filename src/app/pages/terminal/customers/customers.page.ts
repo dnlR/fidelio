@@ -100,10 +100,11 @@ export class CustomersPage implements OnInit {
     const actionSheet = await this.actionSheetCtrl.create({
       header: currentUser.name,
       subHeader: currentUser.email,
-      
+      cssClass: 'alertCustomerClass',
       buttons: [        
         {
           text: `Añadir ${this.points} ${this.textoPuntos}`,
+          cssClass: 'alertButtonCustomerClass',
           handler: () => {            
             this.addPoints(currentUser);
           }          

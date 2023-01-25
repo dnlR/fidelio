@@ -6,7 +6,7 @@
     <ion-card-header>
       <ion-row>
         <ion-card-title>{{currentCampaign.card_title}}          
-        <button class="statsButton" (click)="stats()"><ion-icon style="font-size:20px;" name="stats-chart-sharp"></ion-icon></button>
+        <button class="statsButton" (click)="stats()"><ion-icon style="background-color: white;font-size:20px;" name="stats-chart-sharp"></ion-icon></button>
       </ion-card-title>
       </ion-row>
    
@@ -22,7 +22,7 @@
         <ion-col  size="3">
           <div  class="ion-text-center">
             <button (click)="qr()" [disabled] = "points===0 || !points" >
-              <ion-icon name="qr-code-outline"></ion-icon>
+              <ion-icon style="background-color: white;" name="qr-code-outline"></ion-icon>
               <!-- QR -->
             </button>
           </div>         
@@ -30,14 +30,14 @@
         <ion-col size="3">
           <div class="ion-text-center">
           <button (click)="manual()" [disabled] = "points===0 || !points">
-            <ion-icon name="pencil-outline"></ion-icon>
+            <ion-icon style="background-color: white;" name="pencil-outline"></ion-icon>
             <!-- Manual -->
           </button>
         </div>
         </ion-col>        
       </ion-row>
     </ion-card-header>    
-    <ion-card-content>
+    <ion-card-content [style.background-color]="currentCampaign.card_color" style="color:white;padding:10px 15px">
       {{currentCampaign.description}}       
     </ion-card-content>  
   </ion-card>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserCardsService } from 'src/app/services/user-cards.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-usercards',
@@ -18,6 +19,15 @@ export class UsercardsPage implements OnInit {
 
   ngOnInit() {
   }
+
+  async basicShare(title, description, image) {
+    await Share.share({
+      title: title,
+      text: description,
+      url: image,
+      dialogTitle: `Aprovecha esta oportunidad`,
+    });
+}
 
   async ionViewWillEnter() {
     await this.getUserCardsForCurrentUser();

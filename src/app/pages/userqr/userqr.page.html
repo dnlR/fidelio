@@ -1,31 +1,44 @@
 <ion-header>
-  <!-- <ion-toolbar>
-    <ion-title>userqr</ion-title>
-  </ion-toolbar> -->
 </ion-header>
 
-<ion-content class="background">
-  THIS IS MY QR CODE: 
-  <qrcode [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-
-  <ion-content *ngIf="mobileweb===false; else camera"> 
-    <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
-      SCAN
-    </ion-button>
-    <ion-row class="scan-button" [hidden]="!scanActive">
-      <ion-col class="ion-no-padding">
-        <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
+<ion-content class="background" id="contentUserQR">
+  <ion-grid>
+    <ion-row style="margin-top: 25px;">
+      <ion-col></ion-col>
+      <ion-col>
+        <qrcode [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
       </ion-col>
+      <ion-col></ion-col>
     </ion-row>
-    <div class="scan-box" [hidden]="!scanActive"></div>
-    <!-- <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">
-      return
-    </ion-button> -->
-  </ion-content>
-  <ng-template #camera>
-    <p style="color:red; margin-left:10%;">No camera on web display only on mobile</p>
-    <!-- usuario de prueba para trabajar en web -->
-    <ion-button (click)="currentUserJoinCampaign('1')">Prueba QR</ion-button>
-    <!-- <ion-button expand="full" [routerLink]="['/campaigns', this.company_id, this.terminal_id]" [hidden]="scanActive">Campañas</ion-button> -->
-  </ng-template>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content id="contentUserReadQR" *ngIf="mobileweb===false">
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
+          Añadir campaña
+        </ion-button>
+        <div style="margin-top: 240px;
+        float: left;
+        bottom: 0px;
+        width: 100%;
+        height: 50px;
+        z-index: 11;" [hidden]="!scanActive">
+          <ion-button expand="full" (click)="stopScanner()" style="margin-top: 60px;">Cancelar</ion-button>
+        </div>
+        <div class="scan-box" [hidden]="!scanActive"></div>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

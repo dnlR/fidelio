@@ -2,6 +2,7 @@
 
 <ion-header>
   <ion-toolbar>
+    <ion-title>Actualizar perfil</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/user"></ion-back-button>
     </ion-buttons>
@@ -9,71 +10,60 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-grid>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col>Update profile</ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-    <ion-row>
+    <ion-row style="margin-top: 50px;">
       <ion-col></ion-col>
       <ion-col>
         <mat-form-field appearance="fill">
-          <mat-label>Enter your new name</mat-label>
+          <mat-label>Nombre</mat-label>
           <input matInput [formControl]="nameControl" required>
           <mat-error *ngIf="nameControl.hasError('required')">
-            Name is <strong>required</strong>
+            El nombre es <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Enter your new zip code</mat-label>
+          <mat-label>Código postal</mat-label>
           <input matInput [formControl]="zipcodeControl" (input)="searchZipCode($event)" [(ngModel)]="searchedZipCode" required>
           
           <mat-error *ngIf="zipcodeControl.hasError('required')">
-            Zip Code is <strong>required</strong>
+            El código postal es <strong>obligatorio</strong>
           </mat-error>
           <mat-error *ngIf="zipcodeControl.hasError('minlength')">
-            Zip Code must be at least <strong>5 characters</strong> long
+            El código postal debe contener como mínimo<strong>5 caracteres</strong>
           </mat-error>
           <mat-error *ngIf="zipcodeControl.hasError('nozipcode')">
-            Zip Code does <strong>not</strong> exists
+            El código postal <strong>no</strong> existe
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Enter your new address</mat-label>
+          <mat-label>Dirección</mat-label>
           <input matInput [formControl]="addressControl" required>
           <mat-error *ngIf="addressControl.hasError('required')">
-            Address is <strong>required</strong>
+            La dirección es<strong>obligatoria</strong>
           </mat-error>
           <mat-error *ngIf="addressControl.hasError('minlength')">
-            Address must be at least <strong>5 characters</strong> long
+            La dirección debe contener como mínimo <strong>5 caracteres</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
-          <mat-label>Enter your new phone</mat-label>
+          <mat-label>Número Teléfono</mat-label>
           <input matInput [formControl]="phoneControl" required>
           <mat-error *ngIf="phoneControl.hasError('required')">
-            Phone number is <strong>required</strong>
+            El número de teléfono es <strong>obligatorio</strong>
           </mat-error>
           <mat-error *ngIf="phoneControl.hasError('minlength')">
-            Phone number must be at least <strong>9 characters</strong> long
+            El número de teléfono debe contener como mínimo <strong>9 caracteres</strong>
           </mat-error>
           <mat-error *ngIf="phoneControl.hasError('pattern')">
-            Phone number must contain <strong>only</strong> numbers
+            El número de teléfono debe contener <strong>solo</strong> numeros
           </mat-error>
         </mat-form-field>
-
-        <div>
-          <button mat-raised-button color="primary" (click)="updateUser()">Update</button>
+        
+        <div style="margin-top: 50px; text-align: center;">
+          <button mat-raised-button color="primary" (click)="updateUser()">Actualizar perfil</button>
         </div>
       </ion-col>
       <ion-col></ion-col>
