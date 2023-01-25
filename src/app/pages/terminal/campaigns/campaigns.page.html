@@ -1,4 +1,4 @@
-<ion-menu side="end" menuId="right-menu" contentId="main-content" swipeGesture="false">
+<ion-menu side="end" menuId="right-menu-3" contentId="main-content" swipeGesture="false">
   <ion-header>
     <ion-toolbar>
       <ion-title>Settings</ion-title>
@@ -6,7 +6,7 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
-      <ion-menu-toggle menu="right-menu">
+      <ion-menu-toggle menu="right-menu-3">
         <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">
           <ion-label>Change profile</ion-label>
         </ion-item>
@@ -25,7 +25,7 @@
         <ion-menu-button menu="left-menu"></ion-menu-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-menu-button menu="right-menu">
+        <ion-menu-button menu="right-menu-3">
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-menu-button>
       </ion-buttons>

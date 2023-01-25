@@ -27,16 +27,6 @@ export class UsertabsPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    this.menuController.enable(true, 'left-menu');
-    this.menuController.enable(true, 'right-menu');
-  }
-
-  ionViewWillLeave() {
-    this.menuController.enable(false, 'left-menu');
-    this.menuController.enable(false, 'right-menu');
-  }
-
   openUser() {
     this.router.navigateByUrl('/user', { replaceUrl: true });
   }

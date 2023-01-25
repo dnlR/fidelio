@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="left-menu" contentId="main-content">
+<ion-menu side="start" menuId="left-menu-2" contentId="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-title>Fidelio</ion-title>
@@ -6,7 +6,7 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
-      <ion-menu-toggle menu="left-menu">
+      <ion-menu-toggle menu="left-menu-2">
         <ion-item [routerLink]="['/user']" detail="true" lines="full">
           <ion-label>Cliente</ion-label>
         </ion-item>
@@ -22,7 +22,7 @@
   <img src="../../../assets/logo7.png">
 </ion-menu>
 
-<ion-menu side="end" menuId="right-menu" contentId="main-content" swipeGesture="false">
+<ion-menu side="end" menuId="right-menu-2" contentId="main-content" swipeGesture="false">
   <ion-header>
     <ion-toolbar>
       <ion-title>Opciones</ion-title>
@@ -30,7 +30,7 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list>
-      <ion-menu-toggle menu="right-menu">
+      <ion-menu-toggle menu="right-menu-2">
         <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">
           <ion-label>Actualizar perfil</ion-label>
         </ion-item>
@@ -52,10 +52,10 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button menu="left-menu"></ion-menu-button>
+        <ion-menu-button menu="left-menu-2"></ion-menu-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-menu-button menu="right-menu">
+        <ion-menu-button menu="right-menu-2">
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-menu-button>
       </ion-buttons>

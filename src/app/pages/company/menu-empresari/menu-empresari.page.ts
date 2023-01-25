@@ -36,16 +36,6 @@ export class MenuEmpresariPage implements OnInit {
     console.log(this.usuariID + " " + this.usuariEMAIL);
   }
 
-  ionViewWillEnter() {
-    this.menuController.enable(true, 'left-menu');
-    this.menuController.enable(true, 'right-menu');
-  }
-
-  ionViewWillLeave() {
-    this.menuController.enable(false, 'left-menu');
-    this.menuController.enable(false, 'right-menu');
-  }
-
   logout() {
     this.supabase.logout();
   }
