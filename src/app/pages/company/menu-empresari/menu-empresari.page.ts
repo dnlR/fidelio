@@ -14,6 +14,9 @@ export class MenuEmpresariPage implements OnInit {
   public usuariEMAIL: string = "";
   public empresaID: string;
   public empresaexist!: boolean;
+  leftMenuId;
+  rightMenuId;
+
   constructor(
     private readonly supabase: AuthService,
     private empresaDS: EmpresaDataService,
@@ -34,6 +37,11 @@ export class MenuEmpresariPage implements OnInit {
     }
     //console.log(this.utilsDS.dialogConfirmation("Hola", "Que dius?"));
     console.log(this.usuariID + " " + this.usuariEMAIL);
+  }
+
+  ionViewWillEnter() {
+    this.leftMenuId = Math.floor(Math.random() * 15);
+    this.rightMenuId = Math.floor(Math.random() * 15);
   }
 
   logout() {

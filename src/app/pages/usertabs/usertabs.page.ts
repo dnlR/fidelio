@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UsertabsPage implements OnInit {
 
   currentUserEmail = '';
+  leftMenuId;
+  rightMenuId;
 
   constructor(
     private router: Router,
@@ -27,6 +29,11 @@ export class UsertabsPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter() {
+    this.leftMenuId = Math.floor(Math.random() * 15);
+    this.rightMenuId = Math.floor(Math.random() * 15);
+  }
+
   openUser() {
     this.router.navigateByUrl('/user', { replaceUrl: true });
   }
@@ -34,6 +41,4 @@ export class UsertabsPage implements OnInit {
   openCompany() {
     this.router.navigateByUrl('/company', { replaceUrl: true });
   }
-
-
 }
