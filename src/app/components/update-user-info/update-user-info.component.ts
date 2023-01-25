@@ -28,6 +28,8 @@ export class UpdateUserInfoComponent implements OnInit {
 
   actionSheetPresented = false;
 
+  currentUser;
+
   constructor(
     private actionSheetCtrl: ActionSheetController,
     private auth: AuthService,
@@ -42,6 +44,20 @@ export class UpdateUserInfoComponent implements OnInit {
     this.zipcodeControl = new FormControl('', [Validators.required, Validators.minLength(5)]);
     this.addressControl = new FormControl('', [Validators.required, Validators.minLength(5)]);
     this.phoneControl = new FormControl('', [Validators.required, Validators.minLength(9), Validators.pattern("^[0-9]*$")]);
+  }
+
+  async ionViewWillEnter() {
+    await this.loadCurrentUserInfo();
+  }
+
+  async loadCurrentUserInfo() {
+    const currentUserId = await this.auth.getCurrentUserId();
+    this.currentUser = await this.userService.getUserById(currentUserId);
+
+    this.nameControl.setValue(this.currentUser.name);
+    this.zipcodeControl.setValue(this.currentUser.zipcode);
+    this.addressControl.setValue(this.currentUser.address);
+    this.phoneControl.setValue(this.currentUser.phone);
   }
 
   async searchZipCode(event: any) {

@@ -23,6 +23,15 @@ export class UsersService {
     return customer;
   }
 
+  async getUserById(id: string) {
+    let { data: user, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .eq('id', id)
+      .single()
+    return user;
+  }
+
   async createUser(user: User) {
     return await this.supabase
       .from('users')
