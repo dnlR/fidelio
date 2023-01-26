@@ -39,7 +39,6 @@ export class FillUserInfoComponent implements OnInit {
     private firstTimeService: FirstTimeService,
     private zipCodeService: ZipCodesService,
     private userService: UsersService,
-    private toolbarService: ToolbarService
   ) {}
 
   ngOnInit() {
@@ -61,7 +60,6 @@ export class FillUserInfoComponent implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.toolbarService.sendShowToolbar(false);
   }
 
   async addUser() {

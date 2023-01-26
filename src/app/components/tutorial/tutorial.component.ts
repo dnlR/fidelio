@@ -12,13 +12,11 @@ export class TutorialComponent implements OnInit {
   constructor (
     private router: Router,
     private firstTimeService: FirstTimeService,
-    private toolbarService: ToolbarService
   ) { }
 
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.toolbarService.sendShowToolbar(false);
   }
 
   async finish() {
