@@ -24,7 +24,7 @@ export class AppComponent {
       await this.authService.setSession(access, refresh)
 
       this.zone.run(() => {
-        this.router.navigateByUrl('/user/usertabs/usercards', { replaceUrl: true })
+        this.router.navigateByUrl('/fill-user-info', { replaceUrl: true })
       })
     })
   }
