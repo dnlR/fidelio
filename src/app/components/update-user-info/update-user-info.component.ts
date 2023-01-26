@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { UpdateUser } from 'src/app/models/update-user';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Location } from '@angular/common';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-update-user-info',
@@ -38,7 +39,8 @@ export class UpdateUserInfoComponent implements OnInit {
     private zipCodeService: ZipCodesService,
     private userService: UsersService,
     private spinner: NgxSpinnerService,
-    private location: Location
+    private location: Location,
+    private msgService: MessageService
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class UpdateUserInfoComponent implements OnInit {
 
   async ionViewWillEnter() {
     await this.loadCurrentUserInfo();
+    this.msgService.sendTitleMsg('Actualizar perfil');
   }
 
   async loadCurrentUserInfo() {

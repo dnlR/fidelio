@@ -9,6 +9,8 @@ import { User } from 'src/app/models/user';
 import { MyErrorStateMatcher } from '../../utils/error-state-matcher';
 import { ZipCodesService } from 'src/app/services/zip-codes.service';
 import { UsersService } from 'src/app/services/users.service';
+import { MessageService } from 'src/app/services/message.service';
+import { ToolbarService } from 'src/app/services/toolbar.service';
 
 
 @Component({
@@ -36,7 +38,8 @@ export class FillUserInfoComponent implements OnInit {
     private router: Router,
     private firstTimeService: FirstTimeService,
     private zipCodeService: ZipCodesService,
-    private userService: UsersService
+    private userService: UsersService,
+    private toolbarService: ToolbarService
   ) {}
 
   ngOnInit() {
@@ -55,6 +58,10 @@ export class FillUserInfoComponent implements OnInit {
     this.formGroupTOS = new FormGroup({
       'tosControl': new FormControl('', [Validators.requiredTrue])
     });
+  }
+
+  ionViewWillEnter() {
+    this.toolbarService.sendShowToolbar(false);
   }
 
   async addUser() {

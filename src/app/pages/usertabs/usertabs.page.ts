@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
+import { ToolbarService } from 'src/app/services/toolbar.service';
 
 @Component({
   selector: 'app-usertabs',
@@ -19,6 +20,7 @@ export class UsertabsPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private msgService: MessageService,
+    private toolbarService: ToolbarService
   ) {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
@@ -32,6 +34,7 @@ export class UsertabsPage implements OnInit {
   
   ionViewWillEnter() {
     this.msgService.sendTitleMsg('Cliente');
+    this.toolbarService.sendShowToolbar(true);
   }
 
   openUser() {

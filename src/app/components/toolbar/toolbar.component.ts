@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MessageService } from 'src/app/services/message.service';
+import { ToolbarService } from 'src/app/services/toolbar.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,16 +10,28 @@ import { MessageService } from 'src/app/services/message.service';
 })
 export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription: Subscription;
-  title = 'Fidelio';
+  toolbarSubscription: Subscription;
+  title = 'FIDELIO';
+  showToolbar = true;
 
-  constructor(private messageService: MessageService) {
+  constructor(
+    private messageService: MessageService,
+    private toolbarService: ToolbarService
+  ) {
     this.subscription = this.messageService.onMessage().subscribe(message => {
-      if (message) {
+      if (message.title) {
         this.title = message.title;
       } else {
-        this.title = 'Fidelio';
+        this.title = 'FIDELIO';
       }
     });
+    this.toolbarSubscription = this.toolbarService.onMessage().subscribe(message => {
+      if (message.showToolbar) {
+        this.showToolbar = true;
+      } else {
+        this.showToolbar = false;
+      }
+    })
   }
 
   ngOnInit() { }

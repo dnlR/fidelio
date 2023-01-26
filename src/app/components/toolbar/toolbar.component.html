@@ -39,10 +39,12 @@
           <ion-label>Actualizar perfil</ion-label>
         </ion-item>
       </ion-menu-toggle>
-      <ion-item [routerLink]="['/logout']" detail="true" lines="full">
-        <ion-label>Logout</ion-label>
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-item>
+      <ion-menu-toggle menu="right-menu">
+        <ion-item [routerLink]="['/logout']" detail="true" lines="full">
+          <ion-label>Logout</ion-label>
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-item>
+      </ion-menu-toggle>
     </ion-list>
   </ion-content>
 
@@ -54,15 +56,15 @@
 <div id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-buttons slot="start" *ngIf="showToolbar">
         <ion-menu-button menu="left-menu"></ion-menu-button>
       </ion-buttons>
-      <ion-buttons slot="end">
+      <ion-buttons slot="end" *ngIf="showToolbar">
         <ion-menu-button menu="right-menu">
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-menu-button>
       </ion-buttons>
-      <ion-title>{{ title }}</ion-title>
+      <ion-title style="text-align: center;">{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
 </div>

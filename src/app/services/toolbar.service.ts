@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class MessageService {
+export class ToolbarService {
     private subject = new Subject<any>();
 
-    sendTitleMsg(message: string) {
-        this.subject.next({ title: message });
+    sendShowToolbar(message: boolean) {
+        this.subject.next({ showToolbar: message });
     }
 
     // clearMessages() {
