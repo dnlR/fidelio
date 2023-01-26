@@ -39,6 +39,10 @@ export class UserqrPage implements OnInit {
     }
   }
 
+  async ionViewWillEnter() {
+    this.QRCode = await this.authService.getCurrentUserId();
+  }
+
   async checkPermission() {
     return new Promise(async (resolve, reject) => {
       const status = await BarcodeScanner.checkPermission({ force: true });
