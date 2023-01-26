@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-usertabs',
@@ -17,7 +18,7 @@ export class UsertabsPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private menuController: MenuController
+    private msgService: MessageService,
   ) {
     this.authService.currentUser.subscribe((user) => {
       if (user) {
@@ -28,10 +29,9 @@ export class UsertabsPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
   ionViewWillEnter() {
-    this.leftMenuId = Math.floor(Math.random() * 15);
-    this.rightMenuId = Math.floor(Math.random() * 15);
+    this.msgService.sendTitleMsg('Cliente');
   }
 
   openUser() {

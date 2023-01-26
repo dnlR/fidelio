@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { MessageService } from 'src/app/services/message.service';
 import { AuthService } from '../../../services/auth.service'
 import { EmpresaDataService } from '../../../services/empresa-data.service';
 import { UtilsService } from '../../../services/utils.service';
@@ -21,7 +22,7 @@ export class MenuEmpresariPage implements OnInit {
     private readonly supabase: AuthService,
     private empresaDS: EmpresaDataService,
     private utilsDS: UtilsService,
-    private menuController: MenuController
+    private msgService: MessageService
   ) { }
 
   async ngOnInit() {
@@ -40,8 +41,7 @@ export class MenuEmpresariPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.leftMenuId = Math.floor(Math.random() * 15);
-    this.rightMenuId = Math.floor(Math.random() * 15);
+    this.msgService.sendTitleMsg('Empresa');
   }
 
   logout() {

@@ -24,24 +24,24 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./empreses.page.scss'],
 })
 export class EmpresesPage implements OnInit {
-  profileEmpresa! : iEmpresa;
+  profileEmpresa!: iEmpresa;
   empresaForm!: FormGroup;
   usuariEMAIL = "";
   usuariID = "";
   CPOldValue = "";
   filteredOptions: Observable<iZIP[]>;
-  moptions: iZIP[]=[];
-  constructor(private fb: FormBuilder, private storageDS:StorageSupabaseService, private actionSheetCtrl: ActionSheetController, private location: Location, private empresaDS:EmpresaDataService, private readonly supabase: AuthService, private zipDS:ZipCodesService) {
-  }
+  moptions: iZIP[] = [];
   
- 
-  ngOnInit():void  {
-     this.loadEmpresa();
+  constructor(private fb: FormBuilder, private storageDS: StorageSupabaseService, private actionSheetCtrl: ActionSheetController, private location: Location, private empresaDS: EmpresaDataService, private readonly supabase: AuthService, private zipDS: ZipCodesService) {
+  }
+
+  ngOnInit(): void {
+    this.loadEmpresa();
   }
 
   async initAutoComplete() {
     this.empresaForm.get("EmpresaCP").valueChanges.subscribe(async x => {
-      if (x.length==5) {
+      if (x.length == 5) {
         // this.options=[
         //   {zip_id:"17300",
         //   zip_city:"Blanes1",
@@ -58,39 +58,39 @@ export class EmpresesPage implements OnInit {
         //   zip_region:"Girona",
         //   zip_country:"España"
         //   }];
-        if (x!=this.CPOldValue) {
+        if (x != this.CPOldValue) {
           //Get ZIP details
           const d = await this.zipDS.zip_getbycode("ES", x)
-          if (d.length>1) {
+          if (d.length > 1) {
             //emplement la multiseleccio
-            this.moptions=[];
+            this.moptions = [];
             d.forEach(element => {
-              const newel:iZIP={
-                  zip_city: element.city,
-                  zip_id:x,
-                  zip_region:element.province,
-                  zip_country:"España" 
-                }              
+              const newel: iZIP = {
+                zip_city: element.city,
+                zip_id: x,
+                zip_region: element.province,
+                zip_country: "España"
+              }
               this.moptions.push(newel)
             })
             this.filteredOptions = this.empresaForm.get("EmpresaCP").valueChanges.pipe(
               startWith(''),
               map(value => this._filter(value || '')),
-              );    
+            );
           }
-          if (d.length==1) {
+          if (d.length == 1) {
             //this.moptions=[];
             //directament emplenem els camps 
             this.empresaForm.get('EmpresaPoblacio').setValue(d[0].city);
             this.empresaForm.get('EmpresaProvincia').setValue(d[0].province);
             this.empresaForm.get('EmpresaPais').setValue("España");
           }
-          if (d.length==0) {
-              //No tenim el CP ho deixem en blanc
-              //this.moptions=[];
-              this.empresaForm.get('EmpresaPoblacio').setValue("");
-              this.empresaForm.get('EmpresaProvincia').setValue("");
-              this.empresaForm.get('EmpresaPais').setValue("");
+          if (d.length == 0) {
+            //No tenim el CP ho deixem en blanc
+            //this.moptions=[];
+            this.empresaForm.get('EmpresaPoblacio').setValue("");
+            this.empresaForm.get('EmpresaProvincia').setValue("");
+            this.empresaForm.get('EmpresaPais').setValue("");
           }
         }
       }
@@ -103,48 +103,48 @@ export class EmpresesPage implements OnInit {
   }
 
   getOptionSelected($event: MatAutocompleteSelectedEvent) {
-     console.log($event.option);
-     const sel:string=$event.option._text.nativeElement.innerText;
-    const r:string[]=sel.split(";")
+    console.log($event.option);
+    const sel: string = $event.option._text.nativeElement.innerText;
+    const r: string[] = sel.split(";")
     const city = r[1];
     const region = r[2];
     const country = r[3];
     this.empresaForm.get('EmpresaPoblacio').setValue(city);
     this.empresaForm.get('EmpresaProvincia').setValue(region);
     this.empresaForm.get('EmpresaPais').setValue(country);
-    this.moptions=[];
-    this.CPOldValue=r[0];
+    this.moptions = [];
+    this.CPOldValue = r[0];
   }
   setFormEmpresa() {
     this.empresaForm = this.fb.group({
-      EmpresaNom:[this.profileEmpresa.name, Validators.required],
-      EmpresaNIF:[this.profileEmpresa.nif, Validators.required],
-      EmpresaEmail:[this.profileEmpresa.email, [Validators.required, Validators.email]],
-      EmpresaAdreca:[this.profileEmpresa.address, [Validators.required]],
-      EmpresaCP:[this.profileEmpresa.zip_code_id, Validators.required],
-      EmpresaPoblacio:[this.profileEmpresa.city, Validators.required],
-      EmpresaProvincia:[this.profileEmpresa.region, Validators.required],
-      EmpresaPais:[this.profileEmpresa.country, Validators.required],
-      EmpresaTelefon:[this.profileEmpresa.phone, Validators.required],
-      EmpresaLogo:[this.profileEmpresa.logo]
-    }); 
-    this.initAutoComplete() ;
+      EmpresaNom: [this.profileEmpresa.name, Validators.required],
+      EmpresaNIF: [this.profileEmpresa.nif, Validators.required],
+      EmpresaEmail: [this.profileEmpresa.email, [Validators.required, Validators.email]],
+      EmpresaAdreca: [this.profileEmpresa.address, [Validators.required]],
+      EmpresaCP: [this.profileEmpresa.zip_code_id, Validators.required],
+      EmpresaPoblacio: [this.profileEmpresa.city, Validators.required],
+      EmpresaProvincia: [this.profileEmpresa.region, Validators.required],
+      EmpresaPais: [this.profileEmpresa.country, Validators.required],
+      EmpresaTelefon: [this.profileEmpresa.phone, Validators.required],
+      EmpresaLogo: [this.profileEmpresa.logo]
+    });
+    this.initAutoComplete();
   }
 
   async onSubmit() {
-    this.profileEmpresa!.name=this.empresaForm.get('EmpresaNom')?.value!;
-    this.profileEmpresa!.nif=this.empresaForm.get('EmpresaNIF')?.value!;
-    this.profileEmpresa!.email=this.empresaForm.get('EmpresaEmail')?.value!;
-    this.profileEmpresa!.address=this.empresaForm.get('EmpresaAdreca')?.value!;
-    this.profileEmpresa!.zip_code_id=this.empresaForm.get('EmpresaCP')?.value!;
-    this.profileEmpresa!.city=this.empresaForm.get('EmpresaPoblacio')?.value!;
-    this.profileEmpresa!.region=this.empresaForm.get('EmpresaProvincia')?.value!;
-    this.profileEmpresa!.country=this.empresaForm.get('EmpresaPais')?.value!;
-    this.profileEmpresa!.phone=this.empresaForm.get('EmpresaTelefon')?.value!;
+    this.profileEmpresa!.name = this.empresaForm.get('EmpresaNom')?.value!;
+    this.profileEmpresa!.nif = this.empresaForm.get('EmpresaNIF')?.value!;
+    this.profileEmpresa!.email = this.empresaForm.get('EmpresaEmail')?.value!;
+    this.profileEmpresa!.address = this.empresaForm.get('EmpresaAdreca')?.value!;
+    this.profileEmpresa!.zip_code_id = this.empresaForm.get('EmpresaCP')?.value!;
+    this.profileEmpresa!.city = this.empresaForm.get('EmpresaPoblacio')?.value!;
+    this.profileEmpresa!.region = this.empresaForm.get('EmpresaProvincia')?.value!;
+    this.profileEmpresa!.country = this.empresaForm.get('EmpresaPais')?.value!;
+    this.profileEmpresa!.phone = this.empresaForm.get('EmpresaTelefon')?.value!;
     //this.profileEmpresa!.logo=this.empresaForm.get('EmpresaLogo')?.value!;
     console.log(this.profileEmpresa);
     const er = await this.empresaDS.empresa_insupd(this.profileEmpresa);
-    if (er!=null)
+    if (er != null)
       await this.storageDS.createNotice(er.message);
     else
       await this.storageDS.createNotice('Cambios guardados correctamente');
@@ -160,11 +160,11 @@ export class EmpresesPage implements OnInit {
     this.profileEmpresa.logo = data.path
     this.empresaForm.get('EmpresaLogo').setValue(data.path + "?t=" + Date())
   }
-  removeLogo(){
+  removeLogo() {
     this.profileEmpresa.logo = null;
   }
-  ZIPonFocus($event){
-    this.CPOldValue=$event.target.value;
+  ZIPonFocus($event) {
+    this.CPOldValue = $event.target.value;
   }
   // async getCP($event){
   //   //console.log($event.detail);
@@ -190,9 +190,9 @@ export class EmpresesPage implements OnInit {
     this.usuariEMAIL = x.email;
     this.usuariID = x.id;
     this.profileEmpresa = await this.empresaDS.empresa_getbyuserid(this.usuariID) as unknown as iEmpresa;
-    if (this.profileEmpresa==null){
+    if (this.profileEmpresa == null) {
       //crear empresa
-      const emp:iEmpresa={
+      const emp: iEmpresa = {
         id: undefined,
         name: '',
         nif: '',
@@ -200,21 +200,21 @@ export class EmpresesPage implements OnInit {
         uuser_id: '',
         address: '',
         zip_code_id: '',
-        city:'',
-        region:'',
-        country:'',
+        city: '',
+        region: '',
+        country: '',
         phone: '',
         logo: '',
         active: true,
         modification_date: new Date(),
         modification_user_id: '',
-        coor_lng:0,
-        coor_lat:0,
+        coor_lng: 0,
+        coor_lat: 0,
       }
-    this.profileEmpresa=emp;
+      this.profileEmpresa = emp;
     }
     this.setFormEmpresa();
-   }
+  }
   //  async presentActionSheetForZipCodes(zipCodes: ZipCode[]) {
   //   const actionSheet = await this.actionSheetCtrl.create({
   //     header: 'Matching Zip Codes',

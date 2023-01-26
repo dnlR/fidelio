@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MyErrorStateMatcher } from 'src/app/utils/error-state-matcher';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private spinner: NgxSpinnerService,
     private router: Router,
+    private msgService: MessageService
   ) {
     this.auth.currentUser.subscribe((user) => {
       if (user) {
@@ -31,6 +33,9 @@ export class LoginComponent implements OnInit {
     this.formGroupLogin = new FormGroup({
       'emailControl': new FormControl('', [Validators.required, Validators.email])
     });
+  }
+
+  ionViewWillEnter() {
   }
 
   async signIn() {
