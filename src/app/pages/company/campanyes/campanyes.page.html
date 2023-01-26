@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content class="background">
-        <ion-grid>
+        <ion-grid [fixed]="true">
           <ion-row *ngFor="let campanya of llistatCampanyes">
             <ion-col>
               <ion-card color="light" *ngIf="campanya.active" [style.border-color]="'green'" style="border: solid; border-width: 10px;">
-                <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}} width="200px" style="text-align: center;">
+                <img *ngIf="campanya.card_main_image" src={{campanya.card_main_image}} width="100%" style="text-align: center;">
                 <ion-card-header>
                   <ion-card-title>
                     {{ campanya.name | titlecase }}

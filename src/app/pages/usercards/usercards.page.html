@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background">
-  <ion-grid>
+  <ion-grid [fixed]="true">
     <ion-row *ngFor="let userCard of userCards">
       <ion-col>
         <ion-card [style.border-color]="userCard.campaigns.card_color" style="border: solid; border-width: 10px;">
-          <img src={{userCard.campaigns.card_main_image}}>
+          <img src={{userCard.campaigns.card_main_image}} width="100%">
           <ion-card-header>
             <ion-row>
               <ion-col>
