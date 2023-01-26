@@ -23,6 +23,9 @@ import { DummyCampaignComponent } from './components/dummy-campaign/dummy-campai
 
 import { Geocoder } from '@ionic-native/google-maps';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { ToolbarModule } from './components/toolbar/toolbar.module';
+
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -32,7 +35,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     FillUserInfoComponent,
     UpdateUserInfoComponent,
     TutorialComponent,
-    DummyCampaignComponent
+    DummyCampaignComponent,
   ],
   imports: [
     BrowserModule, 
@@ -44,7 +47,9 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     ReactiveFormsModule,
     GravatarModule,
     MaterialModule,
-    QRCodeModule
+    QRCodeModule,
+    ToolbarModule,
+    SwiperModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geocoder, NativeGeocoder],
   bootstrap: [AppComponent],

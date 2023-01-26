@@ -9,6 +9,7 @@ import { ZipCodesService } from 'src/app/services/zip-codes.service';
 import { UsersService } from 'src/app/services/users.service';
 import { UpdateUser } from 'src/app/models/update-user';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-user-info',
@@ -36,7 +37,8 @@ export class UpdateUserInfoComponent implements OnInit {
     private router: Router,
     private zipCodeService: ZipCodesService,
     private userService: UsersService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -129,5 +131,9 @@ export class UpdateUserInfoComponent implements OnInit {
       this.addressControl.markAllAsTouched();
       this.phoneControl.markAllAsTouched();
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

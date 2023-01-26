@@ -8,6 +8,7 @@ import { CampaignsPageRoutingModule } from './campaigns-routing.module';
 
 import { CampaignsPage } from './campaigns.page';
 import { MaterialModule } from 'src/app/material.module';
+import { ToolbarModule } from 'src/app/components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { MaterialModule } from 'src/app/material.module';
     FormsModule,
     IonicModule,
     CampaignsPageRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ToolbarModule
   ],
   declarations: [CampaignsPage]
 })

@@ -1,99 +1,29 @@
-
-<ion-menu side="start" menuId="left-menu31" contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Fidelio</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <ion-list>
-      <ion-menu-toggle menu="left-menu31">
-        <ion-item [routerLink]="['/user']" detail="true" lines="full">
-          <ion-label>Cliente</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-item [routerLink]="['/menu-empresari']" detail="true" lines="full">
-        <ion-label>Empresa</ion-label>
-      </ion-item>
-      <ion-item [routerLink]="['/login-terminal']" detail="true" lines="full">
-        <ion-label>Terminal</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-  <img src="../../../assets/logo7.png">
-</ion-menu>
-
-<ion-menu side="end" menuId="right-menu31" contentId="main-content" swipeGesture="false">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Opciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">
-    <ion-list>
-      <ion-menu-toggle menu="right-menu31">
-        <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">
-          <ion-label>Actualizar perfil</ion-label>
-        </ion-item>
-      </ion-menu-toggle>
-      <ion-item [routerLink]="['/logout']" detail="true" lines="full">
-        <ion-label>Logout</ion-label>
-        <ion-icon name="log-out-outline"></ion-icon>
-      </ion-item>
-      <!-- <ion-item lines="none">
-        <ion-label>{{ currentUserEmail }}</ion-label>
-      </ion-item> -->
-    </ion-list>
-  </ion-content>
-
-  <ion-label style="font-size: large; padding-left: 20px;">Fidelio© 2023</ion-label>
-  <ion-label style="padding-left: 20px;">Jordi Aubanell</ion-label>
-  <ion-label style="padding-left: 20px;">Francisco Gil</ion-label>
-  <ion-label style="padding-left: 20px;">Daniel Romero</ion-label>
-</ion-menu>
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button menu="left-menu31"></ion-menu-button>
-      </ion-buttons>
-      <ion-buttons slot="end">
-        <ion-menu-button menu="right-menu31">
-          <ion-icon name="person-circle-outline"></ion-icon>
-        </ion-menu-button>
-      </ion-buttons>
-      <ion-title>Terminal > Campañas</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
 <ion-content class="background">
   <!-- chip toolbar     -->
- 
-  <ion-list-header style="margin-top: 10px;">    
+  <ion-list-header style="margin-top: 10px;">
     <ion-chip *ngIf="nameCompany">
       <ion-icon style='color:white' name="storefront-outline"></ion-icon>
-      <ion-label>{{nameCompany.name}}</ion-label>    
-    </ion-chip>    
+      <ion-label>{{nameCompany.name}}</ion-label>
+    </ion-chip>
     <ion-chip *ngIf="nameTerminal">
       <ion-icon style='color:white' name="calculator-outline"></ion-icon>
-     <ion-label>{{nameTerminal.name|titlecase}}</ion-label> 
+      <ion-label>{{nameTerminal.name|titlecase}}</ion-label>
     </ion-chip>
 
-<!-- buscador -->
+    <!-- buscador -->
   </ion-list-header>
-  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>  
-<!-- cards -->
+  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
+  <!-- cards -->
   <ion-row>
     <ion-col size="12" size-xs="4" *ngFor="let item of campania_filtrados">
-     
+
       <ion-card>
         <button ion-item (click)="showCampaignModal(item)">
           <img style="height:100px;width:150px" src={{item.card_main_image}}>
           <ion-card-content [style.background-color]="item.card_color" style="padding-top:0px"></ion-card-content>
-          <div  class="card-title"> {{ item.name| titlecase }}</div>       
-        </button> 
+          <div class="card-title"> {{ item.name| titlecase }}</div>
+        </button>
       </ion-card>
     </ion-col>
   </ion-row>
 </ion-content>
-</div>

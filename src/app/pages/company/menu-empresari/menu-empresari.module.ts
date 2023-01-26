@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MenuEmpresariPageRoutingModule } from './menu-empresari-routing.module';
 
 import { MenuEmpresariPage } from './menu-empresari.page';
+import { ToolbarModule } from 'src/app/components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuEmpresariPageRoutingModule
+    MenuEmpresariPageRoutingModule,
+    ToolbarModule
   ],
   declarations: [MenuEmpresariPage]
 })

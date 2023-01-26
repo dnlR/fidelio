@@ -1,14 +1,5 @@
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
 
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Actualizar perfil</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/user"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="background">
   <ion-grid>
     <ion-row style="margin-top: 50px;">
@@ -63,10 +54,15 @@
         </mat-form-field>
         
         <div style="margin-top: 50px; text-align: center;">
-          <button mat-raised-button color="primary" (click)="updateUser()">Actualizar perfil</button>
+          <ion-button color="primary" (click)="updateUser()">Actualizar perfil</ion-button>
         </div>
       </ion-col>
       <ion-col></ion-col>
     </ion-row>
   </ion-grid>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button>
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

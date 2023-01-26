@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginTerminalPageRoutingModule } from './login-terminal-routing.module';
 
 import { LoginTerminalPage } from './login-terminal.page';
+import { ToolbarModule } from 'src/app/components/toolbar/toolbar.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { LoginTerminalPage } from './login-terminal.page';
     FormsModule,
     IonicModule,
     LoginTerminalPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToolbarModule
   ],
   declarations: [LoginTerminalPage]
 })

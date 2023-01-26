@@ -24,8 +24,23 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+
+/* SWIPER STUFF */
+@import "~swiper/swiper-bundle.css";
+
+.swiper-slide {
+  text-align: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 70%;
+  object-fit: cover;
+  margin: 0 auto;
+}
 
 // alineacion botones alarma
 .alert-button-group {

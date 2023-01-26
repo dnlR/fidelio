@@ -1,50 +1,42 @@
-<ion-content [fullscreen]="true">
-
-  <ion-grid>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col>
-        <ion-slides>
-          <ion-slide>
-            <div class="slide">
-              <img src="assets/slide-1.png" />
-              <h2>Welcome</h2>
-              <p>
-                The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a
-                demonstration of proper code use.
-              </p>
-            </div>
-            <button mat-raised-button color="primary" (click)="finish()">Skip tutorial</button>
-          </ion-slide>
-
-          <ion-slide>
-            <img src="assets/slide-2.png" />
-            <h2>What is Ionic?</h2>
-            <p>
-              <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps
-              with web technologies like HTML, CSS, and JavaScript.
-            </p>
-            <button mat-raised-button color="primary" (click)="finish()">Skip tutorial</button>
-          </ion-slide>
-
-          <ion-slide>
-            <img src="assets/slide-3.png" />
-            <h2>What is Appflow?</h2>
-            <p>
-              <b>Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a
-              totally new level of app development agility to mobile dev teams.
-            </p>
-            <button mat-raised-button color="primary" (click)="finish()">Skip tutorial</button>
-          </ion-slide>
-
-          <ion-slide>
-            <img src="assets/slide-4.png" />
-            <h2>Ready to Play?</h2>
-            <button mat-raised-button color="primary" (click)="finish()">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></button>
-          </ion-slide>
-        </ion-slides>
-      </ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="background">
+  <swiper [pagination]="{type: 'progressbar'}" 
+    [navigation]="true" 
+    style="margin-top: 20px; margin-left: 10px; margin-right: 10px;">
+    <ng-template swiperSlide>
+      <img src="assets/tutorial/t1.png" style=" width: auto !important;"/>
+      <h2>Bienvenidos a Fidelio!</h2>
+      <p>
+        Fidelio, tu aplicación de fidelización. Localiza tu establecimiento favorito, adhierete a la campaña y empieza a sumar puntos!
+      </p>
+      <br><br><br><br><br>
+      <ion-button color="primary" (click)="finish()" class="btn-tutorial">Saltar tutorial</ion-button>
+    </ng-template>
+    <ng-template swiperSlide>
+      <img src="assets/tutorial/t2.png" />
+      <h2>Súmate a la campaña</h2>
+      <p>
+        Desde la sección QR de la pantalla principal, utiliza el botón añadir campaña y lee el QR del establecimiento mediante tu smartphone.
+      </p>
+      <ion-button color="primary" (click)="finish()" class="btn-tutorial">Saltar tutorial</ion-button>
+    </ng-template>
+    <ng-template swiperSlide>
+      <img src="assets/tutorial/t3.png" />
+      <h2>Acumula puntos</h2>
+      <p>
+        Al realizar una compra, no olvides tu código QR y sigue sumando puntos. Puedes consultar los puntos de tus campañas desde tu sección tarjetas.
+      </p>
+      <ion-button color="primary" (click)="finish()" class="btn-tutorial">Saltar tutorial</ion-button>
+    </ng-template>
+    <ng-template swiperSlide>
+      <img src="assets/tutorial/t4.png" />
+      <h2>Gana premios</h2>
+      <p>
+        Al llegar al objectivo, conseguirás tu premio!
+      </p>
+      <br><br>
+      <ion-button color="primary" (click)="finish()" class="btn-tutorial">
+        Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ng-template>
+  </swiper>
 </ion-content>
