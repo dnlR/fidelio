@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/campaign.service';
+import { MessageService } from 'src/app/services/message.service';
 import { TerminalService } from 'src/app/services/terminal.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { UserCardsService } from 'src/app/services/user-cards.service';
@@ -32,6 +33,7 @@ export class ReaderQrPage implements OnInit {
               public platform: Platform,
               private loadingCtrl: LoadingController,  
               public alertController: AlertController,
+              private msgService: MessageService,
               private router:Router) { }
 
   ngOnInit() {
@@ -65,6 +67,11 @@ export class ReaderQrPage implements OnInit {
       this.mobileweb=false;
     } 
   }
+
+  ionViewWillEnter() {
+    this.msgService.sendTitleMsg('Terminal > Lector QR');
+  }
+
  //Permisos Lector QR
   async checkPermission() {
     return new Promise(async (resolve, reject) => {

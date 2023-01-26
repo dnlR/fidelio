@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, ActionSheetController, LoadingController } from '@ionic/angular';
 import { CampaignService } from 'src/app/services/campaign.service';
 import { CompanyService } from 'src/app/services/company.service';
+import { MessageService } from 'src/app/services/message.service';
 import { TerminalService } from 'src/app/services/terminal.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { UserCardsService } from 'src/app/services/user-cards.service';
@@ -36,7 +37,8 @@ export class CustomersPage implements OnInit {
               private transactionsService: TransactionsService,
               public alertController: AlertController,
               private actionSheetCtrl: ActionSheetController,
-              private loadingCtrl: LoadingController,             
+              private loadingCtrl: LoadingController, 
+              private msgService: MessageService,            
               private router: Router) { }
 
   ngOnInit() {
@@ -83,7 +85,9 @@ export class CustomersPage implements OnInit {
                         })
     });
   }
-
+  ionViewWillEnter() {
+    this.msgService.sendTitleMsg('Terminal > Clientes');
+  }
 
    // Filtrado clientes
   handleChange(event:any) {

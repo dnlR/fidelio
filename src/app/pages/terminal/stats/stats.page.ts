@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {ChartData} from 'chart.js';
 import { CampaignService } from 'src/app/services/campaign.service';
+import { MessageService } from 'src/app/services/message.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
 @Component({
@@ -46,6 +47,7 @@ export class StatsPage implements OnInit {
   constructor(private transactionsService: TransactionsService,
               private campaignService: CampaignService,
               private route: ActivatedRoute,
+              private msgService: MessageService,
               private router: Router) { }
 
   ngOnInit() {
@@ -125,6 +127,10 @@ export class StatsPage implements OnInit {
 
                       });
       
+    }
+
+    ionViewWillEnter() {
+      this.msgService.sendTitleMsg('Terminal > Estadísticas');
     }
 
   volver(){
