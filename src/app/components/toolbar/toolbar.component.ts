@@ -41,7 +41,7 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ionViewWillEnter() {
-    console.log(`VIEW DID ENTER`);
+    console.log(`VIEW WILL ENTER`);
 
   }
   ionViewDidEnter() {
