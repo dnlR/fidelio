@@ -35,17 +35,26 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
       } else {
         this.showToolbar = false;
       }
-    })
+    });
+    this.authService.currentUser.subscribe((user) => {
+      if (user) {
+        this.loadUserEmail();
+      }
+    });
   }
 
   ngOnInit() {
     
   }
 
+  async loadUserEmail() {
+    this.userEmail = await (await this.authService.getUser()).email;
+    // console.log(`USER EMAIL: ${this.userEmail}`);
+  }
+
   async ngAfterViewInit() {
     console.log(`AFTER VIEW INIT`);
-    this.userEmail = await (await this.authService.getUser()).email;
-    console.log(`USER EMAIL: ${this.userEmail}`);
+    await this.loadUserEmail();
   }
 
   async ionViewWillEnter() {
