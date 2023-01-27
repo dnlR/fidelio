@@ -1,0 +1,17 @@
+In ~/.bashrc, ~/.bash_profile, or similar shell startup scripts, make the following modifications:
+
+
+1. Set the ANDROID_SDK_ROOT environment variable. This path should be the Android SDK Location used in the previous section.
+
+$ export ANDROID_SDK_ROOT=$HOME/AppData/Local/Android/Sdk
+
+2. Add the Android SDK command-line directories to PATH. Each directory corresponds to the category of command-line tool.
+
+
+$ # avdmanager, sdkmanager
+$ export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+$ # adb, logcat
+$ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+$ # emulator
+$ export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+

@@ -1,0 +1,80 @@
+ionic start my-project blank --type=angular --capacitor
+
+add '.vscode' to .gitignore
+
+update .tsconfig to look like this:
+	"strict": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+
+ng add @angular/material
+add @import "~@angular/material/prebuilt-themes/deeppurple-amber.css"; to global.css
+
+follow the steps here (https://devdactic.com/angular-material-ionic-4):
+'create a separate module for all the imports we need from angular material'
+ionic g module material --flat
+
+example of material module:
+import { NgModule } from "@angular/core";
+import { MatTableModule } from "@angular/material/table";
+import { MatButtonModule } from "@angular/material/button";
+
+@NgModule({
+  exports: [
+    MatTableModule,
+    MatButtonModule
+  ]
+})
+export class MaterialModule {}
+
+now we only need to import our MaterialModule wherever we want to use Angular Material components.
+
+NOW we can use all IONIC components (https://ionicframework.com/docs/components) and all 
+ANGULAR MATERIAL components (https://material.angular.io/components/categories)
+
+
+Generate auth and data services
+$ ng g service services/auth --skip-tests
+$ ng g service services/data --skip-tests
+
+Install supabase sdk + gravatar
+$ npm i @supabase/supabase-js
+$ npm i ngx-gravatar
+
+Disable confirm email option in the Email Provider menu in supabase web.
+
+
+Update environment.ts:
+export const environment = {
+  production: false,
+  supabaseUrl: 'https://jvavmszzitymsnzrvhth.supabase.co',
+  supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp2YXZtc3p6aXR5bXNuenJ2aHRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzE1NjIwMTQsImV4cCI6MTk4NzEzODAxNH0.o3vYsZ5_hUFM2lpX3jgx_1IwILxhUfok3kAzjzPgz2A',
+};
+
+Test connection on home.page.ts:
+import { Component } from '@angular/core';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from 'src/environments/environment';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+  private supabase: SupabaseClient;
+
+  constructor() {
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    console.log(this.supabase);
+  }
+}
+Should output a valid supabaseClient object to the console.
+
+
