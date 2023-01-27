@@ -36,11 +36,6 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showToolbar = false;
       }
     });
-    this.authService.currentUser.subscribe((user) => {
-      if (user) {
-        this.loadUserEmail();
-      }
-    });
   }
 
   ngOnInit() {
@@ -57,6 +52,11 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngAfterViewInit() {
     console.log(`AFTER VIEW INIT`);
+    this.authService.currentUser.subscribe(async (user) => {
+      if (user) {
+        await this.loadUserEmail();
+      }
+    });
     await this.loadUserEmail();
   }
 
