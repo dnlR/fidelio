@@ -1,10 +1,10 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>qr-code</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
+<ion-content class="background">
   <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="this.QRCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
   <ion-fab slot="fixed" vertical="bottom" horizontal="start">
     <ion-fab-button>

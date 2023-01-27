@@ -19,7 +19,6 @@ export class CampanyesPage implements OnInit {
     private router: Router,
     private location: Location,
     private route: ActivatedRoute,
-    private menuController: MenuController
   ) { }
 
   async ngOnInit() {
@@ -29,13 +28,11 @@ export class CampanyesPage implements OnInit {
   async ionViewWillEnter() {
     this.empID = this.route.snapshot.paramMap.get('empID')!;
     this.llistatCampanyes = await this.campanyaDS.campanya_getallbyEmpID(this.empID);
-    this.menuController.enable(true, 'right-menu');
-    this.menuController.enable(true, 'left-menu');
+   
   }
 
   ionViewWillLeave() {
-    this.menuController.enable(false, 'left-menu');
-    this.menuController.enable(false, 'right-menu');
+  
   }
 
   addCampanya() {
