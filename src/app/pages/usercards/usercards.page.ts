@@ -20,6 +20,13 @@ export class UsercardsPage implements OnInit {
   ngOnInit() {
   }
 
+  async handleRefresh(event) {
+    setTimeout(() => {
+      this.getUserCardsForCurrentUser();
+      event.target.complete();
+    }, 1000);
+  };
+
   async basicShare(title, description, image) {
     await Share.share({
       title: title,
@@ -27,7 +34,7 @@ export class UsercardsPage implements OnInit {
       url: image,
       dialogTitle: `Aprovecha esta oportunidad`,
     });
-}
+  }
 
   async ionViewWillEnter() {
     await this.getUserCardsForCurrentUser();
@@ -44,6 +51,6 @@ export class UsercardsPage implements OnInit {
   async leaveCampaign(userCardId) {
     const currentUserId = await this.authService.getCurrentUserId();
     this.userCardsService.userLeavesCampaign(currentUserId, userCardId);
-    await this.getUserCardsForCurrentUser();  
+    await this.getUserCardsForCurrentUser();
   }
 }

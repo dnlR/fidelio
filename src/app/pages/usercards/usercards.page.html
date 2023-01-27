@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="background">
+  
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid [fixed]="true">
     <ion-row *ngFor="let userCard of userCards">
       <ion-col>
