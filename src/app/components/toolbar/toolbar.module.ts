@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { GravatarModule } from 'ngx-gravatar';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule, 
     IonicModule,
-    RouterModule
+    RouterModule,
+    GravatarModule
   ],
   exports: [
     ToolbarComponent,

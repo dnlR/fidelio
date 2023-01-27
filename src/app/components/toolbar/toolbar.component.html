@@ -33,6 +33,10 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
+    <div style="text-align: center; margin-top: 15px;">
+      <!-- <ion-label>{{ userEmail }}</ion-label> -->
+      <img ngxGravatar [email]="userEmail"/>
+    </div>
     <ion-list>
       <ion-menu-toggle menu="right-menu">
         <ion-item [routerLink]="['/update-user-info']" detail="true" lines="full">

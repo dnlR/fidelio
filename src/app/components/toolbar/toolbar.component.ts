@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { User } from '@supabase/supabase-js';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ToolbarService } from 'src/app/services/toolbar.service';
 
@@ -13,10 +15,12 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
   toolbarSubscription: Subscription;
   title = 'FIDELIO';
   showToolbar = true;
+  userEmail: string;
 
   constructor(
     private messageService: MessageService,
-    private toolbarService: ToolbarService
+    private toolbarService: ToolbarService,
+    private authService: AuthService,
   ) {
     this.subscription = this.messageService.onMessage().subscribe(message => {
       if (message.title) {
@@ -34,16 +38,20 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+  }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     console.log(`AFTER VIEW INIT`);
+    this.userEmail = await (await this.authService.getUser()).email;
+    console.log(`USER EMAIL: ${this.userEmail}`);
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     console.log(`VIEW WILL ENTER`);
-
   }
+
   ionViewDidEnter() {
     console.log(`VIEW DID ENTER`);
   }
