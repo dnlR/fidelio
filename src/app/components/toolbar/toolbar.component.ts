@@ -15,7 +15,7 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
   toolbarSubscription: Subscription;
   title = 'FIDELIO';
   showToolbar = true;
-  userEmail: string;
+  userEmail: string = '';
 
   constructor(
     private messageService: MessageService,
@@ -48,7 +48,10 @@ export class ToolbarComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async loadUserEmail() {
-    this.userEmail = await (await this.authService.getUser()).email;
+    const user = await (await this.authService.getUser());
+    if (user) {
+      this.userEmail = user.email;
+    }
     // console.log(`USER EMAIL: ${this.userEmail}`);
   }
 

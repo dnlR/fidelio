@@ -35,7 +35,7 @@
   <ion-content class="ion-padding">
     <div style="text-align: center; margin-top: 15px;">
       <!-- <ion-label>{{ userEmail }}</ion-label> -->
-      <img ngxGravatar [email]="userEmail" [size]="64"/>
+      <img ngxGravatar [email]="userEmail" [size]="64" fallback="mp"/>
     </div>
     <ion-list>
       <ion-menu-toggle menu="right-menu">
@@ -65,7 +65,8 @@
       </ion-buttons>
       <ion-buttons slot="end" *ngIf="showToolbar">
         <ion-menu-button menu="right-menu">
-          <ion-icon name="person-circle-outline"></ion-icon>
+          <!-- <ion-icon name="person-circle-outline"></ion-icon> -->
+          <img ngxGravatar [email]="userEmail" [size]="32" fallback="mp"/>
         </ion-menu-button>
       </ion-buttons>
       <ion-title style="text-align: center;">{{title}}</ion-title>
