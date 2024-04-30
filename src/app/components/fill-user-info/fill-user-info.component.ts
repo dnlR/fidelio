@@ -39,7 +39,7 @@ export class FillUserInfoComponent implements OnInit {
     private firstTimeService: FirstTimeService,
     private zipCodeService: ZipCodesService,
     private userService: UsersService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formGroupName = new FormGroup({
